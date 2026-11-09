@@ -10,6 +10,12 @@ Voraussetzung: Node.js 20+ und `make`.
 make build
 ```
 
+Für einen Versionsstand beim Bauen:
+
+```sh
+make build VERSION=0.1.1
+```
+
 `make check` baut die Seite und prüft die JavaScript-Syntax. Der Build erzeugt ausschließlich die statischen Dateien in `dist/`; ein lokaler Webserver ist nicht Teil des Projekts und für GitHub Pages nicht erforderlich.
 
 ## GitHub Pages
