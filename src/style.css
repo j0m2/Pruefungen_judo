@@ -32,6 +32,7 @@ button:focus-visible, input:focus-visible, select:focus-visible, a:focus-visible
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 .skip-link { position: fixed; z-index: 30; top: -4rem; left: 1rem; background: white; color: var(--navy); padding: .65rem .9rem; border-radius: 8px; box-shadow: var(--shadow); }
 .skip-link:focus { top: 1rem; }
+.print-exit { display: none; }
 
 .site-header { display: flex; align-items: center; gap: 1.5rem; padding: 18px clamp(16px, 3vw, 40px); color: white; background: var(--navy); }
 .header-copy { min-width: 0; }
@@ -80,7 +81,7 @@ h2 { margin: 0; color: var(--ink); font-size: 1.2rem; line-height: 1.2; letter-s
 .requirement-detail { display: block; margin-top: .22rem; color: #687d95; font-size: .62rem; line-height: 1.35; }
 .program-note { margin-top: .8rem; padding: .65rem .75rem; border-radius: 8px; background: #f1f6fc; color: #41546a; font-size: .7rem; line-height: 1.48; }
 
-.notice-section, .situations-section, .technique-section, .sources { margin-top: 22px; }
+.notice-section, .fall-section, .situations-section, .dan-options-section, .technique-section, .sources { margin-top: 22px; }
 .section-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; }
 .notices { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 10px; margin-top: .7rem; }
 .notice { min-height: 126px; padding: .86rem; border: 1px solid var(--line); border-radius: 11px; background: white; }
@@ -88,6 +89,13 @@ h2 { margin: 0; color: var(--ink); font-size: 1.2rem; line-height: 1.2; letter-s
 .notice.is-ok .notice-tag { background: #def4e9; color: #087c6c; }
 .notice h3 { margin: .55rem 0 .25rem; color: #183147; font-size: .76rem; }
 .notice p { margin: 0; color: #5d728b; font-size: .66rem; line-height: 1.45; }
+
+.fall-intro { margin: .55rem 0 .7rem; color: #5d728b; font-size: .7rem; }
+.fall-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 9px; }
+.fall-card { min-height: 88px; padding: .75rem; border: 1px solid #c9d9e9; border-radius: 10px; background: linear-gradient(135deg, #f8fbfe, #edf5fb); }
+.fall-card-kind { display: block; color: #087c6c; font-size: .57rem; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; }
+.fall-card strong { display: block; margin-top: .32rem; color: #183147; font-size: .77rem; line-height: 1.2; }
+.fall-card small { display: block; margin-top: .25rem; color: #5d728b; font-size: .62rem; line-height: 1.35; }
 
 .situations-intro { margin: .55rem 0 .7rem; color: #5d728b; font-size: .7rem; }
 .situation-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(245px, 1fr)); gap: 9px; }
@@ -99,6 +107,15 @@ h2 { margin: 0; color: var(--ink); font-size: 1.2rem; line-height: 1.2; letter-s
 .situation-content { display: block; min-width: 0; }
 .situation-content strong { display: block; font-size: .72rem; line-height: 1.25; }
 .situation-content small { display: block; margin-top: .18rem; color: #687d95; font-size: .62rem; line-height: 1.35; }
+
+.dan-options-intro { margin: .55rem 0 .7rem; color: #5d728b; font-size: .7rem; }
+.dan-option-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+.dan-option-card { min-height: 162px; padding: .9rem; border: 1px solid var(--line); border-radius: 11px; background: white; transition: border-color .15s, box-shadow .15s; }
+.dan-option-card.is-selected { border-color: #3182ce; box-shadow: 0 0 0 1px #3182ce; }
+.dan-option-kind { margin: 0; color: var(--teal); font-size: .62rem; font-weight: 750; letter-spacing: .045em; text-transform: uppercase; }
+.dan-option-card h3 { margin: .32rem 0 0; color: #183147; font-size: .9rem; }
+.dan-option-card label { margin-top: .82rem; }
+.dan-option-card select { min-height: 44px; font-size: .69rem; }
 
 .selected-summary { padding: .5rem .65rem; border: 1px solid #cbd9e8; border-radius: 8px; color: #185c9f; background: #eef6fc; font-size: .68rem; font-weight: 700; }
 .tool-row { display: flex; align-items: center; justify-content: space-between; gap: .8rem; margin: .9rem 0 .6rem; }
@@ -120,14 +137,15 @@ h2 { margin: 0; color: var(--ink); font-size: 1.2rem; line-height: 1.2; letter-s
 .technique-card { position: relative; min-height: 166px; padding: .7rem; overflow: hidden; border: 1px solid #d8e1ed; border-radius: 10px; background: #fff; transition: border-color .15s, box-shadow .15s, transform .15s; }
 .technique-card:hover { z-index: 1; border-color: #8cb7e1; box-shadow: 0 5px 16px rgba(33, 73, 112, .11); transform: translateY(-1px); }
 .technique-card.is-selected { padding: calc(.7rem - 1px); border: 2px solid #3182ce; background: #fcfdff; box-shadow: 0 0 0 1px #3182ce; }
-.technique-card.is-required:not(.is-selected)::after { content: 'Pflicht'; position: absolute; top: .52rem; right: .52rem; padding: .18rem .33rem; border-radius: 4px; background: #fff0df; color: #9a5a07; font-size: .53rem; font-weight: 800; letter-spacing: .03em; text-transform: uppercase; }
+.technique-card.is-required::after { content: 'Pflicht'; position: absolute; top: .7rem; right: 2.7rem; padding: .18rem .33rem; border-radius: 4px; background: #fff0df; color: #9a5a07; font-size: .53rem; font-weight: 800; letter-spacing: .03em; text-transform: uppercase; }
 .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: .5rem; }
 .card-pool { color: var(--pool-color); font-size: .57rem; font-weight: 750; letter-spacing: .045em; text-transform: uppercase; }
 .select-toggle { display: grid; flex: 0 0 auto; width: 26px; min-width: 26px; height: 26px; padding: 0; border: 1px solid #b7c9dc; border-radius: 7px; background: white; color: transparent; font-size: .85rem; }
 .is-selected .select-toggle { border-color: #1865b5; background: #1865b5; color: white; }
-.pictogram { display: block; width: 100%; height: 51px; margin: -.1rem 0 .18rem; }
-.pictogram .mat { stroke: #dbe5ef; } .pictogram .tori { stroke: #147d6e; fill: none; } .pictogram .uke { stroke: #2563eb; fill: none; }
-.pictogram .dot-tori { fill: #147d6e; stroke: none; } .pictogram .dot-uke { fill: #2563eb; stroke: none; }
+.is-selected .select-toggle:disabled { cursor: not-allowed; border-color: #9cb9d8; background: #dce9f6; color: #356a9f; }
+.comic-illustration { display: block; max-width: 100%; height: 64px; margin: -.18rem auto .3rem; border-radius: 6px; background-color: #edf3f8; background-repeat: no-repeat; }
+.comic-illustration--fallback { background-color: transparent; }
+.technique-card.is-selected .comic-illustration { box-shadow: inset 0 0 0 1px #bad6f3; }
 .technique-card h4 { margin: 0; padding-right: .1rem; color: #172b47; font-size: .76rem; line-height: 1.2; letter-spacing: -.01em; }
 .technique-meta { margin: .24rem 0 0; color: #687d95; font-size: .61rem; line-height: 1.3; }
 .card-bottom { display: flex; align-items: center; justify-content: space-between; gap: .25rem; margin-top: .55rem; }
@@ -159,6 +177,26 @@ h2 { margin: 0; color: var(--ink); font-size: 1.2rem; line-height: 1.2; letter-s
 .disclaimer { margin: .85rem 0 0; color: #58718d; font-size: .65rem; }
 footer { display: flex; justify-content: space-between; gap: 1rem; max-width: 1800px; margin: auto; padding: 18px clamp(12px, 2.5vw, 35px) 28px; color: #58718d; font-size: .62rem; }
 
+body.print-view { background: white; }
+body.print-view > :not(main):not(.print-exit) { display: none !important; }
+body.print-view .print-exit { position: fixed; z-index: 40; top: 14px; right: 14px; display: block; min-height: 38px; border: 1px solid #1865b5; border-radius: 8px; background: #1865b5; color: white; padding: .48rem .7rem; font-size: .72rem; font-weight: 700; box-shadow: var(--shadow); }
+body.print-view main { max-width: 1200px; padding: 66px 18px 28px; }
+body.print-view main > :not(.fall-section):not(.technique-section) { display: none !important; }
+body.print-view .fall-section { margin: 0 0 18px; }
+body.print-view .fall-grid { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
+body.print-view .technique-section { margin: 0; }
+body.print-view .technique-heading, body.print-view .tool-row, body.print-view .legend { display: none; }
+body.print-view .technique-group:not(:has(.technique-card.is-selected)), body.print-view .technique-card:not(.is-selected) { display: none; }
+body.print-view .technique-groups { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; }
+body.print-view .technique-group { padding: 0; border: 0; border-radius: 0; }
+body.print-view .group-header, body.print-view .card-top, body.print-view .technique-meta, body.print-view .card-bottom { display: none; }
+body.print-view .technique-card::after { display: none; }
+body.print-view .technique-grid { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); margin: 0; }
+body.print-view .technique-card { min-height: 142px; padding: .85rem; border-color: #d8e1ed; box-shadow: none; }
+body.print-view .technique-card.is-selected { padding: .85rem; border: 1px solid #d8e1ed; box-shadow: none; }
+body.print-view .technique-card h4 { margin-top: .3rem; text-align: center; font-size: .82rem; }
+body.print-view .comic-illustration { margin-right: auto; margin-left: auto; }
+
 @media (max-width: 900px) {
   .site-header { align-items: flex-start; flex-wrap: wrap; }
   .site-header nav { order: 3; width: 100%; margin-left: 0; padding-top: 0; }
@@ -178,6 +216,7 @@ footer { display: flex; justify-content: space-between; gap: 1rem; max-width: 18
   .source-stamp { width: 100%; min-width: 0; }
   .progress-panel, .setup-panel { padding: 15px; }
   .requirements { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .dan-option-grid { grid-template-columns: 1fr; }
   .tool-row { flex-direction: column; align-items: stretch; }
   .search-label { min-width: 0; }
   .technique-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -191,29 +230,20 @@ footer { display: flex; justify-content: space-between; gap: 1rem; max-width: 18
 @media print {
   @page { size: A4; margin: 11mm; }
   body { background: white; font-size: 9pt; }
-  .site-header { display: block; padding: 0 0 4mm; color: var(--ink); background: white; border-bottom: 1px solid var(--line); }
-  .site-header h1 { color: var(--ink); font-size: 18pt; }
-  .site-header p, .brand { color: var(--muted); }
-  .brand-mark { color: var(--teal); border-color: var(--teal); }
-  .site-header nav, .print-header, .skip-link, .tool-row, .legend, .select-toggle, .side-select, .action-section, footer, .disclaimer { display: none !important; }
-  main { max-width: none; padding: 0; }
-  .hero { margin: 4mm 0; padding: 4mm; border-radius: 0; }
-  .hero h2 { font-size: 15pt; }
-  .workspace { border-radius: 0; box-shadow: none; grid-template-columns: 55mm 1fr; }
-  .setup-panel, .progress-panel { padding: 4mm; }
-  .requirements { gap: 3mm; }
-  .requirement { min-height: 24mm; break-inside: avoid; }
-  .situations-section, .technique-section, .sources { margin-top: 7mm; }
-  .situation-card:not(.is-selected), .technique-card:not(.is-selected) { display: none; }
+  body > :not(main) { display: none !important; }
+  main, main > .fall-section, main > .technique-section { display: block !important; max-width: none; margin: 0; padding: 0; }
+  main > :not(.fall-section):not(.technique-section), .technique-heading, .tool-row, .legend { display: none !important; }
+  .fall-section { margin: 0 0 5mm !important; }
+  .fall-intro { margin: 1.5mm 0 2mm; }
+  .fall-grid { grid-template-columns: repeat(3, 1fr); gap: 2mm; }
+  .fall-card { min-height: 0; padding: 2.5mm; border-radius: 0; break-inside: avoid; }
   .technique-group:not(:has(.technique-card.is-selected)) { display: none; }
-  .situation-grid { grid-template-columns: 1fr 1fr; gap: 2mm; }
-  .situation-card { min-height: 18mm; padding: 3mm; border-radius: 0; break-inside: avoid; }
+  .technique-card:not(.is-selected) { display: none; }
   .technique-groups { grid-template-columns: 1fr 1fr; gap: 4mm; }
-  .technique-group { padding: 3mm; border-radius: 0; break-inside: avoid; }
+  .technique-group { padding: 0; border: 0; border-radius: 0; break-inside: avoid; }
+  .group-header, .card-top, .technique-meta, .card-bottom, .technique-card::after { display: none !important; }
   .technique-grid { gap: 2mm; margin-top: 2mm; }
-  .technique-card { min-height: 34mm; padding: 3mm; border-radius: 0; break-inside: avoid; }
-  .pictogram { height: 13mm; }
-  .source-grid { gap: 2mm; }
-  .source-grid article { min-height: 0; padding: 3mm; border-radius: 0; }
-  .source-grid a { display: none; }
+  .technique-card, .technique-card.is-selected { min-height: 34mm; padding: 3mm; border: 1px solid #d8e1ed; border-radius: 0; box-shadow: none; break-inside: avoid; }
+  .technique-card h4 { text-align: center; }
+  .comic-illustration { margin-right: auto; margin-left: auto; }
 }

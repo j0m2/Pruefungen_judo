@@ -9,6 +9,7 @@
   </head>
   <body>
     <a class="skip-link" href="#techniken">Direkt zu den Techniken</a>
+    <button class="print-exit" id="print-exit" type="button">Druckansicht verlassen</button>
     <header class="site-header">
       <div class="header-copy">
         <div class="brand" aria-label="Judo Programmplaner"><span class="brand-mark" aria-hidden="true">柔</span><span>Judo</span></div>
@@ -63,16 +64,39 @@
         </section>
       </section>
 
-      <section class="situations-section" id="situationen" aria-labelledby="situations-title">
+      <section class="dan-options-section" id="dan-optionen" aria-labelledby="dan-options-title" hidden>
         <div class="section-heading">
           <div>
-            <p class="section-label">03 · Situationslösungen</p>
-            <h2 id="situations-title">Standardsituationen planen</h2>
+            <p class="section-label">1. Dan · Ergänzungen</p>
+            <h2 id="dan-options-title">Kata und Wahlbereich festlegen</h2>
           </div>
-          <div class="selected-summary" id="situations-summary"></div>
         </div>
-        <p class="situations-intro" id="situations-intro"></p>
-        <div class="situation-grid" id="situation-grid"></div>
+        <p class="dan-options-intro">Diese beiden Nachweise gehören zusätzlich zu den ausgewählten Technik- und Situationskarten zum 1. Dan.</p>
+        <div class="dan-option-grid">
+          <article class="dan-option-card" id="dan-kata-card">
+            <p class="dan-option-kind">Obligatorische Kata</p>
+            <h3>Kata-Teil auswählen</h3>
+            <label for="dan-kata-select">Vorgabe zum 1. Dan</label>
+            <select id="dan-kata-select" name="dan-kata-select"></select>
+          </article>
+          <article class="dan-option-card" id="dan-wahlbereich-card">
+            <p class="dan-option-kind">Ein Wahlbereich</p>
+            <h3>Schwerpunkt auswählen</h3>
+            <label for="dan-wahlbereich-select">Nachweis zum 1. Dan</label>
+            <select id="dan-wahlbereich-select" name="dan-wahlbereich-select"></select>
+          </article>
+        </div>
+      </section>
+
+      <section class="fall-section" id="falltechniken" aria-labelledby="fall-title">
+        <div class="section-heading">
+          <div>
+            <p class="section-label">03 · Falltechniken</p>
+            <h2 id="fall-title">Erforderliche Ukemi</h2>
+          </div>
+        </div>
+        <p class="fall-intro" id="fall-intro"></p>
+        <div class="fall-grid" id="fall-grid"></div>
       </section>
 
       <section class="technique-section" id="techniken" aria-labelledby="techniques-title">
@@ -102,9 +126,21 @@
         <div class="technique-groups" id="technique-groups"></div>
       </section>
 
+      <section class="situations-section" id="situationen" aria-labelledby="situations-title">
+        <div class="section-heading">
+          <div>
+            <p class="section-label">05 · Situationslösungen</p>
+            <h2 id="situations-title">Standardsituationen planen</h2>
+          </div>
+          <div class="selected-summary" id="situations-summary"></div>
+        </div>
+        <p class="situations-intro" id="situations-intro"></p>
+        <div class="situation-grid" id="situation-grid"></div>
+      </section>
+
       <section class="action-section" aria-label="Programmaustausch">
         <div>
-          <p class="section-label">05 · Mitnehmen</p>
+          <p class="section-label">06 · Mitnehmen</p>
           <h2>Programm speichern, teilen, drucken.</h2>
           <p>JSON enthält nur die Auswahl und Programmdaten – keine personenbezogenen Daten.</p>
         </div>
@@ -138,7 +174,7 @@
         <div class="notices" id="notices"></div>
       </section>
     </main>
-    <footer><span>Judo Programmplaner</span><span>Originale schematische Piktogramme · keine Übernahme der DJB-Poster</span></footer>
+    <footer><span>Judo Programmplaner</span><span>Eigene Comic-Illustrationen · keine Übernahme der DJB-Poster</span></footer>
     <script type="module" src="app.js"></script>
   </body>
 </html>

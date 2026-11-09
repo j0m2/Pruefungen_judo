@@ -1,4 +1,4 @@
-const DATA_VERSION = 1;
+const DATA_VERSION = 2;
 const STORAGE_KEY = "judo-programmplaner-v1";
 
 const degrees = [
@@ -161,6 +161,41 @@ const techniques = [
   technique("do-jime", "Do-jime", "boden-shime", "historisch"),
 ];
 
+// Eigene Comic-Neuillustrationen. Die Körperhaltungen der abgedeckten Techniken
+// wurden anhand der DJB-Poster nachvollzogen; die Poster selbst sind keine Assets
+// dieser Anwendung. Spalten und Zeilen beziehen sich auf die jeweilige Sprite-Tafel.
+const comicSprites = {
+  grundStand: { src: "assets/illustrations/grund-stand-comic.png", columns: 4, rows: 4, ratio: 1.01 },
+  erweiterungStand: { src: "assets/illustrations/erweiterung-stand-comic.png", columns: 3, rows: 4, ratio: 2 },
+  grundBoden: { src: "assets/illustrations/grund-boden-comic.png", columns: 4, rows: 4, ratio: 1.5 },
+  erweiterungBoden: { src: "assets/illustrations/erweiterung-boden-comic.png", columns: 3, rows: 4, ratio: 1.78 },
+};
+
+const comicFrames = {
+  // Grundprogramm Stand: Raster wie das Poster, von oben links nach unten rechts.
+  "morote-seoi-nage": ["grundStand", 0, 0], "tai-otoshi": ["grundStand", 1, 0], "tsurikomi-goshi": ["grundStand", 2, 0], "uchi-mata": ["grundStand", 3, 0],
+  "o-goshi": ["grundStand", 0, 1], "ippon-seoi-nage": ["grundStand", 1, 1], "sode-tsurikomi-goshi": ["grundStand", 2, 1], "koshi-guruma": ["grundStand", 3, 1],
+  "de-ashi-barai": ["grundStand", 0, 2], "o-uchi-gari": ["grundStand", 1, 2], "ko-uchi-gari": ["grundStand", 2, 2], "o-soto-gari": ["grundStand", 3, 2],
+  "uki-goshi": ["grundStand", 0, 3], "ko-soto-gari": ["grundStand", 1, 3], "sasae-tsurikomi-ashi": ["grundStand", 2, 3], "harai-goshi": ["grundStand", 3, 3],
+
+  // Erweiterungsprogramm Stand.
+  "tomoe-nage": ["erweiterungStand", 0, 0], "sumi-gaeshi": ["erweiterungStand", 1, 0], "ura-nage": ["erweiterungStand", 2, 0],
+  "tani-otoshi": ["erweiterungStand", 0, 1], "soto-makikomi": ["erweiterungStand", 1, 1], "ko-uchi-makikomi": ["erweiterungStand", 2, 1],
+  "okuri-ashi-barai": ["erweiterungStand", 0, 2], "ashi-guruma": ["erweiterungStand", 1, 2], "uki-otoshi": ["erweiterungStand", 2, 2],
+  "tsuri-goshi": ["erweiterungStand", 0, 3], "utsuri-goshi": ["erweiterungStand", 1, 3], "kata-guruma": ["erweiterungStand", 2, 3],
+
+  // Grundprogramm Boden: nur die auf der 4 × 4-Tafel eindeutig abgebildeten Techniken.
+  "kesa-gatame": ["grundBoden", 0, 1], "yoko-shiho-gatame": ["grundBoden", 0, 2], "tate-shiho-gatame": ["grundBoden", 0, 3],
+  "ushiro-kesa-gatame": ["grundBoden", 1, 1], "kuzure-kami-shiho-gatame": ["grundBoden", 1, 2], "uki-gatame": ["grundBoden", 1, 3],
+  "juji-gatame": ["grundBoden", 3, 1], "ude-garami": ["grundBoden", 3, 2], "waki-gatame": ["grundBoden", 3, 3],
+
+  // Erweiterungsprogramm Boden.
+  "hiza-gatame": ["erweiterungBoden", 0, 0], "gyaku-juji-jime": ["erweiterungBoden", 1, 0], "okuri-eri-jime": ["erweiterungBoden", 2, 0],
+  "sankaku-gatame": ["erweiterungBoden", 0, 1], "sode-guruma-jime": ["erweiterungBoden", 2, 1],
+  "ashi-gatame": ["erweiterungBoden", 0, 2], "hadaka-jime": ["erweiterungBoden", 1, 2], "sankaku-jime": ["erweiterungBoden", 2, 2],
+  "hara-gatame": ["erweiterungBoden", 0, 3], "kataha-jime": ["erweiterungBoden", 1, 3], "tsukkomi-jime": ["erweiterungBoden", 2, 3],
+};
+
 const techniqueById = new Map(techniques.map((item) => [item.id, item]));
 const gokyoKeys = [...new Set(techniques.filter((item) => item.gokyo).map((item) => item.gokyo))];
 const danGroundIds = techniques.filter((item) => item.area === "boden" && ["grund", "erweiterung"].includes(item.pool)).map((item) => item.id);
@@ -171,12 +206,99 @@ const mandatoryByDegree = {
   "3": ["tomoe-nage", "tani-otoshi", "hiza-gatame", "sankaku-gatame"],
   "2": ["sumi-gaeshi", "soto-makikomi", "gyaku-juji-jime", "okuri-eri-jime"],
   "1": ["ura-nage", "ko-uchi-makikomi", "sode-guruma-jime", "okuri-eri-jime"],
+  "dan1": [...new Set([
+    ...techniques.filter((item) => item.gokyo).map((item) => item.id),
+    ...danGroundIds,
+  ])],
 };
+
+const sideRequirementsByDegree = { "7": 1, "6": 2, "5": 3, "4": 3 };
+
+const danKataOptions = [
+  ["nage-1-3", "Nage-no-kata · Gruppen 1–3"],
+  ["ju-1-2", "Ju-no-kata · Gruppen 1–2"],
+];
+
+const danWahlbereichOptions = [
+  ["lizenz", "Lizenzen · gültige Trainer-C-Lizenz des DJB"],
+  ["wettkampf", "Wettkampf · 10 Kampfpunkte und individuelle Kampfkonzeption"],
+  ["kata-uke", "Kata · als Uke: Kodokan-Kata nach Wahl mit mindestens 15 Techniken"],
+  ["kata-alternative", "Kata · als Tori: nicht gewählte Alternative der Obligatorik"],
+  ["kata-nage-4-5", "Kata · als Tori: Nage-no-kata Gruppen 4–5"],
+  ["kata-ju-3", "Kata · als Tori: Ju-no-kata Gruppe 3"],
+  ["kata-katame-osae", "Kata · als Tori: Katame-no-kata · Osaekomi-waza"],
+  ["kata-goshinjutsu-1-2", "Kata · als Tori: Kodokan Goshinjutsu Gruppen 1–2 (ohne Waffen)"],
+  ["selbstverteidigung", "Selbstverteidigung · Nahdistanz sowie Schläge und Tritte"],
+  ["taiso", "Taiso · Sportabzeichen, Tandoku-renshu und Seiryoku-zenyo-kokumin-taiiku"],
+];
+
+const danKataOptionIds = new Set(danKataOptions.map(([id]) => id));
+const danWahlbereichOptionIds = new Set(danWahlbereichOptions.map(([id]) => id));
 
 const notices = [
   { type: "Widerspruch", title: "Zählweise der Nage-waza", text: "Die Pool-Übersicht zählt 16 + 12 + 32 + 9 = 69 Nage-waza, während ihr Anhang „Nage-waza, 68“ ausweist. Alle in der Übersicht namentlich aufgeführten Techniken bleiben hier sichtbar; Zählwerte werden nicht als Prüfungsanforderung verwendet." },
-  { type: "Widerspruch", title: "Abweichende Schreibweisen", text: "Die Pool-Übersicht schreibt „Ko-soko-gari“ und „Okure-ashi-harai“. Die aktuellen Kyu-Anforderungen und DJB-Poster führen Ko-soto-gari bzw. Okuri-ashi-barai. Die Anwendung verwendet diese neueren Schreibweisen." },
+  { type: "Widerspruch", title: "Abweichende Technikbezeichnungen", text: "Die Pool-Übersicht nennt „Ko-soko-gari“ und „Okure-ashi-harai“. Das Grundprogramm-Poster bezeichnet die gezeigte Technik dagegen als „Ko-soto-gake“, das Erweiterungsprogramm-Poster als „Okuri-ashi-barai“. Die Anwendung führt Ko-soto-gari bzw. Okuri-ashi-barai; beim Ko-soto-Eintrag bleibt die Posterreferenz deshalb ausdrücklich als Quellenabweichung markiert." },
 ];
+
+const fallTechniquesByDegree = {
+  "8": {
+    intro: "Für den Einstiegsgürtel ist kein festes Ukemi-Repertoire vorgegeben. Die sichere Grundidee bleibt: fallen lernen, ohne sich zu verletzen.",
+    items: [["Sicher fallen", "Grundverständnis: verletzungsfrei fallen lernen."]],
+  },
+  "7": {
+    intro: "Aus dem Stand; bei der Lernzielkontrolle ist jeweils eine Seite gefordert.",
+    items: [
+      ["Rückwärts", "Eine Seite"],
+      ["Seitwärts", "Eine Seite"],
+      ["Rolle", "Eine Seite"],
+    ],
+  },
+  "6": {
+    intro: "Aus dem Stand und jeweils zu beiden Seiten.",
+    items: [
+      ["Rückwärts mit Rolle", "Beide Seiten"],
+      ["Seitwärts", "Beide Seiten"],
+      ["Rolle vorwärts", "Beide Seiten"],
+    ],
+  },
+  "5": {
+    intro: "Aus dem Gehen und jeweils rechts wie links.",
+    items: [
+      ["Rückwärts", "Aus dem Gehen · rechts und links"],
+      ["Seitwärts", "Aus dem Gehen · rechts und links"],
+      ["Rolle", "Aus dem Gehen · rechts und links"],
+    ],
+  },
+  "4": {
+    intro: "Aus der zügigen Bewegung und jeweils zu beiden Seiten.",
+    items: [
+      ["Rückwärts", "Zügige Bewegung · beide Seiten"],
+      ["Seitwärts", "Zügige Bewegung · beide Seiten"],
+      ["Rolle", "Zügige Bewegung · beide Seiten"],
+    ],
+  },
+  "3": {
+    intro: "Alle bisherigen Ukemi werden aus der zügigen Bewegung beidseitig verlangt; der freie Fall kommt hinzu.",
+    items: [
+      ["Rückwärts", "Zügige Bewegung · beide Seiten"],
+      ["Seitwärts", "Zügige Bewegung · beide Seiten"],
+      ["Rolle", "Zügige Bewegung · beide Seiten"],
+      ["Freier Fall", "Zusätzliche Falltechnik"],
+    ],
+  },
+  "2": {
+    intro: "Alle bisher erlernten Ukemi sind gefordert.",
+    items: [["Alle bisherigen Ukemi", "Rückwärts, seitwärts, Rollen und freier Fall sicher beherrschen."]],
+  },
+  "1": {
+    intro: "Alle bisher erlernten Ukemi sind gefordert.",
+    items: [["Alle bisherigen Ukemi", "Rückwärts, seitwärts, Rollen und freier Fall sicher beherrschen."]],
+  },
+  dan1: {
+    intro: "Für den 1. Dan weist das Anforderungsprofil keine zusätzliche, eigenständige Ukemi-Anforderung aus.",
+    items: [["Keine zusätzliche Vorgabe", "Die Ukemi-Anforderungen werden im 1.-Dan-Profil nicht gesondert aufgeführt."]],
+  },
+};
 
 const standardSituationsByDegree = {
   "7": [
@@ -260,7 +382,7 @@ const gradeNotes = {
 };
 
 function defaultState() {
-  return { version: DATA_VERSION, name: "Mein Prüfungsprogramm", degree: "1", selected: {}, situations: {} };
+  return { version: DATA_VERSION, name: "Mein Prüfungsprogramm", degree: "1", selected: {}, situations: {}, danOptions: { kata: "", wahlbereich: "" } };
 }
 
 function readState() {
@@ -291,12 +413,17 @@ function normaliseState(candidate) {
       if (standardSituationIds.has(id)) situations[id] = true;
     }
   }
-  return { version: DATA_VERSION, name: String(candidate.name || fallback.name).slice(0, 80), degree, selected, situations };
+  const danOptions = {
+    kata: danKataOptionIds.has(candidate.danOptions?.kata) ? candidate.danOptions.kata : "",
+    wahlbereich: danWahlbereichOptionIds.has(candidate.danOptions?.wahlbereich) ? candidate.danOptions.wahlbereich : "",
+  };
+  return { version: DATA_VERSION, name: String(candidate.name || fallback.name).slice(0, 80), degree, selected, situations, danOptions };
 }
 
 let state = readState();
 let activeFilter = "all";
 let searchTerm = "";
+let previousTechniqueView = null;
 
 const elements = {
   degreeSelect: document.querySelector("#degree-select"),
@@ -306,15 +433,24 @@ const elements = {
   completion: document.querySelector("#completion"),
   note: document.querySelector("#program-note"),
   notices: document.querySelector("#notices"),
+  fallSection: document.querySelector("#falltechniken"),
+  fallIntro: document.querySelector("#fall-intro"),
+  fallGrid: document.querySelector("#fall-grid"),
   situationsSection: document.querySelector("#situationen"),
   situationsIntro: document.querySelector("#situations-intro"),
   situationsGrid: document.querySelector("#situation-grid"),
   situationsSummary: document.querySelector("#situations-summary"),
+  danOptionsSection: document.querySelector("#dan-optionen"),
+  danKataCard: document.querySelector("#dan-kata-card"),
+  danWahlbereichCard: document.querySelector("#dan-wahlbereich-card"),
+  danKataSelect: document.querySelector("#dan-kata-select"),
+  danWahlbereichSelect: document.querySelector("#dan-wahlbereich-select"),
   groups: document.querySelector("#technique-groups"),
   selectedSummary: document.querySelector("#selected-summary"),
   search: document.querySelector("#search-input"),
   feedback: document.querySelector("#feedback"),
   importInput: document.querySelector("#import-input"),
+  printExit: document.querySelector("#print-exit"),
 };
 
 function persist() {
@@ -349,6 +485,17 @@ function pruneUnavailableSelections() {
   return removed;
 }
 
+function ensureMandatorySelections() {
+  let added = 0;
+  for (const id of mandatoryByDegree[state.degree] || []) {
+    const item = techniqueById.get(id);
+    if (!item || state.selected[id]) continue;
+    state.selected[id] = { side: item.turn ? "main" : "neutral" };
+    added += 1;
+  }
+  return added;
+}
+
 function situationsForCurrentDegree() {
   return (standardSituationsByDegree[state.degree] || []).map(([id, title, detail]) => ({
     id: `${state.degree}:${id}`,
@@ -376,11 +523,10 @@ function pruneUnavailableSituations() {
 }
 
 function showSideSelection(item) {
-  return item.turn && ["7", "6", "5", "4"].includes(state.degree);
+  return Boolean(sideRequirementsByDegree[state.degree]) && item.turn && isSelected(item.id);
 }
 
 function requiredForCurrentDegree(item) {
-  if (state.degree === "dan1") return Boolean(item.gokyo || danGroundIds.includes(item.id));
   return (mandatoryByDegree[state.degree] || []).includes(item.id);
 }
 
@@ -410,7 +556,7 @@ function requirementDefinitions() {
     "3": [["Würfe", selectedStand, 15, "gesamt"], ["Erweiterung", extensionThrows, 3, "Würfe aus dem Erweiterungsprogramm"], ["Pflichtwürfe", () => required(["tomoe-nage", "tani-otoshi"]).current, 2, "Tomoe-nage · Tani-otoshi"], ["Erweiterungshebel", () => countSelected((item) => item.pool === "erweiterung" && item.group === "boden-kansetsu"), 4, "inkl. Hiza- & Sankaku-gatame"], ["Pflichthebel", () => required(["hiza-gatame", "sankaku-gatame"]).current, 2, "Hiza- & Sankaku-gatame"]],
     "2": [["Würfe", selectedStand, 18, "gesamt"], ["Erweiterung", extensionThrows, 6, "Würfe aus dem Erweiterungsprogramm"], ["Pflichtwürfe", () => required(["sumi-gaeshi", "soto-makikomi"]).current, 2, "Sumi-gaeshi · Soto-makikomi"], ["Würgetechniken", selectedChokes, 3, "aus Grund- & Erweiterungsprogramm"], ["Pflichtwürgen", () => required(["gyaku-juji-jime", "okuri-eri-jime"]).current, 2, "Gyaku-juji- & Okuri-eri-jime"]],
     "1": [["Würfe", selectedStand, 20, "gesamt"], ["Erweiterung", extensionThrows, 9, "Würfe aus dem Erweiterungsprogramm"], ["Pflichtwürfe", () => required(["ura-nage", "ko-uchi-makikomi"]).current, 2, "Ura-nage · Ko-uchi-makikomi"], ["Würgetechniken", selectedChokes, 4, "aus Grund- & Erweiterungsprogramm"], ["Pflichtwürgen", () => required(["sode-guruma-jime", "okuri-eri-jime"]).current, 2, "Sode-guruma- & Okuri-eri-jime"]],
-    "dan1": [["Gokyo-no-waza", totalGokyo, gokyoKeys.length, "jede Gokyo-Familie aus freier Interaktion"], ["Katame-waza", () => selectedRequired(danGroundIds), danGroundIds.length, "je eine Variante aus Grund- & Erweiterungsprogramm"], ["Kata", () => 0, 1, "Nage-no-kata 1–3 oder Ju-no-kata 1–2 · außerhalb des Rasters"], ["Wahlbereich", () => 0, 1, "Lizenz · Wettkampf · Kata · SV oder Taiso · außerhalb des Rasters"]],
+    "dan1": [["Gokyo-no-waza", totalGokyo, gokyoKeys.length, "jede Gokyo-Familie aus freier Interaktion"], ["Katame-waza", () => selectedRequired(danGroundIds), danGroundIds.length, "je eine Variante aus Grund- & Erweiterungsprogramm"], ["Kata", () => state.danOptions.kata ? 1 : 0, 1, "Nage-no-kata 1–3 oder Ju-no-kata 1–2"], ["Wahlbereich", () => state.danOptions.wahlbereich ? 1 : 0, 1, "Lizenz · Wettkampf · Kata · Selbstverteidigung oder Taiso"]],
   };
   if (state.degree === "8") return [["Einstieg", () => 0, 0, "kein Technikpool-Umfang festgelegt"]];
   const situationCount = situationsForCurrentDegree().length;
@@ -433,6 +579,18 @@ function renderDegreeCard() {
   const current = degree();
   elements.degreeCard.style.setProperty("--degree-color", current.color);
   elements.degreeCard.innerHTML = `<strong>${current.short}</strong><span>${current.description}</span>`;
+}
+
+function renderFallTechniques() {
+  const requirement = fallTechniquesByDegree[state.degree];
+  elements.fallSection.hidden = !requirement;
+  if (!requirement) return;
+  elements.fallIntro.textContent = requirement.intro;
+  elements.fallGrid.innerHTML = requirement.items.map(([title, detail]) => `<article class="fall-card">
+    <span class="fall-card-kind">Ukemi</span>
+    <strong>${title}</strong>
+    <small>${detail}</small>
+  </article>`).join("");
 }
 
 function renderRequirements() {
@@ -470,41 +628,38 @@ function renderSituations() {
   }).join("");
 }
 
+function renderDanOptions() {
+  const isDan = state.degree === "dan1";
+  elements.danOptionsSection.hidden = !isDan;
+  if (!isDan) return;
+  const optionMarkup = (options, placeholder) => `<option value="">${placeholder}</option>${options.map(([id, label]) => `<option value="${id}">${label}</option>`).join("")}`;
+  elements.danKataSelect.innerHTML = optionMarkup(danKataOptions, "Bitte auswählen …");
+  elements.danWahlbereichSelect.innerHTML = optionMarkup(danWahlbereichOptions, "Bitte auswählen …");
+  elements.danKataSelect.value = state.danOptions.kata;
+  elements.danWahlbereichSelect.value = state.danOptions.wahlbereich;
+  elements.danKataCard.classList.toggle("is-selected", Boolean(state.danOptions.kata));
+  elements.danWahlbereichCard.classList.toggle("is-selected", Boolean(state.danOptions.wahlbereich));
+}
+
 function renderNotices() {
   elements.notices.innerHTML = notices.map((notice) => `<article class="notice">
     <span class="notice-tag">${notice.type}</span><h3>${notice.title}</h3><p>${notice.text}</p>
   </article>`).join("");
 }
 
-function standingPictogram(item) {
-  const falling = item.group.includes("yoko") || item.group.includes("ma");
-  const foot = item.group === "stand-ashi";
-  const turn = item.turn;
-  return `<svg class="pictogram" viewBox="0 0 150 66" aria-hidden="true" focusable="false">
-    <path class="mat" d="M7 58H143" fill="none" stroke-width="1"/>
-    <circle class="dot-tori" cx="${turn ? 67 : 57}" cy="${falling ? 27 : 17}" r="4"/>
-    <path class="tori" d="M${turn ? 67 : 57} ${falling ? 32 : 22} L${turn ? 71 : 60} ${falling ? 43 : 37} M${turn ? 69 : 59} ${falling ? 35 : 27} L${turn ? 54 : 43} ${falling ? 42 : 31} M${turn ? 70 : 59} ${falling ? 38 : 31} L${turn ? 87 : 75} ${falling ? 45 : 28} M${turn ? 70 : 59} ${falling ? 43 : 37} L${turn ? 54 : 47} ${falling ? 55 : 56} M${turn ? 70 : 59} ${falling ? 43 : 37} L${turn ? 84 : 69} ${falling ? 55 : 56}" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-    <circle class="dot-uke" cx="${falling ? 104 : 93}" cy="${falling ? 39 : 17}" r="4"/>
-    <path class="uke" d="M${falling ? 101 : 93} ${falling ? 43 : 22} L${falling ? 93 : 93} ${falling ? 49 : 37} M${falling ? 98 : 93} ${falling ? 46 : 28} L${falling ? 116 : 77} ${falling ? 52 : 30} M${falling ? 97 : 93} ${falling ? 47 : 29} L${falling ? 80 : 109} ${falling ? 54 : 32} M${falling ? 94 : 93} ${falling ? 49 : 37} L${falling ? 80 : 81} ${falling ? 56 : 56} M${falling ? 94 : 93} ${falling ? 49 : 37} L${falling ? 111 : 105} ${falling ? 57 : 56}" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-    ${foot ? '<path d="M61 47 Q77 43 91 50" fill="none" stroke="#b95042" stroke-width="1.5" stroke-dasharray="3 3"/>' : ""}
-  </svg>`;
+function fallbackPictogram() {
+  return '<span class="comic-illustration comic-illustration--fallback" aria-hidden="true" style="width:43px;background-image:url(\'assets/illustrations/technik-ohne-vorlage-comic.png\');background-size:contain;background-position:center;"></span>';
 }
 
-function groundPictogram(item) {
-  const choke = item.group === "boden-shime";
-  const lever = item.group === "boden-kansetsu";
-  return `<svg class="pictogram" viewBox="0 0 150 66" aria-hidden="true" focusable="false">
-    <path class="mat" d="M7 57H143" fill="none" stroke-width="1"/>
-    <circle class="dot-uke" cx="98" cy="43" r="4"/>
-    <path class="uke" d="M94 46 L74 47 M80 47 L61 51 M80 47 L67 39 M94 46 L113 53 M94 46 L112 39" fill="none" stroke-width="3" stroke-linecap="round"/>
-    <circle class="dot-tori" cx="68" cy="25" r="4"/>
-    <path class="tori" d="M69 30 L76 41 M72 34 L91 39 M73 34 L60 38 M76 41 L64 54 M76 41 L88 54" fill="none" stroke-width="3" stroke-linecap="round"/>
-    ${choke ? '<path d="M74 34 Q85 28 95 37" fill="none" stroke="#b95042" stroke-width="2" stroke-linecap="round"/>' : ""}
-    ${lever ? '<path d="M84 44 L106 29" fill="none" stroke="#b95042" stroke-width="2" stroke-linecap="round"/>' : ""}
-  </svg>`;
+function comicIllustration(item) {
+  const frame = comicFrames[item.id];
+  if (!frame) return fallbackPictogram(item);
+  const [spriteId, column, row] = frame;
+  const sprite = comicSprites[spriteId];
+  const x = sprite.columns === 1 ? 0 : (column / (sprite.columns - 1)) * 100;
+  const y = sprite.rows === 1 ? 0 : (row / (sprite.rows - 1)) * 100;
+  return `<span class="comic-illustration" aria-hidden="true" style="width:${Math.round(64 * sprite.ratio)}px;background-image:url('${sprite.src}');background-size:${sprite.columns * 100}% ${sprite.rows * 100}%;background-position:${x}% ${y}%;"></span>`;
 }
-
-function pictogram(item) { return item.area === "stand" ? standingPictogram(item) : groundPictogram(item); }
 
 function techniqueCard(item) {
   const selected = isSelected(item.id);
@@ -514,8 +669,8 @@ function techniqueCard(item) {
   const pool = pools[item.pool];
   const detail = item.counterOnly ? "reine Kontertechnik" : item.gokyo ? "Gokyo-no-waza" : item.category;
   return `<article class="technique-card ${selected ? "is-selected" : ""} ${required ? "is-required" : ""}" style="--pool-color:${pool.color}" data-id="${item.id}">
-    <div class="card-top"><span class="card-pool">${pool.label}</span><button class="select-toggle" type="button" data-toggle="${item.id}" aria-label="${item.name} ${selected ? "abwählen" : "auswählen"}">✓</button></div>
-    ${pictogram(item)}
+    <div class="card-top"><span class="card-pool">${pool.label}</span><button class="select-toggle" type="button" data-toggle="${item.id}" ${required ? "disabled" : ""} aria-label="${required ? `${item.name} ist für diesen Grad verpflichtend` : `${item.name} ${selected ? "abwählen" : "auswählen"}`}" title="${required ? "Pflichttechnik für diesen Grad" : ""}">✓</button></div>
+    ${comicIllustration(item)}
     <h4>${item.name}</h4>
     <p class="technique-meta">${detail}</p>
     <div class="card-bottom"><span class="category-chip">${item.category}</span>
@@ -553,13 +708,16 @@ function renderTechniqueGrid() {
 function rerender() {
   renderDegreeCard();
   renderRequirements();
-  renderSituations();
+  renderDanOptions();
+  renderFallTechniques();
   renderTechniqueGrid();
+  renderSituations();
 }
 
 function updateSelection(id) {
   const item = techniqueById.get(id);
   if (!item) return;
+  if (requiredForCurrentDegree(item)) return;
   if (isSelected(id)) delete state.selected[id];
   else state.selected[id] = { side: item.turn ? "main" : "neutral" };
   persist();
@@ -578,6 +736,38 @@ function updateSituation(id) {
 function setFeedback(message) {
   elements.feedback.textContent = message;
   window.setTimeout(() => { if (elements.feedback.textContent === message) elements.feedback.textContent = ""; }, 4800);
+}
+
+function syncFilterButtons() {
+  document.querySelectorAll(".filter").forEach((button) => button.classList.toggle("active", button.dataset.filter === activeFilter));
+}
+
+function enterPrintView() {
+  if (!selectedTechniques().length) {
+    setFeedback("Für die Druckansicht zuerst mindestens eine Technik auswählen.");
+    return;
+  }
+  previousTechniqueView = { filter: activeFilter, search: searchTerm };
+  activeFilter = "selected";
+  searchTerm = "";
+  elements.search.value = "";
+  syncFilterButtons();
+  renderTechniqueGrid();
+  document.body.classList.add("print-view");
+  elements.printExit.focus();
+  window.scrollTo(0, 0);
+}
+
+function leavePrintView() {
+  document.body.classList.remove("print-view");
+  if (previousTechniqueView) {
+    activeFilter = previousTechniqueView.filter;
+    searchTerm = previousTechniqueView.search;
+    elements.search.value = searchTerm;
+    previousTechniqueView = null;
+  }
+  syncFilterButtons();
+  renderTechniqueGrid();
 }
 
 function safeFilename(name) {
@@ -611,6 +801,7 @@ async function importProgram(file) {
     const candidate = normaliseState(program);
     state = candidate;
     pruneUnavailableSelections();
+    ensureMandatorySelections();
     pruneUnavailableSituations();
     persist();
     renderDegreeSelect();
@@ -627,11 +818,17 @@ function bindEvents() {
   elements.degreeSelect.addEventListener("change", (event) => {
     state.degree = event.target.value;
     const removedTechniques = pruneUnavailableSelections();
+    const addedMandatory = ensureMandatorySelections();
     const removedSituations = pruneUnavailableSituations();
     persist();
     rerender();
     const removed = removedTechniques + removedSituations;
-    if (removed) setFeedback(`${removed} nicht zum Grad passende Auswahl${removed === 1 ? " wurde" : "en wurden"} entfernt.`);
+    if (removed || addedMandatory) {
+      const messages = [];
+      if (removed) messages.push(`${removed} nicht zum Grad passende Auswahl${removed === 1 ? " wurde" : "en wurden"} entfernt`);
+      if (addedMandatory) messages.push(`${addedMandatory} Pflichttechnik${addedMandatory === 1 ? " wurde" : "en wurden"} automatisch ausgewählt`);
+      setFeedback(`${messages.join(" · ")}.`);
+    }
   });
   elements.name.addEventListener("input", (event) => {
     state.name = event.target.value.slice(0, 80);
@@ -639,7 +836,7 @@ function bindEvents() {
   });
   document.querySelectorAll(".filter").forEach((button) => button.addEventListener("click", () => {
     activeFilter = button.dataset.filter;
-    document.querySelectorAll(".filter").forEach((item) => item.classList.toggle("active", item === button));
+    syncFilterButtons();
     renderTechniqueGrid();
   }));
   elements.search.addEventListener("input", (event) => { searchTerm = event.target.value; renderTechniqueGrid(); });
@@ -658,14 +855,31 @@ function bindEvents() {
     const button = event.target.closest("[data-situation-toggle]");
     if (button) updateSituation(button.dataset.situationToggle);
   });
+  elements.danKataSelect.addEventListener("change", (event) => {
+    state.danOptions.kata = danKataOptionIds.has(event.target.value) ? event.target.value : "";
+    persist();
+    renderRequirements();
+    renderDanOptions();
+  });
+  elements.danWahlbereichSelect.addEventListener("change", (event) => {
+    state.danOptions.wahlbereich = danWahlbereichOptionIds.has(event.target.value) ? event.target.value : "";
+    persist();
+    renderRequirements();
+    renderDanOptions();
+  });
   document.querySelector("#export-button").addEventListener("click", exportProgram);
   document.querySelector("#import-button").addEventListener("click", () => elements.importInput.click());
   elements.importInput.addEventListener("change", (event) => { if (event.target.files?.[0]) importProgram(event.target.files[0]); });
-  [document.querySelector("#print-button"), document.querySelector("#print-button-bottom")].forEach((button) => button.addEventListener("click", () => window.print()));
+  [document.querySelector("#print-button"), document.querySelector("#print-button-bottom")].forEach((button) => button.addEventListener("click", enterPrintView));
+  elements.printExit.addEventListener("click", leavePrintView);
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && document.body.classList.contains("print-view")) leavePrintView();
+  });
 }
 
 renderDegreeSelect();
 pruneUnavailableSelections();
+ensureMandatorySelections();
 pruneUnavailableSituations();
 renderNotices();
 rerender();
