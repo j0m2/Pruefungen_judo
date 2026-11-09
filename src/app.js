@@ -1,0 +1,502 @@
+const DATA_VERSION = 1;
+const STORAGE_KEY = "judo-programmplaner-v1";
+
+const degrees = [
+  { id: "8", label: "8. Kyu · weiß-gelb", short: "8. Kyu", color: "#e4d9a9", description: "Einstieg: Grundverständnis, Werte, Fallen und erste Judoerfahrungen. Kein Technikpool-Umfang vorgegeben." },
+  { id: "7", label: "7. Kyu · gelb", short: "7. Kyu", color: "#e7c74a", description: "Fallen, Werfen, Halten · 3 Wurftechniken aus dem Grundprogramm." },
+  { id: "6", label: "6. Kyu · gelb-orange", short: "6. Kyu", color: "#e5a543", description: "Vertiefung und Variation · 6 Wurftechniken aus dem Grundprogramm." },
+  { id: "5", label: "5. Kyu · orange", short: "5. Kyu", color: "#d97837", description: "Anwenden und Befreien · 9 Wurftechniken aus dem Grundprogramm." },
+  { id: "4", label: "4. Kyu · orange-grün", short: "4. Kyu", color: "#88a64c", description: "Werfen auf einem Bein · 12 Wurftechniken aus dem Grundprogramm." },
+  { id: "3", label: "3. Kyu · grün", short: "3. Kyu", color: "#3e7b56", description: "Sensationelle Technikwelten · 15 Würfe, davon 3 aus dem Erweiterungsprogramm." },
+  { id: "2", label: "2. Kyu · blau", short: "2. Kyu", color: "#477d9b", description: "Judo-Taktik · 18 Würfe, davon 6 aus dem Erweiterungsprogramm." },
+  { id: "1", label: "1. Kyu · braun", short: "1. Kyu", color: "#725034", description: "Das eigene Judoprofil · 20 Würfe, davon 9 aus dem Erweiterungsprogramm." },
+  { id: "dan1", label: "1. Dan · schwarz", short: "1. Dan", color: "#252825", description: "Obligatorik: vollständige Gokyo-no-waza und Katame-waza aus Grund- und Erweiterungsprogramm." },
+];
+
+const pools = {
+  grund: { label: "Grundprogramm", color: "#d97837" },
+  erweiterung: { label: "Erweiterungsprogramm", color: "#3e7b56" },
+  master: { label: "Masterprogramm", color: "#477d9b" },
+  historisch: { label: "Historisches Programm", color: "#7a6554" },
+};
+
+const groupInfo = {
+  "stand-te": { title: "Stand · Te-waza", area: "stand", order: 1 },
+  "stand-koshi": { title: "Stand · Koshi-waza", area: "stand", order: 2 },
+  "stand-ashi": { title: "Stand · Ashi-waza", area: "stand", order: 3 },
+  "stand-ma": { title: "Stand · Ma-sutemi-waza", area: "stand", order: 4 },
+  "stand-yoko": { title: "Stand · Yoko-sutemi-waza", area: "stand", order: 5 },
+  "boden-osae": { title: "Boden · Osaekomi-waza", area: "boden", order: 6 },
+  "boden-kansetsu": { title: "Boden · Kansetsu-waza", area: "boden", order: 7 },
+  "boden-shime": { title: "Boden · Shime-waza", area: "boden", order: 8 },
+};
+
+function technique(id, name, group, pool, options = {}) {
+  return {
+    id, name, group, pool,
+    area: groupInfo[group].area,
+    category: groupInfo[group].title.split(" · ")[1],
+    turn: false,
+    gokyo: null,
+    counterOnly: false,
+    ...options,
+  };
+}
+
+// Techniken aus den vier Technik-Pools (DJB, Stand 01.06.2022) plus die
+// Kyu-/Dan-relevanten Katame-waza. Schreibweisen folgen vorrangig dem Kyu-PDF 2025.
+const techniques = [
+  // Grundprogramm · Nage-waza
+  technique("morote-seoi-nage", "Morote-seoi-nage", "stand-te", "grund", { turn: true, gokyo: "seoi-nage" }),
+  technique("ippon-seoi-nage", "Ippon-seoi-nage", "stand-te", "grund", { turn: true, gokyo: "seoi-nage" }),
+  technique("tai-otoshi", "Tai-otoshi", "stand-te", "grund", { turn: true, gokyo: "tai-otoshi" }),
+  technique("o-goshi", "O-goshi", "stand-koshi", "grund", { turn: true, gokyo: "o-goshi" }),
+  technique("uki-goshi", "Uki-goshi", "stand-koshi", "grund", { turn: true, gokyo: "uki-goshi" }),
+  technique("koshi-guruma", "Koshi-guruma", "stand-koshi", "grund", { turn: true, gokyo: "koshi-guruma" }),
+  technique("tsurikomi-goshi", "Tsurikomi-goshi", "stand-koshi", "grund", { turn: true, gokyo: "tsurikomi-goshi" }),
+  technique("sode-tsurikomi-goshi", "Sode-tsurikomi-goshi", "stand-koshi", "grund", { turn: true }),
+  technique("harai-goshi", "Harai-goshi", "stand-koshi", "grund", { turn: true, gokyo: "harai-goshi" }),
+  technique("de-ashi-barai", "De-ashi-barai", "stand-ashi", "grund", { gokyo: "de-ashi-barai" }),
+  technique("sasae-tsurikomi-ashi", "Sasae-tsurikomi-ashi", "stand-ashi", "grund", { gokyo: "sasae-tsurikomi-ashi" }),
+  technique("o-soto-gari", "O-soto-gari", "stand-ashi", "grund", { gokyo: "o-soto-gari" }),
+  technique("o-uchi-gari", "O-uchi-gari", "stand-ashi", "grund", { gokyo: "o-uchi-gari" }),
+  technique("ko-soto-gari", "Ko-soto-gari", "stand-ashi", "grund", { gokyo: "ko-soto-gari" }),
+  technique("ko-uchi-gari", "Ko-uchi-gari", "stand-ashi", "grund", { gokyo: "ko-uchi-gari" }),
+  technique("uchi-mata", "Uchi-mata", "stand-ashi", "grund", { turn: true, gokyo: "uchi-mata" }),
+
+  // Erweiterungsprogramm · Nage-waza
+  technique("kata-guruma", "Kata-guruma", "stand-te", "erweiterung", { turn: true, gokyo: "kata-guruma" }),
+  technique("uki-otoshi", "Uki-otoshi", "stand-te", "erweiterung", { gokyo: "uki-otoshi" }),
+  technique("tsuri-goshi", "Tsuri-goshi", "stand-koshi", "erweiterung", { turn: true, gokyo: "tsuri-goshi" }),
+  technique("utsuri-goshi", "Utsuri-goshi", "stand-koshi", "erweiterung", { gokyo: "utsuri-goshi" }),
+  technique("okuri-ashi-barai", "Okuri-ashi-barai", "stand-ashi", "erweiterung", { gokyo: "okuri-ashi-barai" }),
+  technique("ashi-guruma", "Ashi-guruma", "stand-ashi", "erweiterung", { turn: true, gokyo: "ashi-guruma" }),
+  technique("tomoe-nage", "Tomoe-nage", "stand-ma", "erweiterung", { gokyo: "tomoe-nage" }),
+  technique("sumi-gaeshi", "Sumi-gaeshi", "stand-ma", "erweiterung", { gokyo: "sumi-gaeshi" }),
+  technique("ura-nage", "Ura-nage", "stand-ma", "erweiterung", { gokyo: "ura-nage" }),
+  technique("ko-uchi-makikomi", "Ko-uchi-makikomi", "stand-yoko", "erweiterung"),
+  technique("tani-otoshi", "Tani-otoshi", "stand-yoko", "erweiterung", { gokyo: "tani-otoshi" }),
+  technique("soto-makikomi", "Soto-makikomi", "stand-yoko", "erweiterung", { turn: true, gokyo: "soto-makikomi" }),
+
+  // Masterprogramm · Nage-waza
+  technique("kuchiki-daoshi", "Kuchiki-daoshi", "stand-te", "master"),
+  technique("morote-gari", "Morote-gari", "stand-te", "master"),
+  technique("sukui-nage", "Sukui-nage", "stand-te", "master", { gokyo: "sukui-nage" }),
+  technique("uchi-mata-sukashi", "Uchi-mata-sukashi", "stand-te", "master", { gokyo: "uchi-mata-sukashi" }),
+  technique("ko-uchi-gaeshi", "Ko-uchi-gaeshi", "stand-te", "master", { counterOnly: true }),
+  technique("seoi-otoshi", "Seoi-otoshi", "stand-te", "master", { turn: true }),
+  technique("sumi-otoshi", "Sumi-otoshi", "stand-te", "master"),
+  technique("obi-tori-gaeshi", "Obi-tori-gaeshi", "stand-te", "master"),
+  technique("kibisu-gaeshi", "Kibisu-gaeshi", "stand-te", "master"),
+  technique("obi-otoshi", "Obi-otoshi", "stand-te", "master"),
+  technique("yama-arashi", "Yama-arashi", "stand-te", "master"),
+  technique("hane-goshi", "Hane-goshi", "stand-koshi", "master", { turn: true, gokyo: "hane-goshi" }),
+  technique("ushiro-goshi", "Ushiro-goshi", "stand-koshi", "master"),
+  technique("hiza-guruma", "Hiza-guruma", "stand-ashi", "master", { gokyo: "hiza-guruma" }),
+  technique("ko-soto-gake", "Ko-soto-gake", "stand-ashi", "master", { gokyo: "ko-soto-gake" }),
+  technique("harai-tsurikomi-ashi", "Harai-tsurikomi-ashi", "stand-ashi", "master", { gokyo: "harai-tsurikomi-ashi" }),
+  technique("o-guruma", "O-guruma", "stand-ashi", "master", { turn: true, gokyo: "o-guruma" }),
+  technique("o-soto-guruma", "O-soto-guruma", "stand-ashi", "master", { gokyo: "o-soto-guruma" }),
+  technique("o-soto-otoshi", "O-soto-otoshi", "stand-ashi", "master", { gokyo: "o-soto-otoshi" }),
+  technique("o-soto-gaeshi", "O-soto-gaeshi", "stand-ashi", "master", { counterOnly: true }),
+  technique("tsubame-gaeshi", "Tsubame-gaeshi", "stand-ashi", "master", { counterOnly: true }),
+  technique("hane-goshi-gaeshi", "Hane-goshi-gaeshi", "stand-ashi", "master", { counterOnly: true }),
+  technique("harai-goshi-gaeshi", "Harai-goshi-gaeshi", "stand-ashi", "master", { counterOnly: true }),
+  technique("uchi-mata-gaeshi", "Uchi-mata-gaeshi", "stand-ashi", "master", { counterOnly: true }),
+  technique("o-uchi-gaeshi", "O-uchi-gaeshi", "stand-ashi", "master", { counterOnly: true }),
+  technique("hikikomi-gaeshi", "Hikikomi-gaeshi", "stand-ma", "master"),
+  technique("harai-makikomi", "Harai-makikomi", "stand-yoko", "master"),
+  technique("uchi-mata-makikomi", "Uchi-mata-makikomi", "stand-yoko", "master", { turn: true }),
+  technique("hane-makikomi", "Hane-makikomi", "stand-yoko", "master", { turn: true, gokyo: "hane-makikomi" }),
+  technique("o-soto-makikomi", "O-soto-makikomi", "stand-yoko", "master"),
+  technique("yoko-otoshi", "Yoko-otoshi", "stand-yoko", "master", { gokyo: "yoko-otoshi" }),
+  technique("uki-waza", "Uki-waza", "stand-yoko", "master", { gokyo: "uki-waza" }),
+  technique("yoko-guruma", "Yoko-guruma", "stand-yoko", "master", { gokyo: "yoko-guruma" }),
+  technique("yoko-gake", "Yoko-gake", "stand-yoko", "master", { gokyo: "yoko-gake" }),
+  technique("yoko-wakare", "Yoko-wakare", "stand-yoko", "master", { gokyo: "yoko-wakare" }),
+
+  // Historisches Programm · Nage-waza
+  technique("daki-age", "Daki-age", "stand-koshi", "historisch"),
+  technique("tawara-gaeshi", "Tawara-gaeshi", "stand-ma", "historisch"),
+  technique("uchi-makikomi", "Uchi-makikomi", "stand-yoko", "historisch"),
+  technique("daki-wakare", "Daki-wakare", "stand-yoko", "historisch"),
+  technique("kani-basami", "Kani-basami", "stand-yoko", "historisch"),
+  technique("kawazu-gake", "Kawazu-gake", "stand-yoko", "historisch"),
+
+  // Grundprogramm · Katame-waza
+  technique("kuzure-kesa-gatame", "Kuzure-kesa-gatame", "boden-osae", "grund"),
+  technique("kesa-gatame", "Kesa-gatame", "boden-osae", "grund"),
+  technique("yoko-shiho-gatame", "Yoko-shiho-gatame", "boden-osae", "grund"),
+  technique("kami-shiho-gatame", "Kami-shiho-gatame", "boden-osae", "grund"),
+  technique("tate-shiho-gatame", "Tate-shiho-gatame", "boden-osae", "grund"),
+  technique("juji-gatame", "Juji-gatame", "boden-kansetsu", "grund"),
+  technique("ude-garami", "Ude-garami (am gebeugten Arm)", "boden-kansetsu", "grund"),
+  technique("gyaku-juji-jime", "Gyaku-juji-jime", "boden-shime", "grund"),
+  technique("okuri-eri-jime", "Okuri-eri-jime", "boden-shime", "grund"),
+
+  // Erweiterungsprogramm · Katame-waza
+  technique("ushiro-kesa-gatame", "Ushiro-kesa-gatame", "boden-osae", "erweiterung"),
+  technique("kata-gatame", "Kata-gatame", "boden-osae", "erweiterung"),
+  technique("kuzure-kami-shiho-gatame", "Kuzure-kami-shiho-gatame", "boden-osae", "erweiterung"),
+  technique("ura-gatame", "Ura-gatame", "boden-osae", "erweiterung"),
+  technique("uki-gatame", "Uki-gatame", "boden-osae", "erweiterung"),
+  technique("waki-gatame", "Waki-gatame", "boden-kansetsu", "erweiterung"),
+  technique("ude-gatame", "Ude-gatame", "boden-kansetsu", "erweiterung"),
+  technique("hiza-gatame", "Hiza-gatame", "boden-kansetsu", "erweiterung"),
+  technique("sankaku-gatame", "Sankaku-gatame", "boden-kansetsu", "erweiterung"),
+  technique("katate-jime", "Katate-jime", "boden-shime", "erweiterung"),
+  technique("kataha-jime", "Kataha-jime", "boden-shime", "erweiterung"),
+  technique("hadaka-jime", "Hadaka-jime", "boden-shime", "erweiterung"),
+  technique("sankaku-jime", "Sankaku-jime", "boden-shime", "erweiterung"),
+  technique("sode-guruma-jime", "Sode-guruma-jime", "boden-shime", "erweiterung"),
+  technique("tsukkomi-jime", "Tsukkomi-jime", "boden-shime", "erweiterung"),
+
+  // Masterprogramm · Katame-waza
+  technique("ashi-gatame", "Ashi-gatame", "boden-kansetsu", "master"),
+  technique("hara-gatame", "Hara-gatame", "boden-kansetsu", "master"),
+  technique("te-gatame", "Te-gatame", "boden-kansetsu", "master"),
+  technique("nami-juji-jime", "Nami-juji-jime", "boden-shime", "master"),
+  technique("kata-juji-jime", "Kata-juji-jime", "boden-shime", "master"),
+  technique("ryote-jime", "Ryo-te-jime", "boden-shime", "master"),
+  technique("do-jime", "Do-jime", "boden-shime", "historisch"),
+];
+
+const techniqueById = new Map(techniques.map((item) => [item.id, item]));
+const gokyoKeys = [...new Set(techniques.filter((item) => item.gokyo).map((item) => item.gokyo))];
+const danGroundIds = techniques.filter((item) => item.area === "boden" && ["grund", "erweiterung"].includes(item.pool)).map((item) => item.id);
+
+const mandatoryByDegree = {
+  "7": ["kesa-gatame", "tate-shiho-gatame", "yoko-shiho-gatame", "kami-shiho-gatame"],
+  "4": ["o-soto-gari", "harai-goshi", "uchi-mata", "juji-gatame", "ude-garami"],
+  "3": ["tomoe-nage", "tani-otoshi", "hiza-gatame", "sankaku-gatame"],
+  "2": ["sumi-gaeshi", "soto-makikomi", "gyaku-juji-jime", "okuri-eri-jime"],
+  "1": ["ura-nage", "ko-uchi-makikomi", "sode-guruma-jime", "okuri-eri-jime"],
+};
+
+const notices = [
+  { type: "Hinweis", title: "Versionsstände sind verschieden", text: "Die Kyu-Anforderungen gelten ab 17.02.2025; die sichtbaren DJB-Poster tragen Copyright 2024; der Technikpool ist Stand 01.06.2022. Die Anwendung priorisiert bei Abweichungen die neueste Anforderungen-Ausgabe." },
+  { type: "Normalisiert", title: "Zwei Schreibweisen im Pool-PDF", text: "Die Übersichtstabelle schreibt „Ko-soko-gari“ und „Okure-ashi-harai“. Das aktuelle Kyu-PDF und die Poster führen Ko-soto-gari bzw. Okuri-ashi-barai. Diese Anwendung benutzt die aktuellen Schreibweisen." },
+  { type: "Widerspruch", title: "Zählweise der Nage-waza", text: "Die Pool-Übersicht zählt 16 + 12 + 32 + 9 = 69 Nage-waza, während ihr Anhang „Nage-waza, 68“ ausweist. Alle in der Übersicht namentlich aufgeführten Techniken bleiben hier sichtbar; Zählwerte werden nicht als Prüfungsanforderung verwendet." },
+  { type: "Prüfen", title: "Pool-Dokument nennt sich vorläufig", text: "Das Technikpool-Dokument kündigt eine Revision zum 01.01.2023 an. Es wird weiterhin vom DJB verlinkt, sollte bei einer künftigen Neufassung aber erneut abgeglichen werden." },
+  { type: "Konsistent", ok: true, title: "Erweiterungspool Stand", text: "Die 2024er Stand-Poster bestätigen die Staffelung 3 / 6 / 9 aus 12 Erweiterungswürfen für 3., 2. und 1. Kyu samt Pflichtwürfen." },
+  { type: "Konsistent", ok: true, title: "Erweiterungspool Boden", text: "Hiza- und Sankaku-gatame sowie die geforderten Würgetechniken des 3.–1. Kyu stimmen im 2024er Boden-Poster mit den Anforderungen überein." },
+  { type: "Einordnung", title: "Kein Ersatz für Prüfungskompetenz", text: "Musterlösungen, Ausführungsqualität, Situationen und Wahlbereiche sind nicht allein über eine Technikliste bewertbar. Diese bleiben als Textanforderung sichtbar." },
+];
+
+const gradeNotes = {
+  "8": "Der 8. Kyu ist ein Einstiegsgürtel; die aktuelle Kyu-Anforderung schreibt keinen Auswahlumfang aus dem Technikpool vor.",
+  "7": "Die drei Würfe sollen aus dem Grundprogramm kommen; Kesa-, Tate-shiho-, Yoko-shiho- und Kami-shiho-gatame sind konkret benannt.",
+  "6": "Vier weitere Haltetechniken können eigenständige Kodokan/IJF-Techniken oder Varianten sein. Die Karte zählt deshalb nur die Technik-Planung, nicht Variantenwechsel.",
+  "5": "Die vier Befreiungs- und vier Situationslösungen sind Aufgaben, keine fest vorgegebenen Einzeltechniken. Sie stehen nicht als auswählbare Karte im Raster.",
+  "4": "Neben zwölf Würfen sind O-soto-gari, Harai-goshi und Uchi-mata verbindlich. Bei den Hebeln sind Juji-gatame und Ude-garami verbindlich plus eine Wahltechnik.",
+  "3": "15 Würfe, davon drei aus dem Erweiterungsprogramm; Tomoe-nage und Tani-otoshi sowie Hiza- und Sankaku-gatame sind verbindlich.",
+  "2": "18 Würfe, davon sechs aus dem Erweiterungsprogramm; Sumi-gaeshi und Soto-makikomi sowie Gyaku-juji- und Okuri-eri-jime sind verbindlich.",
+  "1": "20 Würfe, davon neun aus dem Erweiterungsprogramm; Ura-nage und Ko-uchi-makikomi sowie Sode-guruma- und Okuri-eri-jime sind verbindlich. Zusätzlich ca. 10 Aktionen aus einem individuellen Schwerpunkt.",
+  "dan1": "Zum 1. Dan sind alle Gokyo-no-waza aus freien Interaktionen gefordert. Bei Katame-waza je eine Variante jeder Technik aus Grund- und Erweiterungsprogramm als Situationslösung; Kata und ein Wahlbereich bleiben zusätzlich erforderlich.",
+};
+
+function defaultState() {
+  return { version: DATA_VERSION, name: "Mein Prüfungsprogramm", degree: "1", selected: {} };
+}
+
+function readState() {
+  try {
+    const parsed = JSON.parse(localStorage.getItem(STORAGE_KEY));
+    return normaliseState(parsed);
+  } catch {
+    return defaultState();
+  }
+}
+
+function normaliseState(candidate) {
+  const fallback = defaultState();
+  if (!candidate || typeof candidate !== "object") return fallback;
+  const degree = degrees.some((item) => item.id === candidate.degree) ? candidate.degree : fallback.degree;
+  const selected = {};
+  if (candidate.selected && typeof candidate.selected === "object") {
+    for (const [id, value] of Object.entries(candidate.selected)) {
+      const technique = techniqueById.get(id);
+      if (!technique) continue;
+      const side = technique.turn && ["main", "opposite"].includes(value?.side) ? value.side : "neutral";
+      selected[id] = { side };
+    }
+  }
+  return { version: DATA_VERSION, name: String(candidate.name || fallback.name).slice(0, 80), degree, selected };
+}
+
+let state = readState();
+let activeFilter = "all";
+let searchTerm = "";
+let noticesExpanded = false;
+
+const elements = {
+  degreeSelect: document.querySelector("#degree-select"),
+  name: document.querySelector("#program-name"),
+  degreeCard: document.querySelector("#degree-card"),
+  requirements: document.querySelector("#requirements"),
+  completion: document.querySelector("#completion"),
+  note: document.querySelector("#program-note"),
+  notices: document.querySelector("#notices"),
+  noticesToggle: document.querySelector("#toggle-notices"),
+  groups: document.querySelector("#technique-groups"),
+  selectedSummary: document.querySelector("#selected-summary"),
+  search: document.querySelector("#search-input"),
+  feedback: document.querySelector("#feedback"),
+  importInput: document.querySelector("#import-input"),
+};
+
+function persist() {
+  try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch { /* private browser mode */ }
+}
+
+function isSelected(id) { return Boolean(state.selected[id]); }
+function selectedTechniques() { return techniques.filter((item) => isSelected(item.id)); }
+function countSelected(predicate) { return selectedTechniques().filter(predicate).length; }
+function selectedRequired(ids) { return ids.filter(isSelected).length; }
+function degree() { return degrees.find((item) => item.id === state.degree); }
+
+function requiredForCurrentDegree(item) {
+  if (state.degree === "dan1") return Boolean(item.gokyo || danGroundIds.includes(item.id));
+  return (mandatoryByDegree[state.degree] || []).includes(item.id);
+}
+
+function requirementDefinitions() {
+  const selectedStand = () => countSelected((item) => item.area === "stand");
+  const selectedTurns = (side) => countSelected((item) => item.area === "stand" && item.turn && state.selected[item.id]?.side === side);
+  const selectedFoot = () => countSelected((item) => item.group === "stand-ashi");
+  const extensionThrows = () => countSelected((item) => item.area === "stand" && item.pool === "erweiterung");
+  const selectedHolds = () => countSelected((item) => item.group === "boden-osae");
+  const selectedLevers = () => countSelected((item) => item.group === "boden-kansetsu");
+  const selectedChokes = () => countSelected((item) => item.group === "boden-shime");
+  const required = (ids) => ({ current: selectedRequired(ids), needed: ids.length });
+  const totalGokyo = () => new Set(selectedTechniques().filter((item) => item.gokyo).map((item) => item.gokyo)).size;
+
+  const basics = {
+    "7": [
+      ["Würfe", selectedStand, 3, "aus dem Grundprogramm"],
+      ["Hauptseite", () => selectedTurns("main"), 1, "Eindrehtechnik"],
+      ["Gegenseite", () => selectedTurns("opposite"), 1, "Eindrehtechnik"],
+      ["Fußtechnik", selectedFoot, 1, "Ashi-waza"],
+      ["Halten", () => required(mandatoryByDegree["7"]).current, 4, "4 konkret benannte Osaekomi-waza"],
+    ],
+    "6": [["Würfe", selectedStand, 6, "aus dem Grundprogramm"], ["Hauptseite", () => selectedTurns("main"), 2, "Eindrehtechniken"], ["Gegenseite", () => selectedTurns("opposite"), 2, "Eindrehtechniken"], ["Fußtechniken", selectedFoot, 2, "Ashi-waza"], ["Halten", selectedHolds, 4, "weitere Haltegriffe / Varianten"]],
+    "5": [["Würfe", selectedStand, 9, "aus dem Grundprogramm"], ["Hauptseite", () => selectedTurns("main"), 3, "Eindrehtechniken"], ["Gegenseite", () => selectedTurns("opposite"), 3, "Eindrehtechniken"], ["Fußtechniken", selectedFoot, 3, "Ashi-waza"]],
+    "4": [["Würfe", selectedStand, 12, "aus dem Grundprogramm"], ["Hauptseite", () => selectedTurns("main"), 3, "Eindrehtechniken"], ["Gegenseite", () => selectedTurns("opposite"), 3, "Eindrehtechniken"], ["Pflichtwürfe", () => required(["o-soto-gari", "harai-goshi", "uchi-mata"]).current, 3, "O-soto-gari · Harai-goshi · Uchi-mata"], ["Hebel", selectedLevers, 3, "inkl. Juji- & Ude-garami"]],
+    "3": [["Würfe", selectedStand, 15, "gesamt"], ["Erweiterung", extensionThrows, 3, "Würfe aus dem Erweiterungsprogramm"], ["Pflichtwürfe", () => required(["tomoe-nage", "tani-otoshi"]).current, 2, "Tomoe-nage · Tani-otoshi"], ["Erweiterungshebel", () => countSelected((item) => item.pool === "erweiterung" && item.group === "boden-kansetsu"), 4, "inkl. Hiza- & Sankaku-gatame"], ["Pflichthebel", () => required(["hiza-gatame", "sankaku-gatame"]).current, 2, "Hiza- & Sankaku-gatame"]],
+    "2": [["Würfe", selectedStand, 18, "gesamt"], ["Erweiterung", extensionThrows, 6, "Würfe aus dem Erweiterungsprogramm"], ["Pflichtwürfe", () => required(["sumi-gaeshi", "soto-makikomi"]).current, 2, "Sumi-gaeshi · Soto-makikomi"], ["Würgetechniken", selectedChokes, 3, "aus Grund- & Erweiterungsprogramm"], ["Pflichtwürgen", () => required(["gyaku-juji-jime", "okuri-eri-jime"]).current, 2, "Gyaku-juji- & Okuri-eri-jime"]],
+    "1": [["Würfe", selectedStand, 20, "gesamt"], ["Erweiterung", extensionThrows, 9, "Würfe aus dem Erweiterungsprogramm"], ["Pflichtwürfe", () => required(["ura-nage", "ko-uchi-makikomi"]).current, 2, "Ura-nage · Ko-uchi-makikomi"], ["Würgetechniken", selectedChokes, 4, "aus Grund- & Erweiterungsprogramm"], ["Pflichtwürgen", () => required(["sode-guruma-jime", "okuri-eri-jime"]).current, 2, "Sode-guruma- & Okuri-eri-jime"]],
+    "dan1": [["Gokyo-no-waza", totalGokyo, gokyoKeys.length, "jede Gokyo-Familie aus freier Interaktion"], ["Katame-waza", () => selectedRequired(danGroundIds), danGroundIds.length, "je eine Variante aus Grund- & Erweiterungsprogramm"], ["Kata", () => 0, 1, "Nage-no-kata 1–3 oder Ju-no-kata 1–2 · außerhalb des Rasters"], ["Wahlbereich", () => 0, 1, "Lizenz · Wettkampf · Kata · SV oder Taiso · außerhalb des Rasters"]],
+  };
+  if (state.degree === "8") return [["Einstieg", () => 0, 0, "kein Technikpool-Umfang festgelegt"]];
+  return basics[state.degree] || [];
+}
+
+function renderDegreeSelect() {
+  elements.degreeSelect.innerHTML = degrees.map((item) => `<option value="${item.id}">${item.label}</option>`).join("");
+  elements.degreeSelect.value = state.degree;
+  elements.name.value = state.name;
+}
+
+function renderDegreeCard() {
+  const current = degree();
+  elements.degreeCard.style.setProperty("--degree-color", current.color);
+  elements.degreeCard.innerHTML = `<strong>${current.short}</strong><span>${current.description}</span>`;
+}
+
+function renderRequirements() {
+  const definitions = requirementDefinitions();
+  const countable = definitions.filter(([, , needed]) => needed > 0);
+  const complete = countable.filter(([, getCurrent, needed]) => getCurrent() >= needed).length;
+  elements.completion.innerHTML = `${complete}/${countable.length} <small>erfüllt</small>`;
+  elements.requirements.innerHTML = definitions.map(([title, getCurrent, needed, detail]) => {
+    const current = getCurrent();
+    const isComplete = needed === 0 || current >= needed;
+    return `<article class="requirement ${isComplete ? "is-complete" : "is-alert"}">
+      <span class="requirement-title">${title}</span>
+      <span class="requirement-value">${needed === 0 ? "—" : `${current} / ${needed}`}</span>
+      <span class="requirement-detail">${detail}</span>
+    </article>`;
+  }).join("");
+  elements.note.textContent = gradeNotes[state.degree];
+}
+
+function renderNotices() {
+  elements.notices.classList.toggle("is-collapsed", !noticesExpanded);
+  elements.notices.innerHTML = notices.map((notice) => `<article class="notice ${notice.ok ? "is-ok" : ""}">
+    <span class="notice-tag">${notice.type}</span><h3>${notice.title}</h3><p>${notice.text}</p>
+  </article>`).join("");
+  elements.noticesToggle.textContent = noticesExpanded ? "Hinweise einklappen" : "Alle Hinweise anzeigen";
+  elements.noticesToggle.setAttribute("aria-expanded", String(noticesExpanded));
+}
+
+function standingPictogram(item) {
+  const falling = item.group.includes("yoko") || item.group.includes("ma");
+  const foot = item.group === "stand-ashi";
+  const turn = item.turn;
+  return `<svg class="pictogram" viewBox="0 0 150 66" aria-hidden="true" focusable="false">
+    <path class="mat" d="M7 58H143" fill="none" stroke-width="1"/>
+    <circle class="dot-tori" cx="${turn ? 67 : 57}" cy="${falling ? 27 : 17}" r="4"/>
+    <path class="tori" d="M${turn ? 67 : 57} ${falling ? 32 : 22} L${turn ? 71 : 60} ${falling ? 43 : 37} M${turn ? 69 : 59} ${falling ? 35 : 27} L${turn ? 54 : 43} ${falling ? 42 : 31} M${turn ? 70 : 59} ${falling ? 38 : 31} L${turn ? 87 : 75} ${falling ? 45 : 28} M${turn ? 70 : 59} ${falling ? 43 : 37} L${turn ? 54 : 47} ${falling ? 55 : 56} M${turn ? 70 : 59} ${falling ? 43 : 37} L${turn ? 84 : 69} ${falling ? 55 : 56}" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    <circle class="dot-uke" cx="${falling ? 104 : 93}" cy="${falling ? 39 : 17}" r="4"/>
+    <path class="uke" d="M${falling ? 101 : 93} ${falling ? 43 : 22} L${falling ? 93 : 93} ${falling ? 49 : 37} M${falling ? 98 : 93} ${falling ? 46 : 28} L${falling ? 116 : 77} ${falling ? 52 : 30} M${falling ? 97 : 93} ${falling ? 47 : 29} L${falling ? 80 : 109} ${falling ? 54 : 32} M${falling ? 94 : 93} ${falling ? 49 : 37} L${falling ? 80 : 81} ${falling ? 56 : 56} M${falling ? 94 : 93} ${falling ? 49 : 37} L${falling ? 111 : 105} ${falling ? 57 : 56}" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+    ${foot ? '<path d="M61 47 Q77 43 91 50" fill="none" stroke="#b95042" stroke-width="1.5" stroke-dasharray="3 3"/>' : ""}
+  </svg>`;
+}
+
+function groundPictogram(item) {
+  const choke = item.group === "boden-shime";
+  const lever = item.group === "boden-kansetsu";
+  return `<svg class="pictogram" viewBox="0 0 150 66" aria-hidden="true" focusable="false">
+    <path class="mat" d="M7 57H143" fill="none" stroke-width="1"/>
+    <circle class="dot-uke" cx="98" cy="43" r="4"/>
+    <path class="uke" d="M94 46 L74 47 M80 47 L61 51 M80 47 L67 39 M94 46 L113 53 M94 46 L112 39" fill="none" stroke-width="3" stroke-linecap="round"/>
+    <circle class="dot-tori" cx="68" cy="25" r="4"/>
+    <path class="tori" d="M69 30 L76 41 M72 34 L91 39 M73 34 L60 38 M76 41 L64 54 M76 41 L88 54" fill="none" stroke-width="3" stroke-linecap="round"/>
+    ${choke ? '<path d="M74 34 Q85 28 95 37" fill="none" stroke="#b95042" stroke-width="2" stroke-linecap="round"/>' : ""}
+    ${lever ? '<path d="M84 44 L106 29" fill="none" stroke="#b95042" stroke-width="2" stroke-linecap="round"/>' : ""}
+  </svg>`;
+}
+
+function pictogram(item) { return item.area === "stand" ? standingPictogram(item) : groundPictogram(item); }
+
+function techniqueCard(item) {
+  const selected = isSelected(item.id);
+  const side = state.selected[item.id]?.side || "neutral";
+  const required = requiredForCurrentDegree(item);
+  const pool = pools[item.pool];
+  const detail = item.counterOnly ? "reine Kontertechnik" : item.gokyo ? "Gokyo-no-waza" : item.category;
+  return `<article class="technique-card ${selected ? "is-selected" : ""} ${required ? "is-required" : ""}" style="--pool-color:${pool.color}" data-id="${item.id}">
+    <div class="card-top"><span class="card-pool">${pool.label}</span><button class="select-toggle" type="button" data-toggle="${item.id}" aria-label="${item.name} ${selected ? "abwählen" : "auswählen"}">✓</button></div>
+    ${pictogram(item)}
+    <h4>${item.name}</h4>
+    <p class="technique-meta">${detail}</p>
+    <div class="card-bottom"><span class="category-chip">${item.category}</span>
+      <select class="side-select" data-side="${item.id}" ${item.turn ? "" : "disabled"} aria-label="Seite für ${item.name}">
+        <option value="main" ${side === "main" ? "selected" : ""}>Hauptseite</option>
+        <option value="opposite" ${side === "opposite" ? "selected" : ""}>Gegenseite</option>
+      </select>
+    </div>
+  </article>`;
+}
+
+function filterTechniques(items) {
+  const needle = searchTerm.trim().toLocaleLowerCase("de");
+  return items.filter((item) => {
+    const filterMatches = activeFilter === "all" || (activeFilter === "stand" && item.area === "stand") || (activeFilter === "boden" && item.area === "boden") || (activeFilter === "required" && requiredForCurrentDegree(item)) || (activeFilter === "selected" && isSelected(item.id));
+    const textMatches = !needle || `${item.name} ${item.category} ${pools[item.pool].label}`.toLocaleLowerCase("de").includes(needle);
+    return filterMatches && textMatches;
+  });
+}
+
+function renderTechniqueGrid() {
+  const matching = filterTechniques(techniques);
+  const buckets = new Map(Object.keys(groupInfo).map((key) => [key, []]));
+  matching.forEach((item) => buckets.get(item.group).push(item));
+  const html = [...buckets.entries()]
+    .filter(([, items]) => items.length)
+    .sort(([a], [b]) => groupInfo[a].order - groupInfo[b].order)
+    .map(([group, items]) => `<section class="technique-group"><div class="group-header"><h3>${groupInfo[group].title}</h3><span>${items.length} Technik${items.length === 1 ? "" : "en"}</span></div><div class="technique-grid">${items.map(techniqueCard).join("")}</div></section>`)
+    .join("");
+  elements.groups.innerHTML = html || '<div class="empty-state">Keine Technik entspricht diesem Filter.</div>';
+  elements.selectedSummary.textContent = `${selectedTechniques().length} Technik${selectedTechniques().length === 1 ? "" : "en"} ausgewählt`;
+}
+
+function rerender() {
+  renderDegreeCard();
+  renderRequirements();
+  renderTechniqueGrid();
+}
+
+function updateSelection(id) {
+  const item = techniqueById.get(id);
+  if (!item) return;
+  if (isSelected(id)) delete state.selected[id];
+  else state.selected[id] = { side: item.turn ? "main" : "neutral" };
+  persist();
+  rerender();
+}
+
+function setFeedback(message) {
+  elements.feedback.textContent = message;
+  window.setTimeout(() => { if (elements.feedback.textContent === message) elements.feedback.textContent = ""; }, 4800);
+}
+
+function safeFilename(name) {
+  return (name || "judo-programm").toLocaleLowerCase("de").replace(/[^a-z0-9äöüß]+/gi, "-").replace(/^-+|-+$/g, "").slice(0, 48) || "judo-programm";
+}
+
+function exportProgram() {
+  const payload = {
+    schema: "judo-programmplaner",
+    version: DATA_VERSION,
+    exportedAt: new Date().toISOString(),
+    program: state,
+  };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = `${safeFilename(state.name)}.json`;
+  document.body.append(link);
+  link.click();
+  link.remove();
+  window.setTimeout(() => URL.revokeObjectURL(url), 0);
+  setFeedback("JSON-Export erstellt.");
+}
+
+async function importProgram(file) {
+  try {
+    const parsed = JSON.parse(await file.text());
+    const program = parsed?.schema === "judo-programmplaner" ? parsed.program : parsed;
+    if (!program || typeof program !== "object" || !("degree" in program) || !("selected" in program)) throw new Error("Ungültig");
+    const candidate = normaliseState(program);
+    state = candidate;
+    persist();
+    renderDegreeSelect();
+    rerender();
+    setFeedback("Programm importiert.");
+  } catch {
+    setFeedback("Import nicht möglich: Bitte eine JSON-Datei aus diesem Planer wählen.");
+  } finally {
+    elements.importInput.value = "";
+  }
+}
+
+function bindEvents() {
+  elements.degreeSelect.addEventListener("change", (event) => {
+    state.degree = event.target.value;
+    persist();
+    rerender();
+  });
+  elements.name.addEventListener("input", (event) => {
+    state.name = event.target.value.slice(0, 80);
+    persist();
+  });
+  document.querySelectorAll(".filter").forEach((button) => button.addEventListener("click", () => {
+    activeFilter = button.dataset.filter;
+    document.querySelectorAll(".filter").forEach((item) => item.classList.toggle("active", item === button));
+    renderTechniqueGrid();
+  }));
+  elements.search.addEventListener("input", (event) => { searchTerm = event.target.value; renderTechniqueGrid(); });
+  elements.groups.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-toggle]");
+    if (button) updateSelection(button.dataset.toggle);
+  });
+  elements.groups.addEventListener("change", (event) => {
+    const select = event.target.closest("[data-side]");
+    if (!select || !isSelected(select.dataset.side)) return;
+    state.selected[select.dataset.side].side = select.value;
+    persist();
+    renderRequirements();
+  });
+  elements.noticesToggle.addEventListener("click", () => { noticesExpanded = !noticesExpanded; renderNotices(); });
+  document.querySelector("#export-button").addEventListener("click", exportProgram);
+  document.querySelector("#import-button").addEventListener("click", () => elements.importInput.click());
+  elements.importInput.addEventListener("change", (event) => { if (event.target.files?.[0]) importProgram(event.target.files[0]); });
+  [document.querySelector("#print-button"), document.querySelector("#print-button-bottom")].forEach((button) => button.addEventListener("click", () => window.print()));
+}
+
+renderDegreeSelect();
+renderNotices();
+rerender();
+bindEvents();
