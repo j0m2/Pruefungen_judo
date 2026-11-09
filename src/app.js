@@ -678,7 +678,7 @@ function comicIllustration(item) {
   const sprite = comicSprites[spriteId];
   if (!sprite || column >= sprite.columns || row >= sprite.rows) return fallbackPictogram();
   const file = `${spriteId}-${String(row).padStart(2, "0")}-${String(column).padStart(2, "0")}.png`;
-  return `<span class="comic-illustration" aria-hidden="true"><img src="assets/illustrations/frames/${file}" alt="" /></span>`;
+  return `<span class="comic-illustration comic-illustration--${spriteId}" aria-hidden="true"><img src="assets/illustrations/frames/${file}" alt="" /></span>`;
 }
 
 function techniqueCard(item) {
