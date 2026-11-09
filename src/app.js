@@ -163,12 +163,13 @@ const techniques = [
 
 // Eigene Comic-Neuillustrationen. Die Körperhaltungen der abgedeckten Techniken
 // wurden anhand der DJB-Poster nachvollzogen; die Poster selbst sind keine Assets
-// dieser Anwendung. Spalten und Zeilen beziehen sich auf die jeweilige Sprite-Tafel.
+// dieser Anwendung. Die Tafelbilder werden als gepolsterte Einzeldateien ausgeliefert,
+// damit sich keine Figur aus einem benachbarten Rasterfeld in die Karte schiebt.
 const comicSprites = {
-  grundStand: { src: "assets/illustrations/grund-stand-comic.png", columns: 4, rows: 4, ratio: 1.01 },
-  erweiterungStand: { src: "assets/illustrations/erweiterung-stand-comic.png", columns: 3, rows: 4, ratio: 2 },
-  grundBoden: { src: "assets/illustrations/grund-boden-comic.png", columns: 4, rows: 4, ratio: 1.5 },
-  erweiterungBoden: { src: "assets/illustrations/erweiterung-boden-comic.png", columns: 3, rows: 4, ratio: 1.78 },
+  grundStand: { columns: 4, rows: 4 },
+  erweiterungStand: { columns: 3, rows: 4 },
+  grundBoden: { columns: 4, rows: 4 },
+  erweiterungBoden: { columns: 3, rows: 4 },
 };
 
 const comicFrames = {
@@ -648,7 +649,7 @@ function renderNotices() {
 }
 
 function fallbackPictogram() {
-  return '<span class="comic-illustration comic-illustration--fallback" aria-hidden="true" style="width:43px;background-image:url(\'assets/illustrations/technik-ohne-vorlage-comic.png\');background-size:contain;background-position:center;"></span>';
+  return '<span class="comic-illustration comic-illustration--fallback" aria-hidden="true"><img src="assets/illustrations/technik-ohne-vorlage-comic.png" alt="" /></span>';
 }
 
 function comicIllustration(item) {
@@ -656,9 +657,9 @@ function comicIllustration(item) {
   if (!frame) return fallbackPictogram(item);
   const [spriteId, column, row] = frame;
   const sprite = comicSprites[spriteId];
-  const x = sprite.columns === 1 ? 0 : (column / (sprite.columns - 1)) * 100;
-  const y = sprite.rows === 1 ? 0 : (row / (sprite.rows - 1)) * 100;
-  return `<span class="comic-illustration" aria-hidden="true" style="width:${Math.round(64 * sprite.ratio)}px;background-image:url('${sprite.src}');background-size:${sprite.columns * 100}% ${sprite.rows * 100}%;background-position:${x}% ${y}%;"></span>`;
+  if (!sprite || column >= sprite.columns || row >= sprite.rows) return fallbackPictogram();
+  const file = `${spriteId}-${String(row).padStart(2, "0")}-${String(column).padStart(2, "0")}.png`;
+  return `<span class="comic-illustration" aria-hidden="true"><img src="assets/illustrations/frames/${file}" alt="" loading="lazy" /></span>`;
 }
 
 function techniqueCard(item) {

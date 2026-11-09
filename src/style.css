@@ -133,8 +133,8 @@ h2 { margin: 0; color: var(--ink); font-size: 1.2rem; line-height: 1.2; letter-s
 .group-header { display: flex; align-items: baseline; justify-content: space-between; padding-bottom: .6rem; border-bottom: 1px solid #e5ebf3; }
 .group-header h3 { margin: 0; color: #183147; font-size: .92rem; }
 .group-header span { color: #687d95; font-size: .65rem; }
-.technique-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 8px; margin-top: .7rem; }
-.technique-card { position: relative; min-height: 166px; padding: .7rem; overflow: hidden; border: 1px solid #d8e1ed; border-radius: 10px; background: #fff; transition: border-color .15s, box-shadow .15s, transform .15s; }
+.technique-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 11px; margin-top: .7rem; }
+.technique-card { position: relative; min-height: 218px; padding: .7rem; overflow: hidden; border: 1px solid #d8e1ed; border-radius: 10px; background: #fff; transition: border-color .15s, box-shadow .15s, transform .15s; }
 .technique-card:hover { z-index: 1; border-color: #8cb7e1; box-shadow: 0 5px 16px rgba(33, 73, 112, .11); transform: translateY(-1px); }
 .technique-card.is-selected { padding: calc(.7rem - 1px); border: 2px solid #3182ce; background: #fcfdff; box-shadow: 0 0 0 1px #3182ce; }
 .technique-card.is-required::after { content: 'Pflicht'; position: absolute; top: .7rem; right: 2.7rem; padding: .18rem .33rem; border-radius: 4px; background: #fff0df; color: #9a5a07; font-size: .53rem; font-weight: 800; letter-spacing: .03em; text-transform: uppercase; }
@@ -143,8 +143,10 @@ h2 { margin: 0; color: var(--ink); font-size: 1.2rem; line-height: 1.2; letter-s
 .select-toggle { display: grid; flex: 0 0 auto; width: 26px; min-width: 26px; height: 26px; padding: 0; border: 1px solid #b7c9dc; border-radius: 7px; background: white; color: transparent; font-size: .85rem; }
 .is-selected .select-toggle { border-color: #1865b5; background: #1865b5; color: white; }
 .is-selected .select-toggle:disabled { cursor: not-allowed; border-color: #9cb9d8; background: #dce9f6; color: #356a9f; }
-.comic-illustration { display: block; max-width: 100%; height: 64px; margin: -.18rem auto .3rem; border-radius: 6px; background-color: #edf3f8; background-repeat: no-repeat; }
+.comic-illustration { display: grid; width: 100%; height: 108px; place-items: center; margin: .18rem auto .45rem; overflow: hidden; border-radius: 7px; background-color: #edf3f8; }
+.comic-illustration img { display: block; width: 100%; height: 100%; object-fit: contain; }
 .comic-illustration--fallback { background-color: transparent; }
+.comic-illustration--fallback img { width: auto; max-width: 58%; }
 .technique-card.is-selected .comic-illustration { box-shadow: inset 0 0 0 1px #bad6f3; }
 .technique-card h4 { margin: 0; padding-right: .1rem; color: #172b47; font-size: .76rem; line-height: 1.2; letter-spacing: -.01em; }
 .technique-meta { margin: .24rem 0 0; color: #687d95; font-size: .61rem; line-height: 1.3; }
@@ -220,8 +222,10 @@ body.print-view .comic-illustration { margin-right: auto; margin-left: auto; }
   .tool-row { flex-direction: column; align-items: stretch; }
   .search-label { min-width: 0; }
   .technique-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .technique-card { min-height: 162px; padding: .58rem; }
+  .technique-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
+  .technique-card { min-height: 208px; padding: .58rem; }
   .technique-card.is-selected { padding: calc(.58rem - 1px); }
+  .comic-illustration { height: 92px; }
   .action-section { grid-template-columns: 1fr; }
   .actions { justify-content: flex-start; }
   footer { flex-direction: column; padding-bottom: 18px; }
@@ -245,5 +249,5 @@ body.print-view .comic-illustration { margin-right: auto; margin-left: auto; }
   .technique-grid { gap: 2mm; margin-top: 2mm; }
   .technique-card, .technique-card.is-selected { min-height: 34mm; padding: 3mm; border: 1px solid #d8e1ed; border-radius: 0; box-shadow: none; break-inside: avoid; }
   .technique-card h4 { text-align: center; }
-  .comic-illustration { margin-right: auto; margin-left: auto; }
+  .comic-illustration { height: 23mm; margin-right: auto; margin-left: auto; }
 }
