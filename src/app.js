@@ -174,13 +174,8 @@ const mandatoryByDegree = {
 };
 
 const notices = [
-  { type: "Hinweis", title: "Versionsstände sind verschieden", text: "Die Kyu-Anforderungen gelten ab 17.02.2025; die sichtbaren DJB-Poster tragen Copyright 2024; der Technikpool ist Stand 01.06.2022. Die Anwendung priorisiert bei Abweichungen die neueste Anforderungen-Ausgabe." },
-  { type: "Normalisiert", title: "Zwei Schreibweisen im Pool-PDF", text: "Die Übersichtstabelle schreibt „Ko-soko-gari“ und „Okure-ashi-harai“. Das aktuelle Kyu-PDF und die Poster führen Ko-soto-gari bzw. Okuri-ashi-barai. Diese Anwendung benutzt die aktuellen Schreibweisen." },
   { type: "Widerspruch", title: "Zählweise der Nage-waza", text: "Die Pool-Übersicht zählt 16 + 12 + 32 + 9 = 69 Nage-waza, während ihr Anhang „Nage-waza, 68“ ausweist. Alle in der Übersicht namentlich aufgeführten Techniken bleiben hier sichtbar; Zählwerte werden nicht als Prüfungsanforderung verwendet." },
-  { type: "Prüfen", title: "Pool-Dokument nennt sich vorläufig", text: "Das Technikpool-Dokument kündigt eine Revision zum 01.01.2023 an. Es wird weiterhin vom DJB verlinkt, sollte bei einer künftigen Neufassung aber erneut abgeglichen werden." },
-  { type: "Konsistent", ok: true, title: "Erweiterungspool Stand", text: "Die 2024er Stand-Poster bestätigen die Staffelung 3 / 6 / 9 aus 12 Erweiterungswürfen für 3., 2. und 1. Kyu samt Pflichtwürfen." },
-  { type: "Konsistent", ok: true, title: "Erweiterungspool Boden", text: "Hiza- und Sankaku-gatame sowie die geforderten Würgetechniken des 3.–1. Kyu stimmen im 2024er Boden-Poster mit den Anforderungen überein." },
-  { type: "Einordnung", title: "Kein Ersatz für Prüfungskompetenz", text: "Musterlösungen, Ausführungsqualität, Situationen und Wahlbereiche sind nicht allein über eine Technikliste bewertbar. Diese bleiben als Textanforderung sichtbar." },
+  { type: "Widerspruch", title: "Abweichende Schreibweisen", text: "Die Pool-Übersicht schreibt „Ko-soko-gari“ und „Okure-ashi-harai“. Die aktuellen Kyu-Anforderungen und DJB-Poster führen Ko-soto-gari bzw. Okuri-ashi-barai. Die Anwendung verwendet diese neueren Schreibweisen." },
 ];
 
 const gradeNotes = {
@@ -227,7 +222,6 @@ function normaliseState(candidate) {
 let state = readState();
 let activeFilter = "all";
 let searchTerm = "";
-let noticesExpanded = false;
 
 const elements = {
   degreeSelect: document.querySelector("#degree-select"),
@@ -237,7 +231,6 @@ const elements = {
   completion: document.querySelector("#completion"),
   note: document.querySelector("#program-note"),
   notices: document.querySelector("#notices"),
-  noticesToggle: document.querySelector("#toggle-notices"),
   groups: document.querySelector("#technique-groups"),
   selectedSummary: document.querySelector("#selected-summary"),
   search: document.querySelector("#search-input"),
@@ -254,6 +247,28 @@ function selectedTechniques() { return techniques.filter((item) => isSelected(it
 function countSelected(predicate) { return selectedTechniques().filter(predicate).length; }
 function selectedRequired(ids) { return ids.filter(isSelected).length; }
 function degree() { return degrees.find((item) => item.id === state.degree); }
+
+function isSelectableForCurrentDegree(item) {
+  if (state.degree === "8") return false;
+  if (["7", "6", "5", "4"].includes(state.degree)) return item.pool === "grund";
+  if (["3", "2", "1"].includes(state.degree)) return ["grund", "erweiterung"].includes(item.pool);
+  if (state.degree === "dan1") {
+    return Boolean(item.gokyo) || (item.area === "boden" && ["grund", "erweiterung"].includes(item.pool));
+  }
+  return false;
+}
+
+function pruneUnavailableSelections() {
+  let removed = 0;
+  for (const id of Object.keys(state.selected)) {
+    const item = techniqueById.get(id);
+    if (!item || !isSelectableForCurrentDegree(item)) {
+      delete state.selected[id];
+      removed += 1;
+    }
+  }
+  return removed;
+}
 
 function requiredForCurrentDegree(item) {
   if (state.degree === "dan1") return Boolean(item.gokyo || danGroundIds.includes(item.id));
@@ -321,12 +336,9 @@ function renderRequirements() {
 }
 
 function renderNotices() {
-  elements.notices.classList.toggle("is-collapsed", !noticesExpanded);
-  elements.notices.innerHTML = notices.map((notice) => `<article class="notice ${notice.ok ? "is-ok" : ""}">
+  elements.notices.innerHTML = notices.map((notice) => `<article class="notice">
     <span class="notice-tag">${notice.type}</span><h3>${notice.title}</h3><p>${notice.text}</p>
   </article>`).join("");
-  elements.noticesToggle.textContent = noticesExpanded ? "Hinweise einklappen" : "Alle Hinweise anzeigen";
-  elements.noticesToggle.setAttribute("aria-expanded", String(noticesExpanded));
 }
 
 function standingPictogram(item) {
@@ -382,6 +394,7 @@ function techniqueCard(item) {
 function filterTechniques(items) {
   const needle = searchTerm.trim().toLocaleLowerCase("de");
   return items.filter((item) => {
+    if (!isSelectableForCurrentDegree(item)) return false;
     const filterMatches = activeFilter === "all" || (activeFilter === "stand" && item.area === "stand") || (activeFilter === "boden" && item.area === "boden") || (activeFilter === "required" && requiredForCurrentDegree(item)) || (activeFilter === "selected" && isSelected(item.id));
     const textMatches = !needle || `${item.name} ${item.category} ${pools[item.pool].label}`.toLocaleLowerCase("de").includes(needle);
     return filterMatches && textMatches;
@@ -397,7 +410,7 @@ function renderTechniqueGrid() {
     .sort(([a], [b]) => groupInfo[a].order - groupInfo[b].order)
     .map(([group, items]) => `<section class="technique-group"><div class="group-header"><h3>${groupInfo[group].title}</h3><span>${items.length} Technik${items.length === 1 ? "" : "en"}</span></div><div class="technique-grid">${items.map(techniqueCard).join("")}</div></section>`)
     .join("");
-  elements.groups.innerHTML = html || '<div class="empty-state">Keine Technik entspricht diesem Filter.</div>';
+  elements.groups.innerHTML = html || `<div class="empty-state">${state.degree === "8" ? "Für den 8. Kyu ist kein Technikpool-Umfang vorgegeben." : "Keine für diesen Grad wählbare Technik entspricht diesem Filter."}</div>`;
   elements.selectedSummary.textContent = `${selectedTechniques().length} Technik${selectedTechniques().length === 1 ? "" : "en"} ausgewählt`;
 }
 
@@ -451,6 +464,7 @@ async function importProgram(file) {
     if (!program || typeof program !== "object" || !("degree" in program) || !("selected" in program)) throw new Error("Ungültig");
     const candidate = normaliseState(program);
     state = candidate;
+    pruneUnavailableSelections();
     persist();
     renderDegreeSelect();
     rerender();
@@ -465,8 +479,10 @@ async function importProgram(file) {
 function bindEvents() {
   elements.degreeSelect.addEventListener("change", (event) => {
     state.degree = event.target.value;
+    const removed = pruneUnavailableSelections();
     persist();
     rerender();
+    if (removed) setFeedback(`${removed} nicht zum Grad passende Technik${removed === 1 ? " wurde" : "en wurden"} aus der Auswahl entfernt.`);
   });
   elements.name.addEventListener("input", (event) => {
     state.name = event.target.value.slice(0, 80);
@@ -489,7 +505,6 @@ function bindEvents() {
     persist();
     renderRequirements();
   });
-  elements.noticesToggle.addEventListener("click", () => { noticesExpanded = !noticesExpanded; renderNotices(); });
   document.querySelector("#export-button").addEventListener("click", exportProgram);
   document.querySelector("#import-button").addEventListener("click", () => elements.importInput.click());
   elements.importInput.addEventListener("change", (event) => { if (event.target.files?.[0]) importProgram(event.target.files[0]); });
@@ -497,6 +512,7 @@ function bindEvents() {
 }
 
 renderDegreeSelect();
+pruneUnavailableSelections();
 renderNotices();
 rerender();
 bindEvents();

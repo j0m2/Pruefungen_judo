@@ -80,9 +80,7 @@ h2 { margin: 0; color: var(--ink); font-size: 1.2rem; line-height: 1.2; letter-s
 
 .notice-section, .technique-section, .sources { margin-top: 22px; }
 .section-heading { display: flex; align-items: flex-end; justify-content: space-between; gap: 1rem; }
-.text-button { border: 0; background: transparent; color: #145ca8; padding: .25rem 0; font-size: .72rem; font-weight: 700; text-decoration: underline; }
-.notices { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: .7rem; transition: max-height .25s ease; overflow: hidden; }
-.notices.is-collapsed { max-height: 126px; }
+.notices { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 10px; margin-top: .7rem; }
 .notice { min-height: 126px; padding: .86rem; border: 1px solid var(--line); border-radius: 11px; background: white; }
 .notice-tag { display: inline-block; padding: .2rem .38rem; border-radius: 999px; background: #fff0df; color: #9a5a07; font-size: .57rem; font-weight: 750; letter-spacing: .04em; text-transform: uppercase; }
 .notice.is-ok .notice-tag { background: #def4e9; color: #087c6c; }
@@ -184,7 +182,7 @@ footer { display: flex; justify-content: space-between; gap: 1rem; max-width: 18
   .site-header h1 { color: var(--ink); font-size: 18pt; }
   .site-header p, .brand { color: var(--muted); }
   .brand-mark { color: var(--teal); border-color: var(--teal); }
-  .site-header nav, .print-header, .skip-link, .tool-row, .legend, .select-toggle, .side-select, .action-section, .notice-section .text-button, footer, .disclaimer { display: none !important; }
+  .site-header nav, .print-header, .skip-link, .tool-row, .legend, .select-toggle, .side-select, .action-section, footer, .disclaimer { display: none !important; }
   main { max-width: none; padding: 0; }
   .hero { margin: 4mm 0; padding: 4mm; border-radius: 0; }
   .hero h2 { font-size: 15pt; }
