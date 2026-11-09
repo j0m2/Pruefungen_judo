@@ -178,6 +178,75 @@ const notices = [
   { type: "Widerspruch", title: "Abweichende Schreibweisen", text: "Die Pool-Übersicht schreibt „Ko-soko-gari“ und „Okure-ashi-harai“. Die aktuellen Kyu-Anforderungen und DJB-Poster führen Ko-soto-gari bzw. Okuri-ashi-barai. Die Anwendung verwendet diese neueren Schreibweisen." },
 ];
 
+const standardSituationsByDegree = {
+  "7": [
+    ["stand-boden", "Übergang Stand → Boden", "Nach einem Wurfansatz kontrolliert zum Halten übergehen."],
+  ],
+  "6": [
+    ["stand-boden", "Übergang Stand → Boden", "Wiederholung der Lösung aus dem 7. Kyu."],
+    ["bauchlage-osae", "Bauchlage → Osaekomi", "Uke aus der Bauchlage in eine Haltetechnik umdrehen."],
+  ],
+  "5": [
+    ["stand-boden", "Übergang Stand → Boden", "Wiederholung der bisherigen Lösung."],
+    ["bauchlage-osae", "Bauchlage → Osaekomi", "Uke aus der Bauchlage kontrollieren."],
+    ["beinklammer-loesen", "Beinklammer lösen", "Die Beinklammer funktional auflösen."],
+    ["bank-angriff", "Angriff gegen die Bank", "Eine Lösung gegen Ukes Bankposition erarbeiten."],
+  ],
+  "4": [
+    ["stand-boden", "Übergang Stand → Boden", "Wiederholung der bisherigen Lösung."],
+    ["bauchlage-osae", "Bauchlage → Osaekomi", "Uke aus der Bauchlage kontrollieren."],
+    ["beinklammer-loesen", "Beinklammer lösen", "Die Beinklammer funktional auflösen."],
+    ["bank-angriff", "Angriff gegen die Bank", "Eine Lösung gegen Ukes Bankposition erarbeiten."],
+    ["eigene-rueckenlage", "Angriff aus eigener Rückenlage", "Aus der Unterlage eine günstige Angriffsposition schaffen."],
+    ["gegner-rueckenlage", "Angriff gegen gegnerische Rückenlage", "Gegner in Rückenlage kontrollieren oder angreifen."],
+  ],
+  "3": [
+    ["stand-boden", "Übergang Stand → Boden", "Wiederholung der bisherigen Lösung."],
+    ["bauchlage-osae", "Bauchlage → Osaekomi", "Uke aus der Bauchlage kontrollieren."],
+    ["beinklammer-loesen", "Beinklammer lösen", "Die Beinklammer funktional auflösen."],
+    ["bank-angriff", "Angriff gegen die Bank", "Eine Lösung gegen Ukes Bankposition erarbeiten."],
+    ["eigene-rueckenlage", "Angriff aus eigener Rückenlage", "Aus der Unterlage eine günstige Angriffsposition schaffen."],
+    ["gegner-rueckenlage", "Angriff gegen gegnerische Rückenlage", "Gegner in Rückenlage kontrollieren oder angreifen."],
+    ["positionswechsel", "Positionswechsel", "Von einer Verteidigungsposition in eine günstige Angriffsposition wechseln."],
+  ],
+  "2": [
+    ["stand-boden", "Übergang Stand → Boden", "Wiederholung der bisherigen Lösung."],
+    ["bauchlage-osae", "Bauchlage → Osaekomi", "Uke aus der Bauchlage kontrollieren."],
+    ["beinklammer-loesen", "Beinklammer lösen", "Die Beinklammer funktional auflösen."],
+    ["bank-angriff", "Angriff gegen die Bank", "Eine Lösung gegen Ukes Bankposition erarbeiten."],
+    ["eigene-rueckenlage", "Angriff aus eigener Rückenlage", "Aus der Unterlage eine günstige Angriffsposition schaffen."],
+    ["gegner-rueckenlage", "Angriff gegen gegnerische Rückenlage", "Gegner in Rückenlage kontrollieren oder angreifen."],
+    ["positionswechsel-1", "Positionswechsel · 1", "Von einer Verteidigungsposition in eine günstige Angriffsposition wechseln."],
+    ["positionswechsel-2", "Positionswechsel · 2", "Einen zweiten Positionswechsel mit anderer Ausgangslage planen."],
+  ],
+  "1": [
+    ["stand-boden-ai", "Übergang Stand → Boden · Ai-yotsu", "Eine Situationslösung aus Gleichgriff planen."],
+    ["stand-boden-kenka", "Übergang Stand → Boden · Kenka-yotsu", "Eine Situationslösung aus Gegengriff planen."],
+    ["stand-boden", "Übergang Stand → Boden", "Wiederholung einer früheren Situationslösung."],
+    ["bauchlage-osae", "Bauchlage → Osaekomi", "Uke aus der Bauchlage kontrollieren."],
+    ["beinklammer-loesen", "Beinklammer lösen", "Die Beinklammer funktional auflösen."],
+    ["bank-angriff", "Angriff gegen die Bank", "Eine Lösung gegen Ukes Bankposition erarbeiten."],
+    ["eigene-rueckenlage", "Angriff aus eigener Rückenlage", "Aus der Unterlage eine günstige Angriffsposition schaffen."],
+    ["gegner-rueckenlage", "Angriff gegen gegnerische Rückenlage", "Gegner in Rückenlage kontrollieren oder angreifen."],
+    ["positionswechsel-1", "Positionswechsel · 1", "Von einer Verteidigungsposition in eine günstige Angriffsposition wechseln."],
+    ["positionswechsel-2", "Positionswechsel · 2", "Einen zweiten Positionswechsel mit anderer Ausgangslage planen."],
+    ["positionswechsel-3", "Positionswechsel · 3", "Einen dritten Positionswechsel mit anderer Ausgangslage planen."],
+  ],
+  "dan1": [
+    ["bank-bauch-ober", "Bank-/Bauchlage · Oberlage", "Mindestens eine Lösung aus der Oberlage demonstrieren."],
+    ["bank-bauch-unter", "Bank-/Bauchlage · Unterlage", "Mindestens eine Lösung aus der Unterlage demonstrieren."],
+    ["beinklammer-ober", "Beinklammer · Oberlage", "Mindestens eine Lösung aus der Oberlage demonstrieren."],
+    ["beinklammer-unter", "Beinklammer · Unterlage", "Mindestens eine Lösung aus der Unterlage demonstrieren."],
+    ["rueckenlage-ober", "Rückenlage · Oberlage", "Partner zwischen den Beinen: mindestens eine Lösung aus der Oberlage."],
+    ["rueckenlage-unter", "Rückenlage · Unterlage", "Partner zwischen den Beinen: mindestens eine Lösung aus der Unterlage."],
+    ["stand-boden", "Übergang Stand → Boden", "Eine Katame-waza als Abschluss eines Übergangs planen."],
+  ],
+};
+
+const standardSituationIds = new Set(
+  Object.entries(standardSituationsByDegree).flatMap(([degree, situations]) => situations.map(([id]) => `${degree}:${id}`)),
+);
+
 const gradeNotes = {
   "8": "Der 8. Kyu ist ein Einstiegsgürtel; die aktuelle Kyu-Anforderung schreibt keinen Auswahlumfang aus dem Technikpool vor.",
   "7": "Die drei Würfe sollen aus dem Grundprogramm kommen; Kesa-, Tate-shiho-, Yoko-shiho- und Kami-shiho-gatame sind konkret benannt.",
@@ -191,7 +260,7 @@ const gradeNotes = {
 };
 
 function defaultState() {
-  return { version: DATA_VERSION, name: "Mein Prüfungsprogramm", degree: "1", selected: {} };
+  return { version: DATA_VERSION, name: "Mein Prüfungsprogramm", degree: "1", selected: {}, situations: {} };
 }
 
 function readState() {
@@ -216,7 +285,13 @@ function normaliseState(candidate) {
       selected[id] = { side };
     }
   }
-  return { version: DATA_VERSION, name: String(candidate.name || fallback.name).slice(0, 80), degree, selected };
+  const situations = {};
+  if (candidate.situations && typeof candidate.situations === "object") {
+    for (const id of Object.keys(candidate.situations)) {
+      if (standardSituationIds.has(id)) situations[id] = true;
+    }
+  }
+  return { version: DATA_VERSION, name: String(candidate.name || fallback.name).slice(0, 80), degree, selected, situations };
 }
 
 let state = readState();
@@ -231,6 +306,10 @@ const elements = {
   completion: document.querySelector("#completion"),
   note: document.querySelector("#program-note"),
   notices: document.querySelector("#notices"),
+  situationsSection: document.querySelector("#situationen"),
+  situationsIntro: document.querySelector("#situations-intro"),
+  situationsGrid: document.querySelector("#situation-grid"),
+  situationsSummary: document.querySelector("#situations-summary"),
   groups: document.querySelector("#technique-groups"),
   selectedSummary: document.querySelector("#selected-summary"),
   search: document.querySelector("#search-input"),
@@ -270,6 +349,36 @@ function pruneUnavailableSelections() {
   return removed;
 }
 
+function situationsForCurrentDegree() {
+  return (standardSituationsByDegree[state.degree] || []).map(([id, title, detail]) => ({
+    id: `${state.degree}:${id}`,
+    title,
+    detail,
+  }));
+}
+
+function isSituationSelected(id) { return Boolean(state.situations[id]); }
+
+function selectedSituationCount() {
+  return situationsForCurrentDegree().filter((situation) => isSituationSelected(situation.id)).length;
+}
+
+function pruneUnavailableSituations() {
+  let removed = 0;
+  const valid = new Set(situationsForCurrentDegree().map((situation) => situation.id));
+  for (const id of Object.keys(state.situations)) {
+    if (!valid.has(id)) {
+      delete state.situations[id];
+      removed += 1;
+    }
+  }
+  return removed;
+}
+
+function showSideSelection(item) {
+  return item.turn && ["7", "6", "5", "4"].includes(state.degree);
+}
+
 function requiredForCurrentDegree(item) {
   if (state.degree === "dan1") return Boolean(item.gokyo || danGroundIds.includes(item.id));
   return (mandatoryByDegree[state.degree] || []).includes(item.id);
@@ -285,6 +394,7 @@ function requirementDefinitions() {
   const selectedChokes = () => countSelected((item) => item.group === "boden-shime");
   const required = (ids) => ({ current: selectedRequired(ids), needed: ids.length });
   const totalGokyo = () => new Set(selectedTechniques().filter((item) => item.gokyo).map((item) => item.gokyo)).size;
+  const selectedSituations = () => selectedSituationCount();
 
   const basics = {
     "7": [
@@ -303,6 +413,13 @@ function requirementDefinitions() {
     "dan1": [["Gokyo-no-waza", totalGokyo, gokyoKeys.length, "jede Gokyo-Familie aus freier Interaktion"], ["Katame-waza", () => selectedRequired(danGroundIds), danGroundIds.length, "je eine Variante aus Grund- & Erweiterungsprogramm"], ["Kata", () => 0, 1, "Nage-no-kata 1–3 oder Ju-no-kata 1–2 · außerhalb des Rasters"], ["Wahlbereich", () => 0, 1, "Lizenz · Wettkampf · Kata · SV oder Taiso · außerhalb des Rasters"]],
   };
   if (state.degree === "8") return [["Einstieg", () => 0, 0, "kein Technikpool-Umfang festgelegt"]];
+  const situationCount = situationsForCurrentDegree().length;
+  basics[state.degree].push([
+    "Standardsituationen",
+    selectedSituations,
+    situationCount,
+    state.degree === "dan1" ? "Bodenlagen und Übergang Stand → Boden" : "Situationslösungen für diesen Grad",
+  ]);
   return basics[state.degree] || [];
 }
 
@@ -333,6 +450,24 @@ function renderRequirements() {
     </article>`;
   }).join("");
   elements.note.textContent = gradeNotes[state.degree];
+}
+
+function renderSituations() {
+  const situations = situationsForCurrentDegree();
+  elements.situationsSection.hidden = situations.length === 0;
+  if (!situations.length) return;
+  const selected = selectedSituationCount();
+  elements.situationsSummary.textContent = `${selected} / ${situations.length} geplant`;
+  elements.situationsIntro.textContent = state.degree === "dan1"
+    ? "Für jede Lage eine passende Katame-waza als Situationslösung planen; Ober- und Unterlage getrennt berücksichtigen."
+    : "Jede Karte steht für eine geforderte Situationslösung. Erst mit dem Häkchen ist sie Teil deines Programms.";
+  elements.situationsGrid.innerHTML = situations.map((situation) => {
+    const isSelected = isSituationSelected(situation.id);
+    return `<button class="situation-card ${isSelected ? "is-selected" : ""}" type="button" data-situation-toggle="${situation.id}" aria-pressed="${isSelected}">
+      <span class="situation-check" aria-hidden="true">✓</span>
+      <span class="situation-content"><strong>${situation.title}</strong><small>${situation.detail}</small></span>
+    </button>`;
+  }).join("");
 }
 
 function renderNotices() {
@@ -375,6 +510,7 @@ function techniqueCard(item) {
   const selected = isSelected(item.id);
   const side = state.selected[item.id]?.side || "neutral";
   const required = requiredForCurrentDegree(item);
+  const chooseSide = showSideSelection(item);
   const pool = pools[item.pool];
   const detail = item.counterOnly ? "reine Kontertechnik" : item.gokyo ? "Gokyo-no-waza" : item.category;
   return `<article class="technique-card ${selected ? "is-selected" : ""} ${required ? "is-required" : ""}" style="--pool-color:${pool.color}" data-id="${item.id}">
@@ -383,10 +519,10 @@ function techniqueCard(item) {
     <h4>${item.name}</h4>
     <p class="technique-meta">${detail}</p>
     <div class="card-bottom"><span class="category-chip">${item.category}</span>
-      <select class="side-select" data-side="${item.id}" ${item.turn ? "" : "disabled"} aria-label="Seite für ${item.name}">
+      ${chooseSide ? `<select class="side-select" data-side="${item.id}" aria-label="Seite für ${item.name}">
         <option value="main" ${side === "main" ? "selected" : ""}>Hauptseite</option>
         <option value="opposite" ${side === "opposite" ? "selected" : ""}>Gegenseite</option>
-      </select>
+      </select>` : ""}
     </div>
   </article>`;
 }
@@ -417,6 +553,7 @@ function renderTechniqueGrid() {
 function rerender() {
   renderDegreeCard();
   renderRequirements();
+  renderSituations();
   renderTechniqueGrid();
 }
 
@@ -427,6 +564,15 @@ function updateSelection(id) {
   else state.selected[id] = { side: item.turn ? "main" : "neutral" };
   persist();
   rerender();
+}
+
+function updateSituation(id) {
+  if (!standardSituationIds.has(id)) return;
+  if (isSituationSelected(id)) delete state.situations[id];
+  else state.situations[id] = true;
+  persist();
+  renderRequirements();
+  renderSituations();
 }
 
 function setFeedback(message) {
@@ -465,6 +611,7 @@ async function importProgram(file) {
     const candidate = normaliseState(program);
     state = candidate;
     pruneUnavailableSelections();
+    pruneUnavailableSituations();
     persist();
     renderDegreeSelect();
     rerender();
@@ -479,10 +626,12 @@ async function importProgram(file) {
 function bindEvents() {
   elements.degreeSelect.addEventListener("change", (event) => {
     state.degree = event.target.value;
-    const removed = pruneUnavailableSelections();
+    const removedTechniques = pruneUnavailableSelections();
+    const removedSituations = pruneUnavailableSituations();
     persist();
     rerender();
-    if (removed) setFeedback(`${removed} nicht zum Grad passende Technik${removed === 1 ? " wurde" : "en wurden"} aus der Auswahl entfernt.`);
+    const removed = removedTechniques + removedSituations;
+    if (removed) setFeedback(`${removed} nicht zum Grad passende Auswahl${removed === 1 ? " wurde" : "en wurden"} entfernt.`);
   });
   elements.name.addEventListener("input", (event) => {
     state.name = event.target.value.slice(0, 80);
@@ -505,6 +654,10 @@ function bindEvents() {
     persist();
     renderRequirements();
   });
+  elements.situationsGrid.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-situation-toggle]");
+    if (button) updateSituation(button.dataset.situationToggle);
+  });
   document.querySelector("#export-button").addEventListener("click", exportProgram);
   document.querySelector("#import-button").addEventListener("click", () => elements.importInput.click());
   elements.importInput.addEventListener("change", (event) => { if (event.target.files?.[0]) importProgram(event.target.files[0]); });
@@ -513,6 +666,7 @@ function bindEvents() {
 
 renderDegreeSelect();
 pruneUnavailableSelections();
+pruneUnavailableSituations();
 renderNotices();
 rerender();
 bindEvents();
