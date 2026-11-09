@@ -64,6 +64,7 @@ input:focus, select:focus { border-color: #3182ce; box-shadow: 0 0 0 3px #dceeff
 .degree-card { margin-top: .85rem; padding: .78rem .85rem; border-left: 4px solid var(--degree-color, var(--teal)); border-radius: 0 8px 8px 0; background: white; }
 .degree-card strong { display: block; color: #17324f; font-size: .82rem; }
 .degree-card span { display: block; margin-top: .22rem; color: var(--muted); font-size: .7rem; line-height: 1.42; }
+.reset-selection { width: 100%; margin-top: .72rem; }
 .field-note { margin: .9rem 0 0; color: var(--muted); font-size: .67rem; line-height: 1.5; }
 
 .progress-panel { padding: 18px; }
@@ -221,7 +222,6 @@ body.print-view .comic-illustration { margin-right: auto; margin-left: auto; }
   .dan-option-grid { grid-template-columns: 1fr; }
   .tool-row { flex-direction: column; align-items: stretch; }
   .search-label { min-width: 0; }
-  .technique-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .technique-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 9px; }
   .technique-card { min-height: 208px; padding: .58rem; }
   .technique-card.is-selected { padding: calc(.58rem - 1px); }

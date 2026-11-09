@@ -1,4 +1,4 @@
-const DATA_VERSION = 2;
+const DATA_VERSION = 3;
 const STORAGE_KEY = "judo-programmplaner-v1";
 
 const degrees = [
@@ -405,7 +405,13 @@ function normaliseState(candidate) {
       const technique = techniqueById.get(id);
       if (!technique) continue;
       const side = technique.turn && ["main", "opposite"].includes(value?.side) ? value.side : "neutral";
-      selected[id] = { side };
+      // Ältere Programmdateien kannten die Herkunft der Auswahl nicht. Bereits
+      // für den gespeicherten Grad verpflichtende Techniken werden deshalb als
+      // automatisch behandelt; alle anderen gelten als bewusste Auswahl.
+      const manual = typeof value?.manual === "boolean"
+        ? value.manual
+        : !(mandatoryByDegree[degree] || []).includes(id);
+      selected[id] = { side, manual };
     }
   }
   const situations = {};
@@ -428,6 +434,7 @@ let previousTechniqueView = null;
 
 const elements = {
   degreeSelect: document.querySelector("#degree-select"),
+  resetSelection: document.querySelector("#reset-selection"),
   name: document.querySelector("#program-name"),
   degreeCard: document.querySelector("#degree-card"),
   requirements: document.querySelector("#requirements"),
@@ -486,12 +493,22 @@ function pruneUnavailableSelections() {
   return removed;
 }
 
+function pruneAutomaticSelections() {
+  let removed = 0;
+  for (const [id, selection] of Object.entries(state.selected)) {
+    if (selection?.manual) continue;
+    delete state.selected[id];
+    removed += 1;
+  }
+  return removed;
+}
+
 function ensureMandatorySelections() {
   let added = 0;
   for (const id of mandatoryByDegree[state.degree] || []) {
     const item = techniqueById.get(id);
     if (!item || state.selected[id]) continue;
-    state.selected[id] = { side: item.turn ? "main" : "neutral" };
+    state.selected[id] = { side: item.turn ? "main" : "neutral", manual: false };
     added += 1;
   }
   return added;
@@ -659,7 +676,7 @@ function comicIllustration(item) {
   const sprite = comicSprites[spriteId];
   if (!sprite || column >= sprite.columns || row >= sprite.rows) return fallbackPictogram();
   const file = `${spriteId}-${String(row).padStart(2, "0")}-${String(column).padStart(2, "0")}.png`;
-  return `<span class="comic-illustration" aria-hidden="true"><img src="assets/illustrations/frames/${file}" alt="" loading="lazy" /></span>`;
+  return `<span class="comic-illustration" aria-hidden="true"><img src="assets/illustrations/frames/${file}" alt="" /></span>`;
 }
 
 function techniqueCard(item) {
@@ -720,9 +737,21 @@ function updateSelection(id) {
   if (!item) return;
   if (requiredForCurrentDegree(item)) return;
   if (isSelected(id)) delete state.selected[id];
-  else state.selected[id] = { side: item.turn ? "main" : "neutral" };
+  else state.selected[id] = { side: item.turn ? "main" : "neutral", manual: true };
   persist();
   rerender();
+}
+
+function resetSelection() {
+  state.selected = {};
+  state.situations = {};
+  state.danOptions = { kata: "", wahlbereich: "" };
+  const addedMandatory = ensureMandatorySelections();
+  persist();
+  rerender();
+  setFeedback(addedMandatory
+    ? `Auswahl zurückgesetzt · ${addedMandatory} Pflichttechnik${addedMandatory === 1 ? " bleibt" : "en bleiben"} automatisch gesetzt.`
+    : "Auswahl zurückgesetzt.");
 }
 
 function updateSituation(id) {
@@ -818,15 +847,17 @@ async function importProgram(file) {
 function bindEvents() {
   elements.degreeSelect.addEventListener("change", (event) => {
     state.degree = event.target.value;
-    const removedTechniques = pruneUnavailableSelections();
+    const removedAutomatic = pruneAutomaticSelections();
+    const removedUnavailable = pruneUnavailableSelections();
     const addedMandatory = ensureMandatorySelections();
     const removedSituations = pruneUnavailableSituations();
     persist();
     rerender();
-    const removed = removedTechniques + removedSituations;
-    if (removed || addedMandatory) {
+    if (removedAutomatic || removedUnavailable || removedSituations || addedMandatory) {
       const messages = [];
-      if (removed) messages.push(`${removed} nicht zum Grad passende Auswahl${removed === 1 ? " wurde" : "en wurden"} entfernt`);
+      if (removedAutomatic) messages.push(`${removedAutomatic} automatische Auswahl${removedAutomatic === 1 ? " wurde" : "en wurden"} entfernt`);
+      const removedUnavailableTotal = removedUnavailable + removedSituations;
+      if (removedUnavailableTotal) messages.push(`${removedUnavailableTotal} nicht zum Grad passende Auswahl${removedUnavailableTotal === 1 ? " wurde" : "en wurden"} entfernt`);
       if (addedMandatory) messages.push(`${addedMandatory} Pflichttechnik${addedMandatory === 1 ? " wurde" : "en wurden"} automatisch ausgewählt`);
       setFeedback(`${messages.join(" · ")}.`);
     }
@@ -835,6 +866,7 @@ function bindEvents() {
     state.name = event.target.value.slice(0, 80);
     persist();
   });
+  elements.resetSelection.addEventListener("click", resetSelection);
   document.querySelectorAll(".filter").forEach((button) => button.addEventListener("click", () => {
     activeFilter = button.dataset.filter;
     syncFilterButtons();
@@ -882,6 +914,7 @@ renderDegreeSelect();
 pruneUnavailableSelections();
 ensureMandatorySelections();
 pruneUnavailableSituations();
+persist();
 renderNotices();
 rerender();
 bindEvents();
