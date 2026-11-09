@@ -441,7 +441,7 @@ const elements = {
   completion: document.querySelector("#completion"),
   note: document.querySelector("#program-note"),
   notices: document.querySelector("#notices"),
-  printProgramHeading: document.querySelector("#print-program-heading"),
+  printDegreeName: document.querySelector("#print-degree-name"),
   fallSection: document.querySelector("#falltechniken"),
   fallIntro: document.querySelector("#fall-intro"),
   fallGrid: document.querySelector("#fall-grid"),
@@ -598,7 +598,7 @@ function renderDegreeCard() {
   const current = degree();
   elements.degreeCard.style.setProperty("--degree-color", current.color);
   elements.degreeCard.innerHTML = `<strong>${current.short}</strong><span>${current.description}</span>`;
-  elements.printProgramHeading.innerHTML = `<p>Angestrebter Grad</p><h1>${current.short}</h1>`;
+  elements.printDegreeName.textContent = current.label;
 }
 
 function renderFallTechniques() {
@@ -784,6 +784,7 @@ function enterPrintView() {
   searchTerm = "";
   elements.search.value = "";
   syncFilterButtons();
+  elements.printDegreeName.textContent = degree().label;
   renderTechniqueGrid();
   document.body.classList.add("print-view");
   elements.printExit.focus();
