@@ -179,12 +179,16 @@ h2 { margin: 0; color: var(--ink); font-size: 1.2rem; line-height: 1.2; letter-s
 .source-grid a { display: inline-block; margin-top: .75rem; color: #145ca8; font-size: .67rem; font-weight: 750; }
 .disclaimer { margin: .85rem 0 0; color: #58718d; font-size: .65rem; }
 footer { display: flex; justify-content: space-between; gap: 1rem; max-width: 1800px; margin: auto; padding: 18px clamp(12px, 2.5vw, 35px) 28px; color: #58718d; font-size: .62rem; }
+.print-program-heading { display: none; }
 
 body.print-view { background: white; }
 body.print-view > :not(main):not(.print-exit) { display: none !important; }
 body.print-view .print-exit { position: fixed; z-index: 40; top: 14px; right: 14px; display: block; min-height: 38px; border: 1px solid #1865b5; border-radius: 8px; background: #1865b5; color: white; padding: .48rem .7rem; font-size: .72rem; font-weight: 700; box-shadow: var(--shadow); }
 body.print-view main { max-width: 1200px; padding: 66px 18px 28px; }
-body.print-view main > :not(.fall-section):not(.technique-section) { display: none !important; }
+body.print-view main > :not(.print-program-heading):not(.fall-section):not(.technique-section) { display: none !important; }
+body.print-view .print-program-heading { display: block; margin: 0 0 18px; padding-bottom: 12px; border-bottom: 2px solid #17324f; }
+body.print-view .print-program-heading p { margin: 0; color: #526984; font-size: .67rem; font-weight: 750; letter-spacing: .06em; text-transform: uppercase; }
+body.print-view .print-program-heading h1 { margin: .2rem 0 0; color: #17324f; font-size: 1.5rem; }
 body.print-view .fall-section { margin: 0 0 18px; }
 body.print-view .fall-grid { grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); }
 body.print-view .technique-section { margin: 0; }
@@ -236,8 +240,11 @@ body.print-view .comic-illustration { margin-right: auto; margin-left: auto; }
   @page { size: A4; margin: 11mm; }
   body { background: white; font-size: 9pt; }
   body > :not(main) { display: none !important; }
-  main, main > .fall-section, main > .technique-section { display: block !important; max-width: none; margin: 0; padding: 0; }
-  main > :not(.fall-section):not(.technique-section), .technique-heading, .tool-row, .legend { display: none !important; }
+  main, main > .print-program-heading, main > .fall-section, main > .technique-section { display: block !important; max-width: none; margin: 0; padding: 0; }
+  main > :not(.print-program-heading):not(.fall-section):not(.technique-section), .technique-heading, .tool-row, .legend { display: none !important; }
+  .print-program-heading { margin: 0 0 5mm !important; padding-bottom: 3mm !important; border-bottom: .6mm solid #17324f; }
+  .print-program-heading p { margin: 0; color: #526984; font-size: 8pt; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+  .print-program-heading h1 { margin: 1mm 0 0; color: #17324f; font-size: 18pt; }
   .fall-section { margin: 0 0 5mm !important; }
   .fall-intro { margin: 1.5mm 0 2mm; }
   .fall-grid { grid-template-columns: repeat(3, 1fr); gap: 2mm; }
