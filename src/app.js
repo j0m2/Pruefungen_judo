@@ -477,7 +477,7 @@ const gradeNotes = {
 };
 
 function defaultState() {
-  return { version: DATA_VERSION, name: "Mein Prüfungsprogramm", degree: "1", selected: {}, situations: {}, danOptions: {} };
+  return { version: DATA_VERSION, name: "Mein Prüfungsprogramm", degree: "8", selected: {}, situations: {}, danOptions: {} };
 }
 
 function readState() {
