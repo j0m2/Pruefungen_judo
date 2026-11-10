@@ -117,7 +117,8 @@ h2 { margin: 0; color: var(--ink); font-size: 1.2rem; line-height: 1.2; letter-s
 .dan-option-card h3 { margin: .32rem 0 0; color: #183147; font-size: .9rem; }
 .dan-option-card label { margin-top: .82rem; }
 .dan-option-card select { min-height: 44px; font-size: .69rem; }
-.dan-planner-link { display: inline-block; margin-top: .72rem; color: #145ca8; font-size: .67rem; font-weight: 750; }
+.dan-planner-note { margin: .62rem 0 -.1rem; color: #5d728b; font-size: .65rem; line-height: 1.35; }
+.dan-planner-link { color: #145ca8; font-weight: 750; }
 .dan-planner-link:hover { color: #0f4f91; }
 
 .selected-summary { padding: .5rem .65rem; border: 1px solid #cbd9e8; border-radius: 8px; color: #185c9f; background: #eef6fc; font-size: .68rem; font-weight: 700; }

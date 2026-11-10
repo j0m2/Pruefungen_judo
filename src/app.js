@@ -818,13 +818,16 @@ function renderDanOptions() {
     const value = state.danOptions[card.key] || "";
     const options = `<option value="">Bitte auswählen …</option>${card.options.map(([id, label]) => `<option value="${id}" ${value === id ? "selected" : ""}>${label}</option>`).join("")}`;
     const selectId = `dan-option-${card.key}`;
-    const showPlannerLink = card.plannerLink || card.plannerLinkWhen?.includes(value);
+    // Handlungsketten sind zum 2. und 3. Dan verpflichtend. Der Link wird
+    // deshalb über den Karten-Schlüssel abgesichert und nicht allein über eine
+    // optionale Konfigurationsangabe eingeblendet.
+    const showPlannerLink = card.key === "handlungsketten" || card.plannerLinkWhen?.includes(value);
     return `<article class="dan-option-card ${value ? "is-selected" : ""}">
       <p class="dan-option-kind">${card.kind}</p>
       <h3>${card.title}</h3>
+      ${showPlannerLink ? '<p class="dan-planner-note">Für die Ausarbeitung: <a class="dan-planner-link" href="https://j0m2.github.io/Handlungsketten_judo/" target="_blank" rel="noopener noreferrer">Handlungsketten-Planer öffnen&nbsp;↗</a></p>' : ""}
       <label for="${selectId}">${card.label}</label>
       <select id="${selectId}" name="${selectId}" data-dan-option="${card.key}">${options}</select>
-      ${showPlannerLink ? '<a class="dan-planner-link" href="https://j0m2.github.io/Handlungsketten_judo/" target="_blank" rel="noopener noreferrer">Handlungsketten-Planer öffnen</a>' : ""}
     </article>`;
   }).join("");
 }
