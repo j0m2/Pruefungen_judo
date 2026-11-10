@@ -1,4 +1,4 @@
-const DATA_VERSION = 3;
+const DATA_VERSION = 4;
 const STORAGE_KEY = "judo-programmplaner-v1";
 
 const degrees = [
@@ -11,6 +11,11 @@ const degrees = [
   { id: "2", label: "2. Kyu · blau", short: "2. Kyu", color: "#477d9b", description: "Judo-Taktik · 18 Würfe, davon 6 aus dem Erweiterungsprogramm." },
   { id: "1", label: "1. Kyu · braun", short: "1. Kyu", color: "#725034", description: "Das eigene Judoprofil · 20 Würfe, davon 9 aus dem Erweiterungsprogramm." },
   { id: "dan1", label: "1. Dan · schwarz", short: "1. Dan", color: "#252825", description: "Obligatorik: vollständige Gokyo-no-waza und Katame-waza aus Grund- und Erweiterungsprogramm." },
+  { id: "dan2", label: "2. Dan · schwarz", short: "2. Dan", color: "#252825", description: "Obligatorik: Gokyo-no-waza, 12 weitere Würfe, Katame-waza sowie Nage-no-kata." },
+  { id: "dan3", label: "3. Dan · schwarz", short: "3. Dan", color: "#252825", description: "Obligatorik: Gokyo, 12 weitere Würfe, Katame-waza, Theorie und Katame-no-kata." },
+  { id: "dan4", label: "4. Dan · schwarz", short: "4. Dan", color: "#252825", description: "Exemplarische Prüfung: Te-, Koshi- und Ashi-waza sowie Osaekomi-waza, Kata und Theorie." },
+  { id: "dan5", label: "5. Dan · schwarz", short: "5. Dan", color: "#252825", description: "Exemplarische Prüfung: Sutemi-waza sowie Kansetsu- und Shime-waza, Kata und Theorie." },
+  { id: "dan6", label: "6. Dan · schwarz", short: "6. Dan", color: "#252825", description: "Prüfungserwerb: vollständige Nage- und Katame-waza, zwei Kata-Demonstrationen, Theorie und Engagement." },
 ];
 
 const pools = {
@@ -199,7 +204,10 @@ const comicFrames = {
 
 const techniqueById = new Map(techniques.map((item) => [item.id, item]));
 const gokyoKeys = [...new Set(techniques.filter((item) => item.gokyo).map((item) => item.gokyo))];
+const gokyoTechniqueIds = techniques.filter((item) => item.gokyo).map((item) => item.id);
 const danGroundIds = techniques.filter((item) => item.area === "boden" && ["grund", "erweiterung"].includes(item.pool)).map((item) => item.id);
+const allKatameExceptDoJimeIds = techniques.filter((item) => item.area === "boden" && item.id !== "do-jime").map((item) => item.id);
+const dan6TechniqueIds = techniques.filter((item) => !["kani-basami", "kawazu-gake"].includes(item.id)).map((item) => item.id);
 
 const mandatoryByDegree = {
   "7": ["kesa-gatame", "tate-shiho-gatame", "yoko-shiho-gatame", "kami-shiho-gatame"],
@@ -211,34 +219,84 @@ const mandatoryByDegree = {
     ...techniques.filter((item) => item.gokyo).map((item) => item.id),
     ...danGroundIds,
   ])],
+  // Beim 2. und 3. Dan sind Gokyo und sämtliche Katame-waza (außer Do-jime;
+  // Ashi-garami ist in den DJB-Pools nicht enthalten) verbindlich. Die zwölf
+  // Shinmeisho-/Habukareta-waza bleiben eine individuelle Auswahl.
+  "dan2": [...new Set([...gokyoTechniqueIds, ...allKatameExceptDoJimeIds])],
+  "dan3": [...new Set([...gokyoTechniqueIds, ...allKatameExceptDoJimeIds])],
+  // Zum 6. Dan fordert die Ordnung alle Nage- und Katame-waza; ausdrücklich
+  // ausgenommen sind nur Kawazu-gake und Kani-basami.
+  "dan6": dan6TechniqueIds,
 };
 
 const sideRequirementsByDegree = { "7": 1, "6": 2, "5": 3, "4": 3 };
 
-const danKataOptions = [
-  ["nage-1-3", "Nage-no-kata · Gruppen 1–3"],
-  ["ju-1-2", "Ju-no-kata · Gruppen 1–2"],
-];
+const danPrograms = {
+  dan1: {
+    intro: "Diese Nachweise gehören zusätzlich zu den ausgewählten Technik- und Situationskarten zum 1. Dan.",
+    cards: [
+      { key: "kata", kind: "Obligatorische Kata", title: "Kata-Teil auswählen", label: "Vorgabe zum 1. Dan", requirement: ["Kata", "Nage-no-kata 1–3 oder Ju-no-kata 1–2"], options: [["nage-1-3", "Nage-no-kata · Gruppen 1–3"], ["ju-1-2", "Ju-no-kata · Gruppen 1–2"]] },
+      { key: "wahlbereich", kind: "Ein Wahlbereich", title: "Schwerpunkt auswählen", label: "Nachweis zum 1. Dan", requirement: ["Wahlbereich", "Lizenz · Wettkampf · Kata · Selbstverteidigung oder Taiso"], options: [["lizenz", "Lizenzen · gültige Trainer-C-Lizenz des DJB"], ["wettkampf", "Wettkampf · 10 Kampfpunkte und individuelle Kampfkonzeption"], ["kata-uke", "Kata · als Uke: Kodokan-Kata nach Wahl mit mindestens 15 Techniken"], ["kata-alternative", "Kata · als Tori: nicht gewählte Alternative der Obligatorik"], ["kata-nage-4-5", "Kata · als Tori: Nage-no-kata Gruppen 4–5"], ["kata-ju-3", "Kata · als Tori: Ju-no-kata Gruppe 3"], ["kata-katame-osae", "Kata · als Tori: Katame-no-kata · Osaekomi-waza"], ["kata-goshinjutsu-1-2", "Kata · als Tori: Kodokan Goshinjutsu Gruppen 1–2 (ohne Waffen)"], ["selbstverteidigung", "Selbstverteidigung · Nahdistanz sowie Schläge und Tritte"], ["taiso", "Taiso · Sportabzeichen, Tandoku-renshu und Seiryoku-zenyo-kokumin-taiiku"]] },
+    ],
+  },
+  dan2: {
+    intro: "Zum 2. Dan kommen zum Technikprogramm Nage-no-kata und ein Wahlbereich hinzu.",
+    cards: [
+      { key: "kata", kind: "Obligatorische Kata", title: "Kata vormerken", label: "Vorgabe zum 2. Dan", requirement: ["Kata", "Nage-no-kata"], options: [["nage", "Nage-no-kata"]] },
+      { key: "handlungsketten", kind: "Katame-waza", title: "Handlungsketten planen", label: "Vorgabe", requirement: ["Handlungsketten", "2 verzweigte Ketten aus Oberlage mit je 3 Abschlüssen"], options: [["oberlage-2", "2 verzweigte Handlungsketten aus Oberlage · je mindestens 3 Abschlüsse"]] },
+      { key: "wahlbereich", kind: "Ein Wahlbereich", title: "Schwerpunkt auswählen", label: "Nachweis zum 2. Dan", requirement: ["Wahlbereich", "Lizenz · Wettkampf · Kata · Selbstverteidigung oder Taiso"], options: [["lizenz", "Lizenzen · Trainer-C, Landes-Kampfrichter oder Landes-Kata-Wertungsrichter"], ["wettkampf", "Wettkampf · 10 Kampfpunkte und Uchi-komi mit zwei Eindrehtechniken beidseitig"], ["kata", "Kata · Uke oder Katame-no-kata / Goshinjutsu / Kime-no-kata Idori als Tori"], ["selbstverteidigung", "Selbstverteidigung · Programm 1. Dan plus Schlagwaffen"], ["taiso", "Taiso · Sportabzeichen Silber und Seiryoku-zenyo-kokumin-taiiku"]] },
+    ],
+  },
+  dan3: {
+    intro: "Der 3. Dan ergänzt das Technikprogramm um Theorie, Katame-no-kata und einen Wahlbereich.",
+    cards: [
+      { key: "kata", kind: "Obligatorische Kata", title: "Kata vormerken", label: "Vorgabe zum 3. Dan", requirement: ["Kata", "Katame-no-kata"], options: [["katame", "Katame-no-kata"]] },
+      { key: "theorie", kind: "Theorie", title: "Thema auswählen", label: "Themenbereich", requirement: ["Theorie", "eine Wahlaufgabe"], options: [["kuzushi-tsukuri", "Kanos Konzept von Kuzushi und Tsukuri"], ["uke-lernen", "Bedeutung des Uke-Verhaltens für den Lernprozess"], ["judo-werte", "Judo-Werte im Kinder- und Jugendtraining"]] },
+      { key: "handlungsketten", kind: "Katame-waza", title: "Zusatznachweise planen", label: "Vorgaben", requirement: ["Katame-Nachweise", "Ketten in Ober- und Unterlage sowie Umdrehprinzipien"], options: [["vollstaendig", "2 Ketten Oberlage · 2 Ketten Unterlage · Umdrehprinzipien geplant"]] },
+      { key: "nage-nachweise", kind: "Nage-waza", title: "Kombinationen und Konter", label: "Vorgaben", requirement: ["Nage-Nachweise", "6 Kombinationen/Finten und 6 Kontertechniken"], options: [["vollstaendig", "6 Kombinationen oder Finten und 6 Kontertechniken geplant"]] },
+      { key: "wahlbereich", kind: "Ein Wahlbereich", title: "Schwerpunkt auswählen", label: "Nachweis zum 3. Dan", requirement: ["Wahlbereich", "Lizenz · Wettkampf · Kata · Selbstverteidigung oder Taiso"], options: [["lizenz", "Lizenzen · Trainer-B oder Landeslizenz mit Erfahrung"], ["wettkampf", "Wettkampf · 10 Kampfpunkte, Uchi-komi und Griffkampfstrategien"], ["kata", "Kata · Uke oder Ju-no-kata / Goshinjutsu / Kime-no-kata / Koshiki-no-kata"], ["selbstverteidigung", "Selbstverteidigung · Programm 2. Dan plus Schnitt-/Stichwaffen"], ["taiso", "Taiso · Sportabzeichen Gold und Taiso-Programm"]] },
+    ],
+  },
+  dan4: {
+    intro: "Für den 4. Dan werden vom Prüfer gewählte Beispiele aus den unten freigeschalteten Bereichen demonstriert und erläutert.",
+    cards: [
+      { key: "kata", kind: "Obligatorische Kata", title: "Kata auswählen", label: "Vorgabe zum 4. Dan", requirement: ["Kata", "Ju-no-kata oder Kodokan Goshinjutsu"], options: [["ju", "Ju-no-kata"], ["goshinjutsu", "Kodokan Goshinjutsu"]] },
+      { key: "theorie", kind: "Theorie", title: "Thema auswählen", label: "Themenbereich", requirement: ["Theorie", "eine Wahlaufgabe"], options: [["hebel", "Hebelwirkungen und Rotationen um Körperachsen"], ["uebungsreihen", "Übungsreihen nach Funktionsphasen"], ["kano", "Kanos Erziehungskonzept Ende des 19. Jahrhunderts"]] },
+      { key: "wahlbereich", kind: "Ein Wahlbereich", title: "Schwerpunkt auswählen", label: "Nachweis zum 4. Dan", requirement: ["Wahlbereich", "Lizenz · Wettkampf oder Kata"], options: [["lizenz", "Lizenzen · Trainer-B oder Bundes-B-Lizenz"], ["wettkampf", "Wettkampf · 10 Kampfpunkte und vier Trainingsformen"], ["kata", "Kata · Uke oder Tori nach den zugelassenen Alternativen"]] },
+    ],
+  },
+  dan5: {
+    intro: "Für den 5. Dan werden vom Prüfer gewählte Beispiele aus den unten freigeschalteten Bereichen demonstriert und erläutert.",
+    cards: [
+      { key: "kata", kind: "Obligatorische Kata", title: "Kata-Kombination auswählen", label: "Vorgabe zum 5. Dan", requirement: ["Kata", "Kata als Uke plus Koshiki- oder Kime-no-kata"], options: [["itsutsu-koshiki", "Itsutsu-no-kata als Uke + Koshiki-no-kata"], ["itsutsu-kime", "Itsutsu-no-kata als Uke + Kime-no-kata"], ["andere-koshiki", "andere Dan-Kata als Uke + Koshiki-no-kata"], ["andere-kime", "andere Dan-Kata als Uke + Kime-no-kata"]] },
+      { key: "theorie", kind: "Theorie", title: "Thema auswählen", label: "Themenbereich", requirement: ["Theorie", "eine Wahlaufgabe"], options: [["rumpf", "Rumpfstabilität, Gelenkwinkel und Kraftübertragung"], ["offene-aufgaben", "Technikvermittlung durch offene Aufgabenstellungen"], ["seiryoku", "Seiryoku-zenyo und Jita-kyoei ab ca. 1920"]] },
+      { key: "wahlbereich", kind: "Ein Wahlbereich", title: "Schwerpunkt auswählen", label: "Nachweis zum 5. Dan", requirement: ["Wahlbereich", "Lizenz · Wettkampf oder Kata"], options: [["lizenz", "Lizenzen · Trainer-A oder Bundes-A-Lizenz"], ["wettkampf", "Wettkampf · 10 Kampfpunkte, Handlungsketten und Periodisierung"], ["kata", "Kata · Uke oder Tori nach den zugelassenen Alternativen"]] },
+    ],
+  },
+  dan6: {
+    intro: "Der 6. Dan kann durch Prüfung erworben werden. Neben dem Technikprogramm sind zwei Kata-Demonstrationen, Theorie, Engagement und ein Wahlbereich nachzuweisen.",
+    cards: [
+      { key: "kata", kind: "Bewertete Kata", title: "Prüfungs-Kata auswählen", label: "Als Tori · mindestens 75 %", requirement: ["Bewertete Kata", "eine Kata als Tori in Prüfungssituation"], options: [["nage", "Nage-no-kata"], ["katame", "Katame-no-kata"], ["ju", "Ju-no-kata"], ["kime", "Kime-no-kata"], ["goshinjutsu", "Kodokan Goshinjutsu"], ["koshiki", "Koshiki-no-kata"]] },
+      { key: "kata-oeffentlich", kind: "Öffentliche Kata", title: "Demonstration auswählen", label: "Als Tori bei einer DJB-Veranstaltung", requirement: ["Öffentliche Kata", "eine Kata als Tori bei DJB-Veranstaltung"], options: [["nage", "Nage-no-kata"], ["katame", "Katame-no-kata"], ["ju", "Ju-no-kata"], ["kime", "Kime-no-kata"], ["goshinjutsu", "Kodokan Goshinjutsu"], ["koshiki", "Koshiki-no-kata"]] },
+      { key: "theorie", kind: "Theorie", title: "Nachweis auswählen", label: "Vorab von der Kommission akzeptieren lassen", requirement: ["Theorie", "Veröffentlichung oder nachhaltiges Judo-Projekt"], options: [["veroeffentlichung", "Veröffentlichung zur Theoriebildung des Judo"], ["projekt", "Projekt zur nachhaltigen Förderung des Judo"]] },
+      { key: "engagement", kind: "Engagement", title: "Nachweis vormerken", label: "Vorgabe", requirement: ["Engagement", "besonderes Engagement nach DJB-Ehrenordnung"], options: [["nachweis", "Besonderes Engagement im Sinne der DJB-Ehrenordnung"]] },
+      { key: "wahlbereich", kind: "Ein Wahlbereich", title: "Schwerpunkt auswählen", label: "Nachweis zum 6. Dan", requirement: ["Wahlbereich", "Lizenz · Wettkampf oder Kata"], options: [["lizenz", "Lizenzen · Diplomtrainer oder EJU/IJF-Lizenz"], ["wettkampf", "Wettkampf · internationale Erfolge oder Kämpferprofil"], ["kata", "Kata · internationale Medaille oder zwei Kata-Analysen"]] },
+    ],
+  },
+};
 
-const danWahlbereichOptions = [
-  ["lizenz", "Lizenzen · gültige Trainer-C-Lizenz des DJB"],
-  ["wettkampf", "Wettkampf · 10 Kampfpunkte und individuelle Kampfkonzeption"],
-  ["kata-uke", "Kata · als Uke: Kodokan-Kata nach Wahl mit mindestens 15 Techniken"],
-  ["kata-alternative", "Kata · als Tori: nicht gewählte Alternative der Obligatorik"],
-  ["kata-nage-4-5", "Kata · als Tori: Nage-no-kata Gruppen 4–5"],
-  ["kata-ju-3", "Kata · als Tori: Ju-no-kata Gruppe 3"],
-  ["kata-katame-osae", "Kata · als Tori: Katame-no-kata · Osaekomi-waza"],
-  ["kata-goshinjutsu-1-2", "Kata · als Tori: Kodokan Goshinjutsu Gruppen 1–2 (ohne Waffen)"],
-  ["selbstverteidigung", "Selbstverteidigung · Nahdistanz sowie Schläge und Tritte"],
-  ["taiso", "Taiso · Sportabzeichen, Tandoku-renshu und Seiryoku-zenyo-kokumin-taiiku"],
-];
+function danCardsForDegree(degreeId = state?.degree) {
+  return danPrograms[degreeId]?.cards || [];
+}
 
-const danKataOptionIds = new Set(danKataOptions.map(([id]) => id));
-const danWahlbereichOptionIds = new Set(danWahlbereichOptions.map(([id]) => id));
+function validDanOption(degreeId, key, value) {
+  return danCardsForDegree(degreeId).some((card) => card.key === key && card.options.some(([id]) => id === value));
+}
 
 const notices = [
   { type: "Widerspruch", title: "Zählweise der Nage-waza", text: "Die Pool-Übersicht zählt 16 + 12 + 32 + 9 = 69 Nage-waza, während ihr Anhang „Nage-waza, 68“ ausweist. Alle in der Übersicht namentlich aufgeführten Techniken bleiben hier sichtbar; Zählwerte werden nicht als Prüfungsanforderung verwendet." },
   { type: "Widerspruch", title: "Abweichende Technikbezeichnungen", text: "Die Pool-Übersicht nennt „Ko-soko-gari“ und „Okure-ashi-harai“. Das Grundprogramm-Poster bezeichnet die gezeigte Technik dagegen als „Ko-soto-gake“, das Erweiterungsprogramm-Poster als „Okuri-ashi-barai“. Die Anwendung führt Ko-soto-gari bzw. Okuri-ashi-barai; beim Ko-soto-Eintrag bleibt die Posterreferenz deshalb ausdrücklich als Quellenabweichung markiert." },
+  { type: "Widerspruch", title: "Hara-gatame: Poster vs. Pool", text: "Das DJB-Poster zum Erweiterungsprogramm Boden zeigt Hara-gatame. In der offiziellen Pool-Tabelle ist Hara-gatame jedoch den Kansetsu-waza des Masterprogramms zugeordnet; das historische Programm enthält dort ausschließlich Do-jime. Hara-gatame wird deshalb in dieser Anwendung nicht als Kyu-Technik auswählbar gemacht." },
 ];
 
 const fallTechniquesByDegree = {
@@ -298,6 +356,26 @@ const fallTechniquesByDegree = {
   dan1: {
     intro: "Für den 1. Dan weist das Anforderungsprofil keine zusätzliche, eigenständige Ukemi-Anforderung aus.",
     items: [["Keine zusätzliche Vorgabe", "Die Ukemi-Anforderungen werden im 1.-Dan-Profil nicht gesondert aufgeführt."]],
+  },
+  dan2: {
+    intro: "Für den 2. Dan weist das Anforderungsprofil keine zusätzliche, eigenständige Ukemi-Anforderung aus.",
+    items: [["Keine zusätzliche Vorgabe", "Die Ukemi-Anforderungen werden im 2.-Dan-Profil nicht gesondert aufgeführt."]],
+  },
+  dan3: {
+    intro: "Für den 3. Dan weist das Anforderungsprofil keine zusätzliche, eigenständige Ukemi-Anforderung aus.",
+    items: [["Keine zusätzliche Vorgabe", "Die Ukemi-Anforderungen werden im 3.-Dan-Profil nicht gesondert aufgeführt."]],
+  },
+  dan4: {
+    intro: "Für den 4. Dan weist das Anforderungsprofil keine zusätzliche, eigenständige Ukemi-Anforderung aus.",
+    items: [["Keine zusätzliche Vorgabe", "Die Ukemi-Anforderungen werden im 4.-Dan-Profil nicht gesondert aufgeführt."]],
+  },
+  dan5: {
+    intro: "Für den 5. Dan weist das Anforderungsprofil keine zusätzliche, eigenständige Ukemi-Anforderung aus.",
+    items: [["Keine zusätzliche Vorgabe", "Die Ukemi-Anforderungen werden im 5.-Dan-Profil nicht gesondert aufgeführt."]],
+  },
+  dan6: {
+    intro: "Für den 6. Dan weist das Anforderungsprofil keine zusätzliche, eigenständige Ukemi-Anforderung aus.",
+    items: [["Keine zusätzliche Vorgabe", "Die Ukemi-Anforderungen werden im 6.-Dan-Profil nicht gesondert aufgeführt."]],
   },
 };
 
@@ -364,6 +442,17 @@ const standardSituationsByDegree = {
     ["rueckenlage-unter", "Rückenlage · Unterlage", "Partner zwischen den Beinen: mindestens eine Lösung aus der Unterlage."],
     ["stand-boden", "Übergang Stand → Boden", "Eine Katame-waza als Abschluss eines Übergangs planen."],
   ],
+  "dan2": [
+    ["bank-bauch", "Bank-/Bauchlage", "Katame-waza als Lösung einer Standardsituation einplanen."],
+    ["beinklammer", "Beinklammer", "Katame-waza als Lösung einer Standardsituation einplanen."],
+    ["rueckenlage", "Rückenlage", "Katame-waza als Lösung einer Standardsituation einplanen."],
+    ["stand-boden", "Übergang Stand → Boden", "Katame-waza als Lösung einer Standardsituation einplanen."],
+  ],
+  "dan3": [
+    ["bank-bauch-ober", "Bank-/Bauchlage · Oberlage", "Zwei verzweigte Handlungsketten aus Oberlage ergänzen."],
+    ["bank-bauch-unter", "Bank-/Bauchlage · Unterlage", "Zwei verzweigte Handlungsketten aus Unterlage ergänzen."],
+    ["eigene-rueckenlage", "Eigene Rückenlage", "Prinzipien der Umdrehtechniken erläutern."],
+  ],
 };
 
 const standardSituationIds = new Set(
@@ -380,10 +469,15 @@ const gradeNotes = {
   "2": "18 Würfe, davon sechs aus dem Erweiterungsprogramm; Sumi-gaeshi und Soto-makikomi sowie Gyaku-juji- und Okuri-eri-jime sind verbindlich.",
   "1": "20 Würfe, davon neun aus dem Erweiterungsprogramm; Ura-nage und Ko-uchi-makikomi sowie Sode-guruma- und Okuri-eri-jime sind verbindlich. Zusätzlich ca. 10 Aktionen aus einem individuellen Schwerpunkt.",
   "dan1": "Zum 1. Dan sind alle Gokyo-no-waza aus freien Interaktionen gefordert. Bei Katame-waza je eine Variante jeder Technik aus Grund- und Erweiterungsprogramm als Situationslösung; Kata und ein Wahlbereich bleiben zusätzlich erforderlich.",
+  "dan2": "Zum 2. Dan sind alle Gokyo-no-waza, zwölf Shinmeisho-/Habukareta-waza sowie alle Katame-waza außer Ashi-garami und Do-jime gefordert. Die zwölf zusätzlichen Würfe werden individuell zusammengestellt.",
+  "dan3": "Zum 3. Dan gelten Gokyo, zwölf Shinmeisho-/Habukareta-waza und alle Katame-waza außer Ashi-garami und Do-jime. Zusätzlich werden Kombinationen/Finten, Kontertechniken, Handlungsketten, Kata, Theorie und ein Wahlbereich nachgewiesen.",
+  "dan4": "Zum 4. Dan werden Te-, Koshi- und Ashi-waza sowie Osaekomi-waza aus dem Gesamtprogramm des Kodokan an vom Prüfer gewählten Beispielen demonstriert und erläutert. Die Auswahlkarten dienen der individuellen Vorbereitung, nicht einer fest vorgeschriebenen Technikanzahl.",
+  "dan5": "Zum 5. Dan werden Ma- und Yoko-sutemi-waza (außer Kawazu-gake und Kani-basami) sowie Kansetsu- und Shime-waza an vom Prüfer gewählten Beispielen demonstriert und erläutert.",
+  "dan6": "Beim 6. Dan durch Prüfung sind alle Nage-waza außer Kawazu-gake und Kani-basami sowie alle Katame-waza gefordert. Die Technik-Pflichtauswahl wird deshalb vollständig gesetzt.",
 };
 
 function defaultState() {
-  return { version: DATA_VERSION, name: "Mein Prüfungsprogramm", degree: "1", selected: {}, situations: {}, danOptions: { kata: "", wahlbereich: "" } };
+  return { version: DATA_VERSION, name: "Mein Prüfungsprogramm", degree: "1", selected: {}, situations: {}, danOptions: {} };
 }
 
 function readState() {
@@ -420,10 +514,11 @@ function normaliseState(candidate) {
       if (standardSituationIds.has(id)) situations[id] = true;
     }
   }
-  const danOptions = {
-    kata: danKataOptionIds.has(candidate.danOptions?.kata) ? candidate.danOptions.kata : "",
-    wahlbereich: danWahlbereichOptionIds.has(candidate.danOptions?.wahlbereich) ? candidate.danOptions.wahlbereich : "",
-  };
+  const danOptions = {};
+  for (const card of danCardsForDegree(degree)) {
+    const value = candidate.danOptions?.[card.key];
+    danOptions[card.key] = validDanOption(degree, card.key, value) ? value : "";
+  }
   return { version: DATA_VERSION, name: String(candidate.name || fallback.name).slice(0, 80), degree, selected, situations, danOptions };
 }
 
@@ -450,10 +545,10 @@ const elements = {
   situationsGrid: document.querySelector("#situation-grid"),
   situationsSummary: document.querySelector("#situations-summary"),
   danOptionsSection: document.querySelector("#dan-optionen"),
-  danKataCard: document.querySelector("#dan-kata-card"),
-  danWahlbereichCard: document.querySelector("#dan-wahlbereich-card"),
-  danKataSelect: document.querySelector("#dan-kata-select"),
-  danWahlbereichSelect: document.querySelector("#dan-wahlbereich-select"),
+  danOptionsLabel: document.querySelector("#dan-options-label"),
+  danOptionsTitle: document.querySelector("#dan-options-title"),
+  danOptionsIntro: document.querySelector("#dan-options-intro"),
+  danOptionGrid: document.querySelector("#dan-option-grid"),
   groups: document.querySelector("#technique-groups"),
   selectedSummary: document.querySelector("#selected-summary"),
   search: document.querySelector("#search-input"),
@@ -479,6 +574,17 @@ function isSelectableForCurrentDegree(item) {
   if (state.degree === "dan1") {
     return Boolean(item.gokyo) || (item.area === "boden" && ["grund", "erweiterung"].includes(item.pool));
   }
+  if (["dan2", "dan3"].includes(state.degree)) {
+    return item.area === "stand" || (item.area === "boden" && item.id !== "do-jime");
+  }
+  if (state.degree === "dan4") {
+    return ["stand-te", "stand-koshi", "stand-ashi", "boden-osae"].includes(item.group);
+  }
+  if (state.degree === "dan5") {
+    return ["stand-ma", "stand-yoko", "boden-kansetsu", "boden-shime"].includes(item.group)
+      && !["kani-basami", "kawazu-gake"].includes(item.id);
+  }
+  if (state.degree === "dan6") return !["kani-basami", "kawazu-gake"].includes(item.id);
   return false;
 }
 
@@ -542,7 +648,9 @@ function pruneUnavailableSituations() {
 }
 
 function showSideSelection(item) {
-  return Boolean(sideRequirementsByDegree[state.degree]) && item.turn && isSelected(item.id);
+  const kyuRequirement = Boolean(sideRequirementsByDegree[state.degree]);
+  const danCompetitionRequirement = state.degree === "dan2" && state.danOptions.wahlbereich === "wettkampf";
+  return (kyuRequirement || danCompetitionRequirement) && item.turn && isSelected(item.id);
 }
 
 function requiredForCurrentDegree(item) {
@@ -559,7 +667,14 @@ function requirementDefinitions() {
   const selectedChokes = () => countSelected((item) => item.group === "boden-shime");
   const required = (ids) => ({ current: selectedRequired(ids), needed: ids.length });
   const totalGokyo = () => new Set(selectedTechniques().filter((item) => item.gokyo).map((item) => item.gokyo)).size;
+  const selectedOutsideGokyoThrows = () => countSelected((item) => item.area === "stand" && !item.gokyo);
   const selectedSituations = () => selectedSituationCount();
+  const danOptionRequirements = () => danCardsForDegree(state.degree).map((card) => [
+    card.requirement[0],
+    () => state.danOptions[card.key] ? 1 : 0,
+    1,
+    card.requirement[1],
+  ]);
 
   const basics = {
     "7": [
@@ -575,16 +690,59 @@ function requirementDefinitions() {
     "3": [["Würfe", selectedStand, 15, "gesamt"], ["Erweiterung", extensionThrows, 3, "Würfe aus dem Erweiterungsprogramm"], ["Pflichtwürfe", () => required(["tomoe-nage", "tani-otoshi"]).current, 2, "Tomoe-nage · Tani-otoshi"], ["Erweiterungshebel", () => countSelected((item) => item.pool === "erweiterung" && item.group === "boden-kansetsu"), 4, "inkl. Hiza- & Sankaku-gatame"], ["Pflichthebel", () => required(["hiza-gatame", "sankaku-gatame"]).current, 2, "Hiza- & Sankaku-gatame"]],
     "2": [["Würfe", selectedStand, 18, "gesamt"], ["Erweiterung", extensionThrows, 6, "Würfe aus dem Erweiterungsprogramm"], ["Pflichtwürfe", () => required(["sumi-gaeshi", "soto-makikomi"]).current, 2, "Sumi-gaeshi · Soto-makikomi"], ["Würgetechniken", selectedChokes, 3, "aus Grund- & Erweiterungsprogramm"], ["Pflichtwürgen", () => required(["gyaku-juji-jime", "okuri-eri-jime"]).current, 2, "Gyaku-juji- & Okuri-eri-jime"]],
     "1": [["Würfe", selectedStand, 20, "gesamt"], ["Erweiterung", extensionThrows, 9, "Würfe aus dem Erweiterungsprogramm"], ["Pflichtwürfe", () => required(["ura-nage", "ko-uchi-makikomi"]).current, 2, "Ura-nage · Ko-uchi-makikomi"], ["Würgetechniken", selectedChokes, 4, "aus Grund- & Erweiterungsprogramm"], ["Pflichtwürgen", () => required(["sode-guruma-jime", "okuri-eri-jime"]).current, 2, "Sode-guruma- & Okuri-eri-jime"]],
-    "dan1": [["Gokyo-no-waza", totalGokyo, gokyoKeys.length, "jede Gokyo-Familie aus freier Interaktion"], ["Katame-waza", () => selectedRequired(danGroundIds), danGroundIds.length, "je eine Variante aus Grund- & Erweiterungsprogramm"], ["Kata", () => state.danOptions.kata ? 1 : 0, 1, "Nage-no-kata 1–3 oder Ju-no-kata 1–2"], ["Wahlbereich", () => state.danOptions.wahlbereich ? 1 : 0, 1, "Lizenz · Wettkampf · Kata · Selbstverteidigung oder Taiso"]],
+    "dan1": [
+      ["Gokyo-no-waza", totalGokyo, gokyoKeys.length, "jede Gokyo-Familie aus freier Interaktion"],
+      ["Katame-waza", () => selectedRequired(danGroundIds), danGroundIds.length, "je eine Variante aus Grund- & Erweiterungsprogramm"],
+      ...danOptionRequirements(),
+    ],
+    "dan2": [
+      ["Gokyo-no-waza", totalGokyo, gokyoKeys.length, "jede Gokyo-Technik aus freien Interaktionen"],
+      ["Weitere Würfe", selectedOutsideGokyoThrows, 12, "12 Shinmeisho-/Habukareta-waza"],
+      ["Katame-waza", () => selectedRequired(allKatameExceptDoJimeIds), allKatameExceptDoJimeIds.length, "alle außer Do-jime; Ashi-garami ist nicht im Pool"],
+      ...danOptionRequirements(),
+    ],
+    "dan3": [
+      ["Gokyo-no-waza", totalGokyo, gokyoKeys.length, "jede Gokyo-Technik aus freien Interaktionen"],
+      ["Weitere Würfe", selectedOutsideGokyoThrows, 12, "12 Shinmeisho-/Habukareta-waza"],
+      ["Katame-waza", () => selectedRequired(allKatameExceptDoJimeIds), allKatameExceptDoJimeIds.length, "alle außer Do-jime; Ashi-garami ist nicht im Pool"],
+      ...danOptionRequirements(),
+    ],
+    "dan4": [
+      ["Te-waza", () => countSelected((item) => item.group === "stand-te"), 1, "mindestens ein Beispiel für die individuelle Vorbereitung"],
+      ["Koshi-waza", () => countSelected((item) => item.group === "stand-koshi"), 1, "mindestens ein Beispiel für die individuelle Vorbereitung"],
+      ["Ashi-waza", () => countSelected((item) => item.group === "stand-ashi"), 1, "mindestens ein Beispiel für die individuelle Vorbereitung"],
+      ["Osaekomi-waza", () => countSelected((item) => item.group === "boden-osae"), 1, "mindestens ein Beispiel einschließlich Befreiung"],
+      ...danOptionRequirements(),
+    ],
+    "dan5": [
+      ["Ma-sutemi-waza", () => countSelected((item) => item.group === "stand-ma"), 1, "mindestens ein Beispiel für die individuelle Vorbereitung"],
+      ["Yoko-sutemi-waza", () => countSelected((item) => item.group === "stand-yoko"), 1, "mindestens ein Beispiel; Kawazu-gake und Kani-basami ausgeschlossen"],
+      ["Kansetsu-waza", () => countSelected((item) => item.group === "boden-kansetsu"), 1, "mindestens ein Beispiel einschließlich Verteidigung"],
+      ["Shime-waza", () => countSelected((item) => item.group === "boden-shime"), 1, "mindestens ein Beispiel einschließlich Verteidigung"],
+      ...danOptionRequirements(),
+    ],
+    "dan6": [
+      ["Nage-waza", () => selectedRequired(dan6TechniqueIds.filter((id) => techniqueById.get(id)?.area === "stand")), dan6TechniqueIds.filter((id) => techniqueById.get(id)?.area === "stand").length, "alle außer Kawazu-gake und Kani-basami"],
+      ["Katame-waza", () => selectedRequired(dan6TechniqueIds.filter((id) => techniqueById.get(id)?.area === "boden")), dan6TechniqueIds.filter((id) => techniqueById.get(id)?.area === "boden").length, "alle Katame-waza"],
+      ...danOptionRequirements(),
+    ],
   };
   if (state.degree === "8") return [["Einstieg", () => 0, 0, "kein Technikpool-Umfang festgelegt"]];
   const situationCount = situationsForCurrentDegree().length;
-  basics[state.degree].push([
-    "Standardsituationen",
-    selectedSituations,
-    situationCount,
-    state.degree === "dan1" ? "Bodenlagen und Übergang Stand → Boden" : "Situationslösungen für diesen Grad",
-  ]);
+  if (situationCount) {
+    basics[state.degree].push([
+      "Standardsituationen",
+      selectedSituations,
+      situationCount,
+      state.degree.startsWith("dan") ? "Situationslösungen für diesen Dan-Grad" : "Situationslösungen für diesen Grad",
+    ]);
+  }
+  if (state.degree === "dan2" && state.danOptions.wahlbereich === "wettkampf") {
+    basics[state.degree].push(
+      ["Hauptseite", () => selectedTurns("main"), 2, "zwei Eindrehtechniken im Wahlbereich Wettkampf"],
+      ["Gegenseite", () => selectedTurns("opposite"), 2, "zwei Eindrehtechniken im Wahlbereich Wettkampf"],
+    );
+  }
   return basics[state.degree] || [];
 }
 
@@ -649,16 +807,24 @@ function renderSituations() {
 }
 
 function renderDanOptions() {
-  const isDan = state.degree === "dan1";
-  elements.danOptionsSection.hidden = !isDan;
-  if (!isDan) return;
-  const optionMarkup = (options, placeholder) => `<option value="">${placeholder}</option>${options.map(([id, label]) => `<option value="${id}">${label}</option>`).join("")}`;
-  elements.danKataSelect.innerHTML = optionMarkup(danKataOptions, "Bitte auswählen …");
-  elements.danWahlbereichSelect.innerHTML = optionMarkup(danWahlbereichOptions, "Bitte auswählen …");
-  elements.danKataSelect.value = state.danOptions.kata;
-  elements.danWahlbereichSelect.value = state.danOptions.wahlbereich;
-  elements.danKataCard.classList.toggle("is-selected", Boolean(state.danOptions.kata));
-  elements.danWahlbereichCard.classList.toggle("is-selected", Boolean(state.danOptions.wahlbereich));
+  const program = danPrograms[state.degree];
+  elements.danOptionsSection.hidden = !program;
+  if (!program) return;
+  const current = degree();
+  elements.danOptionsLabel.textContent = `${current.short} · Ergänzungen`;
+  elements.danOptionsTitle.textContent = "Dan-Nachweise festlegen";
+  elements.danOptionsIntro.textContent = program.intro;
+  elements.danOptionGrid.innerHTML = program.cards.map((card) => {
+    const value = state.danOptions[card.key] || "";
+    const options = `<option value="">Bitte auswählen …</option>${card.options.map(([id, label]) => `<option value="${id}" ${value === id ? "selected" : ""}>${label}</option>`).join("")}`;
+    const selectId = `dan-option-${card.key}`;
+    return `<article class="dan-option-card ${value ? "is-selected" : ""}">
+      <p class="dan-option-kind">${card.kind}</p>
+      <h3>${card.title}</h3>
+      <label for="${selectId}">${card.label}</label>
+      <select id="${selectId}" name="${selectId}" data-dan-option="${card.key}">${options}</select>
+    </article>`;
+  }).join("");
 }
 
 function renderNotices() {
@@ -747,7 +913,7 @@ function updateSelection(id) {
 function resetSelection() {
   state.selected = {};
   state.situations = {};
-  state.danOptions = { kata: "", wahlbereich: "" };
+  state.danOptions = {};
   const addedMandatory = ensureMandatorySelections();
   persist();
   rerender();
@@ -850,6 +1016,7 @@ async function importProgram(file) {
 function bindEvents() {
   elements.degreeSelect.addEventListener("change", (event) => {
     state.degree = event.target.value;
+    state.danOptions = {};
     const removedAutomatic = pruneAutomaticSelections();
     const removedUnavailable = pruneUnavailableSelections();
     const addedMandatory = ensureMandatorySelections();
@@ -891,17 +1058,15 @@ function bindEvents() {
     const button = event.target.closest("[data-situation-toggle]");
     if (button) updateSituation(button.dataset.situationToggle);
   });
-  elements.danKataSelect.addEventListener("change", (event) => {
-    state.danOptions.kata = danKataOptionIds.has(event.target.value) ? event.target.value : "";
+  elements.danOptionGrid.addEventListener("change", (event) => {
+    const select = event.target.closest("[data-dan-option]");
+    if (!select) return;
+    const key = select.dataset.danOption;
+    state.danOptions[key] = validDanOption(state.degree, key, select.value) ? select.value : "";
     persist();
     renderRequirements();
     renderDanOptions();
-  });
-  elements.danWahlbereichSelect.addEventListener("change", (event) => {
-    state.danOptions.wahlbereich = danWahlbereichOptionIds.has(event.target.value) ? event.target.value : "";
-    persist();
-    renderRequirements();
-    renderDanOptions();
+    renderTechniqueGrid();
   });
   document.querySelector("#export-button").addEventListener("click", exportProgram);
   document.querySelector("#import-button").addEventListener("click", () => elements.importInput.click());

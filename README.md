@@ -1,6 +1,6 @@
 # Judo Programmplaner
 
-Eine statische, GitHub-Pages-fähige Anwendung zum Zusammenstellen individueller Judo-Graduierungsprogramme für 8.–1. Kyu und 1. Dan.
+Eine statische, GitHub-Pages-fähige Anwendung zum Zusammenstellen individueller Judo-Graduierungsprogramme für 8.–1. Kyu sowie 1.–6. Dan.
 
 ## Start
 

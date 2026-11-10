@@ -128,7 +128,7 @@ h2 { margin: 0; color: var(--ink); font-size: 1.2rem; line-height: 1.2; letter-s
 .legend { display: flex; flex-wrap: wrap; gap: .9rem; margin-bottom: .8rem; color: #4a607c; font-size: .66rem; }
 .legend span { display: flex; align-items: center; gap: .3rem; }
 .legend-dot { display: inline-block; width: 11px; height: 11px; border-radius: 3px; }
-.pool-grund { background: #147d6e; } .pool-erweiterung { background: #2563eb; } .pool-master { background: #7c3aed; } .is-required { background: #b45309; }
+.pool-grund { background: #147d6e; } .pool-erweiterung { background: #2563eb; } .pool-master { background: #7c3aed; } .pool-historisch { background: #7a6554; } .is-required { background: #b45309; }
 .technique-groups { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 13px; }
 .technique-group { scroll-margin-top: 1rem; padding: 13px; border: 1px solid var(--line); border-radius: 14px; background: white; }
 .group-header { display: flex; align-items: baseline; justify-content: space-between; padding-bottom: .6rem; border-bottom: 1px solid #e5ebf3; }

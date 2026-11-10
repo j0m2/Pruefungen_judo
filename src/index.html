@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="Individuelle DJB-Judo-Graduierungsprogramme zusammenstellen." />
-    <title>Judo Programmplaner · DJB Kyu & 1. Dan</title>
+    <title>Judo Programmplaner · DJB Kyu & Dan</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
@@ -14,7 +14,7 @@
       <div class="header-copy">
         <div class="brand" aria-label="Judo Programmplaner"><span class="brand-mark" aria-hidden="true">柔</span><span>Judo</span></div>
         <h1 id="page-title">Judo · Prüfungsprogramm</h1>
-        <p>Individuelle DJB-Programme für Kyu-Grade und den 1. Dan · Technikpool, Lückencheck, Import und Export</p>
+        <p>Individuelle DJB-Programme für Kyu-Grade und 1.–6. Dan · Technikpool, Lückencheck, Import und Export</p>
         <p class="build-info">Version <strong>__BUILD_VERSION__</strong> · Build <time datetime="__BUILD_ISO__">__BUILD_DATE__</time></p>
       </div>
       <nav aria-label="Hauptnavigation">
@@ -73,25 +73,12 @@
       <section class="dan-options-section" id="dan-optionen" aria-labelledby="dan-options-title" hidden>
         <div class="section-heading">
           <div>
-            <p class="section-label">1. Dan · Ergänzungen</p>
-            <h2 id="dan-options-title">Kata und Wahlbereich festlegen</h2>
+            <p class="section-label" id="dan-options-label">Dan · Ergänzungen</p>
+            <h2 id="dan-options-title">Dan-Nachweise festlegen</h2>
           </div>
         </div>
-        <p class="dan-options-intro">Diese beiden Nachweise gehören zusätzlich zu den ausgewählten Technik- und Situationskarten zum 1. Dan.</p>
-        <div class="dan-option-grid">
-          <article class="dan-option-card" id="dan-kata-card">
-            <p class="dan-option-kind">Obligatorische Kata</p>
-            <h3>Kata-Teil auswählen</h3>
-            <label for="dan-kata-select">Vorgabe zum 1. Dan</label>
-            <select id="dan-kata-select" name="dan-kata-select"></select>
-          </article>
-          <article class="dan-option-card" id="dan-wahlbereich-card">
-            <p class="dan-option-kind">Ein Wahlbereich</p>
-            <h3>Schwerpunkt auswählen</h3>
-            <label for="dan-wahlbereich-select">Nachweis zum 1. Dan</label>
-            <select id="dan-wahlbereich-select" name="dan-wahlbereich-select"></select>
-          </article>
-        </div>
+        <p class="dan-options-intro" id="dan-options-intro"></p>
+        <div class="dan-option-grid" id="dan-option-grid"></div>
       </section>
 
       <section class="fall-section" id="falltechniken" aria-labelledby="fall-title">
@@ -127,6 +114,7 @@
           <span><i class="legend-dot pool-grund"></i>Grundprogramm</span>
           <span><i class="legend-dot pool-erweiterung"></i>Erweiterungsprogramm</span>
           <span><i class="legend-dot pool-master"></i>Masterprogramm</span>
+          <span><i class="legend-dot pool-historisch"></i>Historisches Programm</span>
           <span><i class="legend-dot is-required"></i>verbindlich für den Grad</span>
         </div>
         <div class="technique-groups" id="technique-groups"></div>
@@ -164,7 +152,7 @@
         <h2 id="sources-title">Quellen & Einordnung</h2>
         <div class="source-grid">
           <article><span>01</span><h3>Kyu-Anforderungen 2025</h3><p>Aktuelle Auswahlmengen, Pflichttechniken und Seitenvorgaben für 7.–1. Kyu.</p><a href="https://www.judobund.de/fileadmin/user_upload/judobund.de/Downloads/Downloadcenter/Kyu-Graduierungen/Anforderungen_fuer_Kyu-Grade_2025_V2.pdf" target="_blank" rel="noreferrer">Original öffnen</a></article>
-          <article><span>02</span><h3>Dan-Anforderungen 2024</h3><p>Obligatorik zum 1. Dan: Gokyo, Katame-waza, Kata und Wahlbereich.</p><a href="https://www.judobund.de/fileadmin/user_upload/judobund.de/Downloads/Regeln_und_Ordnungen/Anforderungen_fuer_Dan-Grade_2024.pdf" target="_blank" rel="noreferrer">Original öffnen</a></article>
+          <article><span>02</span><h3>Dan-Anforderungen 2024</h3><p>Anforderungen zu Techniken, Kata, Theorie, Engagement und Wahlbereichen für 1.–6. Dan.</p><a href="https://www.judobund.de/fileadmin/user_upload/judobund.de/Downloads/Regeln_und_Ordnungen/Anforderungen_fuer_Dan-Grade_2024.pdf" target="_blank" rel="noreferrer">Original öffnen</a></article>
           <article><span>03</span><h3>Technik-Pools 2022</h3><p>Zuordnung zu Grund-, Erweiterungs-, Master- und historischem Programm.</p><a href="https://www.judobund.de/fileadmin/user_upload/judobund.de/Downloads/Downloadcenter/Kyu-Graduierungen/Kyu_Graduierungsstem_Technik_Pools_fuer_das_Graduierungssystem_des_DJB.pdf" target="_blank" rel="noreferrer">Original öffnen</a></article>
         </div>
         <p class="disclaimer">Keine offizielle DJB-Anwendung. Die Planungshilfe muss vor einer Graduierung durch die zuständige Person bzw. den Landesverband geprüft werden.</p>
