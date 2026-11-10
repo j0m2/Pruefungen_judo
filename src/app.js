@@ -243,7 +243,7 @@ const danPrograms = {
     intro: "Zum 2. Dan kommen zum Technikprogramm Nage-no-kata und ein Wahlbereich hinzu.",
     cards: [
       { key: "kata", kind: "Obligatorische Kata", title: "Kata vormerken", label: "Vorgabe zum 2. Dan", requirement: ["Kata", "Nage-no-kata"], options: [["nage", "Nage-no-kata"]] },
-      { key: "handlungsketten", kind: "Katame-waza", title: "Handlungsketten planen", label: "Vorgabe", requirement: ["Handlungsketten", "2 verzweigte Ketten aus Oberlage mit je 3 Abschlüssen"], options: [["oberlage-2", "2 verzweigte Handlungsketten aus Oberlage · je mindestens 3 Abschlüsse"]] },
+      { key: "handlungsketten", kind: "Katame-waza", title: "Handlungsketten planen", label: "Vorgabe", requirement: ["Handlungsketten", "2 verzweigte Ketten aus Oberlage mit je 3 Abschlüssen"], options: [["oberlage-2", "2 verzweigte Handlungsketten aus Oberlage · je mindestens 3 Abschlüsse"]], plannerLink: true },
       { key: "wahlbereich", kind: "Ein Wahlbereich", title: "Schwerpunkt auswählen", label: "Nachweis zum 2. Dan", requirement: ["Wahlbereich", "Lizenz · Wettkampf · Kata · Selbstverteidigung oder Taiso"], options: [["lizenz", "Lizenzen · Trainer-C, Landes-Kampfrichter oder Landes-Kata-Wertungsrichter"], ["wettkampf", "Wettkampf · 10 Kampfpunkte und Uchi-komi mit zwei Eindrehtechniken beidseitig"], ["kata", "Kata · Uke oder Katame-no-kata / Goshinjutsu / Kime-no-kata Idori als Tori"], ["selbstverteidigung", "Selbstverteidigung · Programm 1. Dan plus Schlagwaffen"], ["taiso", "Taiso · Sportabzeichen Silber und Seiryoku-zenyo-kokumin-taiiku"]] },
     ],
   },
@@ -252,7 +252,7 @@ const danPrograms = {
     cards: [
       { key: "kata", kind: "Obligatorische Kata", title: "Kata vormerken", label: "Vorgabe zum 3. Dan", requirement: ["Kata", "Katame-no-kata"], options: [["katame", "Katame-no-kata"]] },
       { key: "theorie", kind: "Theorie", title: "Thema auswählen", label: "Themenbereich", requirement: ["Theorie", "eine Wahlaufgabe"], options: [["kuzushi-tsukuri", "Kanos Konzept von Kuzushi und Tsukuri"], ["uke-lernen", "Bedeutung des Uke-Verhaltens für den Lernprozess"], ["judo-werte", "Judo-Werte im Kinder- und Jugendtraining"]] },
-      { key: "handlungsketten", kind: "Katame-waza", title: "Zusatznachweise planen", label: "Vorgaben", requirement: ["Katame-Nachweise", "Ketten in Ober- und Unterlage sowie Umdrehprinzipien"], options: [["vollstaendig", "2 Ketten Oberlage · 2 Ketten Unterlage · Umdrehprinzipien geplant"]] },
+      { key: "handlungsketten", kind: "Katame-waza", title: "Zusatznachweise planen", label: "Vorgaben", requirement: ["Katame-Nachweise", "Ketten in Ober- und Unterlage sowie Umdrehprinzipien"], options: [["vollstaendig", "2 Ketten Oberlage · 2 Ketten Unterlage · Umdrehprinzipien geplant"]], plannerLink: true },
       { key: "nage-nachweise", kind: "Nage-waza", title: "Kombinationen und Konter", label: "Vorgaben", requirement: ["Nage-Nachweise", "6 Kombinationen/Finten und 6 Kontertechniken"], options: [["vollstaendig", "6 Kombinationen oder Finten und 6 Kontertechniken geplant"]] },
       { key: "wahlbereich", kind: "Ein Wahlbereich", title: "Schwerpunkt auswählen", label: "Nachweis zum 3. Dan", requirement: ["Wahlbereich", "Lizenz · Wettkampf · Kata · Selbstverteidigung oder Taiso"], options: [["lizenz", "Lizenzen · Trainer-B oder Landeslizenz mit Erfahrung"], ["wettkampf", "Wettkampf · 10 Kampfpunkte, Uchi-komi und Griffkampfstrategien"], ["kata", "Kata · Uke oder Ju-no-kata / Goshinjutsu / Kime-no-kata / Koshiki-no-kata"], ["selbstverteidigung", "Selbstverteidigung · Programm 2. Dan plus Schnitt-/Stichwaffen"], ["taiso", "Taiso · Sportabzeichen Gold und Taiso-Programm"]] },
     ],
@@ -270,7 +270,7 @@ const danPrograms = {
     cards: [
       { key: "kata", kind: "Obligatorische Kata", title: "Kata-Kombination auswählen", label: "Vorgabe zum 5. Dan", requirement: ["Kata", "Kata als Uke plus Koshiki- oder Kime-no-kata"], options: [["itsutsu-koshiki", "Itsutsu-no-kata als Uke + Koshiki-no-kata"], ["itsutsu-kime", "Itsutsu-no-kata als Uke + Kime-no-kata"], ["andere-koshiki", "andere Dan-Kata als Uke + Koshiki-no-kata"], ["andere-kime", "andere Dan-Kata als Uke + Kime-no-kata"]] },
       { key: "theorie", kind: "Theorie", title: "Thema auswählen", label: "Themenbereich", requirement: ["Theorie", "eine Wahlaufgabe"], options: [["rumpf", "Rumpfstabilität, Gelenkwinkel und Kraftübertragung"], ["offene-aufgaben", "Technikvermittlung durch offene Aufgabenstellungen"], ["seiryoku", "Seiryoku-zenyo und Jita-kyoei ab ca. 1920"]] },
-      { key: "wahlbereich", kind: "Ein Wahlbereich", title: "Schwerpunkt auswählen", label: "Nachweis zum 5. Dan", requirement: ["Wahlbereich", "Lizenz · Wettkampf oder Kata"], options: [["lizenz", "Lizenzen · Trainer-A oder Bundes-A-Lizenz"], ["wettkampf", "Wettkampf · 10 Kampfpunkte, Handlungsketten und Periodisierung"], ["kata", "Kata · Uke oder Tori nach den zugelassenen Alternativen"]] },
+      { key: "wahlbereich", kind: "Ein Wahlbereich", title: "Schwerpunkt auswählen", label: "Nachweis zum 5. Dan", requirement: ["Wahlbereich", "Lizenz · Wettkampf oder Kata"], options: [["lizenz", "Lizenzen · Trainer-A oder Bundes-A-Lizenz"], ["wettkampf", "Wettkampf · 10 Kampfpunkte, Handlungsketten und Periodisierung"], ["kata", "Kata · Uke oder Tori nach den zugelassenen Alternativen"]], plannerLinkWhen: ["wettkampf"] },
     ],
   },
   dan6: {
@@ -818,11 +818,13 @@ function renderDanOptions() {
     const value = state.danOptions[card.key] || "";
     const options = `<option value="">Bitte auswählen …</option>${card.options.map(([id, label]) => `<option value="${id}" ${value === id ? "selected" : ""}>${label}</option>`).join("")}`;
     const selectId = `dan-option-${card.key}`;
+    const showPlannerLink = card.plannerLink || card.plannerLinkWhen?.includes(value);
     return `<article class="dan-option-card ${value ? "is-selected" : ""}">
       <p class="dan-option-kind">${card.kind}</p>
       <h3>${card.title}</h3>
       <label for="${selectId}">${card.label}</label>
       <select id="${selectId}" name="${selectId}" data-dan-option="${card.key}">${options}</select>
+      ${showPlannerLink ? '<a class="dan-planner-link" href="https://j0m2.github.io/Handlungsketten_judo/" target="_blank" rel="noopener noreferrer">Handlungsketten-Planer öffnen</a>' : ""}
     </article>`;
   }).join("");
 }
