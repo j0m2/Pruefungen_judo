@@ -1,0 +1,3151 @@
+{
+  "schema": "judo-programmplaner-data",
+  "version": 8,
+  "degrees": [
+    {
+      "id": "8",
+      "label": "8. Kyu · weiß-gelb",
+      "short": "8. Kyu",
+      "color": "#e4d9a9",
+      "description": "Einstieg: Grundverständnis, Werte, Fallen und erste Judoerfahrungen. Kein Technikpool-Umfang vorgegeben."
+    },
+    {
+      "id": "7",
+      "label": "7. Kyu · gelb",
+      "short": "7. Kyu",
+      "color": "#e7c74a",
+      "description": "Fallen, Werfen, Halten · 3 Wurftechniken aus dem Grundprogramm."
+    },
+    {
+      "id": "6",
+      "label": "6. Kyu · gelb-orange",
+      "short": "6. Kyu",
+      "color": "#e5a543",
+      "description": "Vertiefung und Variation · 6 Wurftechniken aus dem Grundprogramm."
+    },
+    {
+      "id": "5",
+      "label": "5. Kyu · orange",
+      "short": "5. Kyu",
+      "color": "#d97837",
+      "description": "Anwenden und Befreien · 9 Wurftechniken aus dem Grundprogramm."
+    },
+    {
+      "id": "4",
+      "label": "4. Kyu · orange-grün",
+      "short": "4. Kyu",
+      "color": "#88a64c",
+      "description": "Werfen auf einem Bein · 12 Wurftechniken aus dem Grundprogramm."
+    },
+    {
+      "id": "3",
+      "label": "3. Kyu · grün",
+      "short": "3. Kyu",
+      "color": "#3e7b56",
+      "description": "Sensationelle Technikwelten · 15 Würfe, davon 3 aus dem Erweiterungsprogramm."
+    },
+    {
+      "id": "2",
+      "label": "2. Kyu · blau",
+      "short": "2. Kyu",
+      "color": "#477d9b",
+      "description": "Judo-Taktik · 18 Würfe, davon 6 aus dem Erweiterungsprogramm."
+    },
+    {
+      "id": "1",
+      "label": "1. Kyu · braun",
+      "short": "1. Kyu",
+      "color": "#725034",
+      "description": "Das eigene Judoprofil · 20 Würfe, davon 9 aus dem Erweiterungsprogramm."
+    },
+    {
+      "id": "dan1",
+      "label": "1. Dan · schwarz",
+      "short": "1. Dan",
+      "color": "#252825",
+      "description": "Obligatorik: vollständige Gokyo-no-waza und Katame-waza aus Grund- und Erweiterungsprogramm."
+    },
+    {
+      "id": "dan2",
+      "label": "2. Dan · schwarz",
+      "short": "2. Dan",
+      "color": "#252825",
+      "description": "Obligatorik: Gokyo-no-waza, 12 weitere Würfe, Katame-waza sowie Nage-no-kata."
+    },
+    {
+      "id": "dan3",
+      "label": "3. Dan · schwarz",
+      "short": "3. Dan",
+      "color": "#252825",
+      "description": "Obligatorik: Gokyo, 12 weitere Würfe, Katame-waza, Theorie und Katame-no-kata."
+    },
+    {
+      "id": "dan4",
+      "label": "4. Dan · schwarz",
+      "short": "4. Dan",
+      "color": "#252825",
+      "description": "Exemplarische Prüfung: Te-, Koshi- und Ashi-waza sowie Osaekomi-waza, Kata und Theorie."
+    },
+    {
+      "id": "dan5",
+      "label": "5. Dan · schwarz",
+      "short": "5. Dan",
+      "color": "#252825",
+      "description": "Exemplarische Prüfung: Sutemi-waza sowie Kansetsu- und Shime-waza, Kata und Theorie."
+    },
+    {
+      "id": "dan6",
+      "label": "6. Dan · schwarz",
+      "short": "6. Dan",
+      "color": "#252825",
+      "description": "Prüfungserwerb: vollständige Nage- und Katame-waza, zwei Kata-Demonstrationen, Theorie und Engagement."
+    }
+  ],
+  "pools": {
+    "grund": {
+      "label": "Grundprogramm",
+      "color": "#d97837"
+    },
+    "erweiterung": {
+      "label": "Erweiterungsprogramm",
+      "color": "#3e7b56"
+    },
+    "master": {
+      "label": "Masterprogramm",
+      "color": "#477d9b"
+    },
+    "historisch": {
+      "label": "Historisches Programm",
+      "color": "#7a6554"
+    }
+  },
+  "groupInfo": {
+    "stand-te": {
+      "title": "Stand · Te-waza",
+      "area": "stand",
+      "order": 1
+    },
+    "stand-koshi": {
+      "title": "Stand · Koshi-waza",
+      "area": "stand",
+      "order": 2
+    },
+    "stand-ashi": {
+      "title": "Stand · Ashi-waza",
+      "area": "stand",
+      "order": 3
+    },
+    "stand-ma": {
+      "title": "Stand · Ma-sutemi-waza",
+      "area": "stand",
+      "order": 4
+    },
+    "stand-yoko": {
+      "title": "Stand · Yoko-sutemi-waza",
+      "area": "stand",
+      "order": 5
+    },
+    "boden-osae": {
+      "title": "Boden · Osaekomi-waza",
+      "area": "boden",
+      "order": 6
+    },
+    "boden-kansetsu": {
+      "title": "Boden · Kansetsu-waza",
+      "area": "boden",
+      "order": 7
+    },
+    "boden-shime": {
+      "title": "Boden · Shime-waza",
+      "area": "boden",
+      "order": 8
+    }
+  },
+  "techniques": [
+    {
+      "id": "morote-seoi-nage",
+      "name": "Morote-seoi-nage",
+      "group": "stand-te",
+      "pool": "grund",
+      "area": "stand",
+      "category": "Te-waza",
+      "turn": true,
+      "gokyo": "seoi-nage",
+      "counterOnly": false
+    },
+    {
+      "id": "ippon-seoi-nage",
+      "name": "Ippon-seoi-nage",
+      "group": "stand-te",
+      "pool": "grund",
+      "area": "stand",
+      "category": "Te-waza",
+      "turn": true,
+      "gokyo": "seoi-nage",
+      "counterOnly": false
+    },
+    {
+      "id": "tai-otoshi",
+      "name": "Tai-otoshi",
+      "group": "stand-te",
+      "pool": "grund",
+      "area": "stand",
+      "category": "Te-waza",
+      "turn": true,
+      "gokyo": "tai-otoshi",
+      "counterOnly": false
+    },
+    {
+      "id": "o-goshi",
+      "name": "O-goshi",
+      "group": "stand-koshi",
+      "pool": "grund",
+      "area": "stand",
+      "category": "Koshi-waza",
+      "turn": true,
+      "gokyo": "o-goshi",
+      "counterOnly": false
+    },
+    {
+      "id": "uki-goshi",
+      "name": "Uki-goshi",
+      "group": "stand-koshi",
+      "pool": "grund",
+      "area": "stand",
+      "category": "Koshi-waza",
+      "turn": true,
+      "gokyo": "uki-goshi",
+      "counterOnly": false
+    },
+    {
+      "id": "koshi-guruma",
+      "name": "Koshi-guruma",
+      "group": "stand-koshi",
+      "pool": "grund",
+      "area": "stand",
+      "category": "Koshi-waza",
+      "turn": true,
+      "gokyo": "koshi-guruma",
+      "counterOnly": false
+    },
+    {
+      "id": "tsurikomi-goshi",
+      "name": "Tsurikomi-goshi",
+      "group": "stand-koshi",
+      "pool": "grund",
+      "area": "stand",
+      "category": "Koshi-waza",
+      "turn": true,
+      "gokyo": "tsurikomi-goshi",
+      "counterOnly": false
+    },
+    {
+      "id": "sode-tsurikomi-goshi",
+      "name": "Sode-tsurikomi-goshi",
+      "group": "stand-koshi",
+      "pool": "grund",
+      "area": "stand",
+      "category": "Koshi-waza",
+      "turn": true,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "harai-goshi",
+      "name": "Harai-goshi",
+      "group": "stand-koshi",
+      "pool": "grund",
+      "area": "stand",
+      "category": "Koshi-waza",
+      "turn": true,
+      "gokyo": "harai-goshi",
+      "counterOnly": false
+    },
+    {
+      "id": "de-ashi-barai",
+      "name": "De-ashi-barai",
+      "group": "stand-ashi",
+      "pool": "grund",
+      "area": "stand",
+      "category": "Ashi-waza",
+      "turn": false,
+      "gokyo": "de-ashi-barai",
+      "counterOnly": false
+    },
+    {
+      "id": "sasae-tsurikomi-ashi",
+      "name": "Sasae-tsurikomi-ashi",
+      "group": "stand-ashi",
+      "pool": "grund",
+      "area": "stand",
+      "category": "Ashi-waza",
+      "turn": false,
+      "gokyo": "sasae-tsurikomi-ashi",
+      "counterOnly": false
+    },
+    {
+      "id": "o-soto-gari",
+      "name": "O-soto-gari",
+      "group": "stand-ashi",
+      "pool": "grund",
+      "area": "stand",
+      "category": "Ashi-waza",
+      "turn": false,
+      "gokyo": "o-soto-gari",
+      "counterOnly": false
+    },
+    {
+      "id": "o-uchi-gari",
+      "name": "O-uchi-gari",
+      "group": "stand-ashi",
+      "pool": "grund",
+      "area": "stand",
+      "category": "Ashi-waza",
+      "turn": false,
+      "gokyo": "o-uchi-gari",
+      "counterOnly": false
+    },
+    {
+      "id": "ko-soto-gari",
+      "name": "Ko-soto-gari",
+      "group": "stand-ashi",
+      "pool": "grund",
+      "area": "stand",
+      "category": "Ashi-waza",
+      "turn": false,
+      "gokyo": "ko-soto-gari",
+      "counterOnly": false
+    },
+    {
+      "id": "ko-uchi-gari",
+      "name": "Ko-uchi-gari",
+      "group": "stand-ashi",
+      "pool": "grund",
+      "area": "stand",
+      "category": "Ashi-waza",
+      "turn": false,
+      "gokyo": "ko-uchi-gari",
+      "counterOnly": false
+    },
+    {
+      "id": "uchi-mata",
+      "name": "Uchi-mata",
+      "group": "stand-ashi",
+      "pool": "grund",
+      "area": "stand",
+      "category": "Ashi-waza",
+      "turn": true,
+      "gokyo": "uchi-mata",
+      "counterOnly": false
+    },
+    {
+      "id": "kata-guruma",
+      "name": "Kata-guruma",
+      "group": "stand-te",
+      "pool": "erweiterung",
+      "area": "stand",
+      "category": "Te-waza",
+      "turn": true,
+      "gokyo": "kata-guruma",
+      "counterOnly": false
+    },
+    {
+      "id": "uki-otoshi",
+      "name": "Uki-otoshi",
+      "group": "stand-te",
+      "pool": "erweiterung",
+      "area": "stand",
+      "category": "Te-waza",
+      "turn": false,
+      "gokyo": "uki-otoshi",
+      "counterOnly": false
+    },
+    {
+      "id": "tsuri-goshi",
+      "name": "Tsuri-goshi",
+      "group": "stand-koshi",
+      "pool": "erweiterung",
+      "area": "stand",
+      "category": "Koshi-waza",
+      "turn": true,
+      "gokyo": "tsuri-goshi",
+      "counterOnly": false
+    },
+    {
+      "id": "utsuri-goshi",
+      "name": "Utsuri-goshi",
+      "group": "stand-koshi",
+      "pool": "erweiterung",
+      "area": "stand",
+      "category": "Koshi-waza",
+      "turn": false,
+      "gokyo": "utsuri-goshi",
+      "counterOnly": false
+    },
+    {
+      "id": "okuri-ashi-barai",
+      "name": "Okuri-ashi-barai",
+      "group": "stand-ashi",
+      "pool": "erweiterung",
+      "area": "stand",
+      "category": "Ashi-waza",
+      "turn": false,
+      "gokyo": "okuri-ashi-barai",
+      "counterOnly": false
+    },
+    {
+      "id": "ashi-guruma",
+      "name": "Ashi-guruma",
+      "group": "stand-ashi",
+      "pool": "erweiterung",
+      "area": "stand",
+      "category": "Ashi-waza",
+      "turn": true,
+      "gokyo": "ashi-guruma",
+      "counterOnly": false
+    },
+    {
+      "id": "tomoe-nage",
+      "name": "Tomoe-nage",
+      "group": "stand-ma",
+      "pool": "erweiterung",
+      "area": "stand",
+      "category": "Ma-sutemi-waza",
+      "turn": false,
+      "gokyo": "tomoe-nage",
+      "counterOnly": false
+    },
+    {
+      "id": "sumi-gaeshi",
+      "name": "Sumi-gaeshi",
+      "group": "stand-ma",
+      "pool": "erweiterung",
+      "area": "stand",
+      "category": "Ma-sutemi-waza",
+      "turn": false,
+      "gokyo": "sumi-gaeshi",
+      "counterOnly": false
+    },
+    {
+      "id": "ura-nage",
+      "name": "Ura-nage",
+      "group": "stand-ma",
+      "pool": "erweiterung",
+      "area": "stand",
+      "category": "Ma-sutemi-waza",
+      "turn": false,
+      "gokyo": "ura-nage",
+      "counterOnly": false
+    },
+    {
+      "id": "ko-uchi-makikomi",
+      "name": "Ko-uchi-makikomi",
+      "group": "stand-yoko",
+      "pool": "erweiterung",
+      "area": "stand",
+      "category": "Yoko-sutemi-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "tani-otoshi",
+      "name": "Tani-otoshi",
+      "group": "stand-yoko",
+      "pool": "erweiterung",
+      "area": "stand",
+      "category": "Yoko-sutemi-waza",
+      "turn": false,
+      "gokyo": "tani-otoshi",
+      "counterOnly": false
+    },
+    {
+      "id": "soto-makikomi",
+      "name": "Soto-makikomi",
+      "group": "stand-yoko",
+      "pool": "erweiterung",
+      "area": "stand",
+      "category": "Yoko-sutemi-waza",
+      "turn": true,
+      "gokyo": "soto-makikomi",
+      "counterOnly": false
+    },
+    {
+      "id": "kuchiki-daoshi",
+      "name": "Kuchiki-daoshi",
+      "group": "stand-te",
+      "pool": "master",
+      "area": "stand",
+      "category": "Te-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "morote-gari",
+      "name": "Morote-gari",
+      "group": "stand-te",
+      "pool": "master",
+      "area": "stand",
+      "category": "Te-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "sukui-nage",
+      "name": "Sukui-nage",
+      "group": "stand-te",
+      "pool": "master",
+      "area": "stand",
+      "category": "Te-waza",
+      "turn": false,
+      "gokyo": "sukui-nage",
+      "counterOnly": false
+    },
+    {
+      "id": "uchi-mata-sukashi",
+      "name": "Uchi-mata-sukashi",
+      "group": "stand-te",
+      "pool": "master",
+      "area": "stand",
+      "category": "Te-waza",
+      "turn": false,
+      "gokyo": "uchi-mata-sukashi",
+      "counterOnly": false
+    },
+    {
+      "id": "ko-uchi-gaeshi",
+      "name": "Ko-uchi-gaeshi",
+      "group": "stand-te",
+      "pool": "master",
+      "area": "stand",
+      "category": "Te-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": true
+    },
+    {
+      "id": "seoi-otoshi",
+      "name": "Seoi-otoshi",
+      "group": "stand-te",
+      "pool": "master",
+      "area": "stand",
+      "category": "Te-waza",
+      "turn": true,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "sumi-otoshi",
+      "name": "Sumi-otoshi",
+      "group": "stand-te",
+      "pool": "master",
+      "area": "stand",
+      "category": "Te-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "obi-tori-gaeshi",
+      "name": "Obi-tori-gaeshi",
+      "group": "stand-te",
+      "pool": "master",
+      "area": "stand",
+      "category": "Te-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "kibisu-gaeshi",
+      "name": "Kibisu-gaeshi",
+      "group": "stand-te",
+      "pool": "master",
+      "area": "stand",
+      "category": "Te-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "obi-otoshi",
+      "name": "Obi-otoshi",
+      "group": "stand-te",
+      "pool": "master",
+      "area": "stand",
+      "category": "Te-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "yama-arashi",
+      "name": "Yama-arashi",
+      "group": "stand-te",
+      "pool": "master",
+      "area": "stand",
+      "category": "Te-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "hane-goshi",
+      "name": "Hane-goshi",
+      "group": "stand-koshi",
+      "pool": "master",
+      "area": "stand",
+      "category": "Koshi-waza",
+      "turn": true,
+      "gokyo": "hane-goshi",
+      "counterOnly": false
+    },
+    {
+      "id": "ushiro-goshi",
+      "name": "Ushiro-goshi",
+      "group": "stand-koshi",
+      "pool": "master",
+      "area": "stand",
+      "category": "Koshi-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "hiza-guruma",
+      "name": "Hiza-guruma",
+      "group": "stand-ashi",
+      "pool": "master",
+      "area": "stand",
+      "category": "Ashi-waza",
+      "turn": false,
+      "gokyo": "hiza-guruma",
+      "counterOnly": false
+    },
+    {
+      "id": "ko-soto-gake",
+      "name": "Ko-soto-gake",
+      "group": "stand-ashi",
+      "pool": "master",
+      "area": "stand",
+      "category": "Ashi-waza",
+      "turn": false,
+      "gokyo": "ko-soto-gake",
+      "counterOnly": false
+    },
+    {
+      "id": "harai-tsurikomi-ashi",
+      "name": "Harai-tsurikomi-ashi",
+      "group": "stand-ashi",
+      "pool": "master",
+      "area": "stand",
+      "category": "Ashi-waza",
+      "turn": false,
+      "gokyo": "harai-tsurikomi-ashi",
+      "counterOnly": false
+    },
+    {
+      "id": "o-guruma",
+      "name": "O-guruma",
+      "group": "stand-ashi",
+      "pool": "master",
+      "area": "stand",
+      "category": "Ashi-waza",
+      "turn": true,
+      "gokyo": "o-guruma",
+      "counterOnly": false
+    },
+    {
+      "id": "o-soto-guruma",
+      "name": "O-soto-guruma",
+      "group": "stand-ashi",
+      "pool": "master",
+      "area": "stand",
+      "category": "Ashi-waza",
+      "turn": false,
+      "gokyo": "o-soto-guruma",
+      "counterOnly": false
+    },
+    {
+      "id": "o-soto-otoshi",
+      "name": "O-soto-otoshi",
+      "group": "stand-ashi",
+      "pool": "master",
+      "area": "stand",
+      "category": "Ashi-waza",
+      "turn": false,
+      "gokyo": "o-soto-otoshi",
+      "counterOnly": false
+    },
+    {
+      "id": "o-soto-gaeshi",
+      "name": "O-soto-gaeshi",
+      "group": "stand-ashi",
+      "pool": "master",
+      "area": "stand",
+      "category": "Ashi-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": true
+    },
+    {
+      "id": "tsubame-gaeshi",
+      "name": "Tsubame-gaeshi",
+      "group": "stand-ashi",
+      "pool": "master",
+      "area": "stand",
+      "category": "Ashi-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": true
+    },
+    {
+      "id": "hane-goshi-gaeshi",
+      "name": "Hane-goshi-gaeshi",
+      "group": "stand-ashi",
+      "pool": "master",
+      "area": "stand",
+      "category": "Ashi-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": true
+    },
+    {
+      "id": "harai-goshi-gaeshi",
+      "name": "Harai-goshi-gaeshi",
+      "group": "stand-ashi",
+      "pool": "master",
+      "area": "stand",
+      "category": "Ashi-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": true
+    },
+    {
+      "id": "uchi-mata-gaeshi",
+      "name": "Uchi-mata-gaeshi",
+      "group": "stand-ashi",
+      "pool": "master",
+      "area": "stand",
+      "category": "Ashi-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": true
+    },
+    {
+      "id": "o-uchi-gaeshi",
+      "name": "O-uchi-gaeshi",
+      "group": "stand-ashi",
+      "pool": "master",
+      "area": "stand",
+      "category": "Ashi-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": true
+    },
+    {
+      "id": "hikikomi-gaeshi",
+      "name": "Hikikomi-gaeshi",
+      "group": "stand-ma",
+      "pool": "master",
+      "area": "stand",
+      "category": "Ma-sutemi-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "harai-makikomi",
+      "name": "Harai-makikomi",
+      "group": "stand-yoko",
+      "pool": "master",
+      "area": "stand",
+      "category": "Yoko-sutemi-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "uchi-mata-makikomi",
+      "name": "Uchi-mata-makikomi",
+      "group": "stand-yoko",
+      "pool": "master",
+      "area": "stand",
+      "category": "Yoko-sutemi-waza",
+      "turn": true,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "hane-makikomi",
+      "name": "Hane-makikomi",
+      "group": "stand-yoko",
+      "pool": "master",
+      "area": "stand",
+      "category": "Yoko-sutemi-waza",
+      "turn": true,
+      "gokyo": "hane-makikomi",
+      "counterOnly": false
+    },
+    {
+      "id": "o-soto-makikomi",
+      "name": "O-soto-makikomi",
+      "group": "stand-yoko",
+      "pool": "master",
+      "area": "stand",
+      "category": "Yoko-sutemi-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "yoko-otoshi",
+      "name": "Yoko-otoshi",
+      "group": "stand-yoko",
+      "pool": "master",
+      "area": "stand",
+      "category": "Yoko-sutemi-waza",
+      "turn": false,
+      "gokyo": "yoko-otoshi",
+      "counterOnly": false
+    },
+    {
+      "id": "uki-waza",
+      "name": "Uki-waza",
+      "group": "stand-yoko",
+      "pool": "master",
+      "area": "stand",
+      "category": "Yoko-sutemi-waza",
+      "turn": false,
+      "gokyo": "uki-waza",
+      "counterOnly": false
+    },
+    {
+      "id": "yoko-guruma",
+      "name": "Yoko-guruma",
+      "group": "stand-yoko",
+      "pool": "master",
+      "area": "stand",
+      "category": "Yoko-sutemi-waza",
+      "turn": false,
+      "gokyo": "yoko-guruma",
+      "counterOnly": false
+    },
+    {
+      "id": "yoko-gake",
+      "name": "Yoko-gake",
+      "group": "stand-yoko",
+      "pool": "master",
+      "area": "stand",
+      "category": "Yoko-sutemi-waza",
+      "turn": false,
+      "gokyo": "yoko-gake",
+      "counterOnly": false
+    },
+    {
+      "id": "yoko-wakare",
+      "name": "Yoko-wakare",
+      "group": "stand-yoko",
+      "pool": "master",
+      "area": "stand",
+      "category": "Yoko-sutemi-waza",
+      "turn": false,
+      "gokyo": "yoko-wakare",
+      "counterOnly": false
+    },
+    {
+      "id": "daki-age",
+      "name": "Daki-age",
+      "group": "stand-koshi",
+      "pool": "historisch",
+      "area": "stand",
+      "category": "Koshi-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "tawara-gaeshi",
+      "name": "Tawara-gaeshi",
+      "group": "stand-ma",
+      "pool": "historisch",
+      "area": "stand",
+      "category": "Ma-sutemi-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "uchi-makikomi",
+      "name": "Uchi-makikomi",
+      "group": "stand-yoko",
+      "pool": "historisch",
+      "area": "stand",
+      "category": "Yoko-sutemi-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "daki-wakare",
+      "name": "Daki-wakare",
+      "group": "stand-yoko",
+      "pool": "historisch",
+      "area": "stand",
+      "category": "Yoko-sutemi-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "kani-basami",
+      "name": "Kani-basami",
+      "group": "stand-yoko",
+      "pool": "historisch",
+      "area": "stand",
+      "category": "Yoko-sutemi-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "kawazu-gake",
+      "name": "Kawazu-gake",
+      "group": "stand-yoko",
+      "pool": "historisch",
+      "area": "stand",
+      "category": "Yoko-sutemi-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "kuzure-kesa-gatame",
+      "name": "Kuzure-kesa-gatame",
+      "group": "boden-osae",
+      "pool": "grund",
+      "area": "boden",
+      "category": "Osaekomi-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "kesa-gatame",
+      "name": "Kesa-gatame",
+      "group": "boden-osae",
+      "pool": "grund",
+      "area": "boden",
+      "category": "Osaekomi-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "yoko-shiho-gatame",
+      "name": "Yoko-shiho-gatame",
+      "group": "boden-osae",
+      "pool": "grund",
+      "area": "boden",
+      "category": "Osaekomi-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "kami-shiho-gatame",
+      "name": "Kami-shiho-gatame",
+      "group": "boden-osae",
+      "pool": "grund",
+      "area": "boden",
+      "category": "Osaekomi-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "tate-shiho-gatame",
+      "name": "Tate-shiho-gatame",
+      "group": "boden-osae",
+      "pool": "grund",
+      "area": "boden",
+      "category": "Osaekomi-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "juji-gatame",
+      "name": "Juji-gatame",
+      "group": "boden-kansetsu",
+      "pool": "grund",
+      "area": "boden",
+      "category": "Kansetsu-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "ude-garami",
+      "name": "Ude-garami (am gebeugten Arm)",
+      "group": "boden-kansetsu",
+      "pool": "grund",
+      "area": "boden",
+      "category": "Kansetsu-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "gyaku-juji-jime",
+      "name": "Gyaku-juji-jime",
+      "group": "boden-shime",
+      "pool": "grund",
+      "area": "boden",
+      "category": "Shime-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "okuri-eri-jime",
+      "name": "Okuri-eri-jime",
+      "group": "boden-shime",
+      "pool": "grund",
+      "area": "boden",
+      "category": "Shime-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "ushiro-kesa-gatame",
+      "name": "Ushiro-kesa-gatame",
+      "group": "boden-osae",
+      "pool": "erweiterung",
+      "area": "boden",
+      "category": "Osaekomi-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "kata-gatame",
+      "name": "Kata-gatame",
+      "group": "boden-osae",
+      "pool": "erweiterung",
+      "area": "boden",
+      "category": "Osaekomi-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "kuzure-kami-shiho-gatame",
+      "name": "Kuzure-kami-shiho-gatame",
+      "group": "boden-osae",
+      "pool": "erweiterung",
+      "area": "boden",
+      "category": "Osaekomi-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "ura-gatame",
+      "name": "Ura-gatame",
+      "group": "boden-osae",
+      "pool": "erweiterung",
+      "area": "boden",
+      "category": "Osaekomi-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "uki-gatame",
+      "name": "Uki-gatame",
+      "group": "boden-osae",
+      "pool": "erweiterung",
+      "area": "boden",
+      "category": "Osaekomi-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "waki-gatame",
+      "name": "Waki-gatame",
+      "group": "boden-kansetsu",
+      "pool": "erweiterung",
+      "area": "boden",
+      "category": "Kansetsu-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "ude-gatame",
+      "name": "Ude-gatame",
+      "group": "boden-kansetsu",
+      "pool": "erweiterung",
+      "area": "boden",
+      "category": "Kansetsu-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "hiza-gatame",
+      "name": "Hiza-gatame",
+      "group": "boden-kansetsu",
+      "pool": "erweiterung",
+      "area": "boden",
+      "category": "Kansetsu-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "sankaku-gatame",
+      "name": "Sankaku-gatame",
+      "group": "boden-kansetsu",
+      "pool": "erweiterung",
+      "area": "boden",
+      "category": "Kansetsu-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "katate-jime",
+      "name": "Katate-jime",
+      "group": "boden-shime",
+      "pool": "erweiterung",
+      "area": "boden",
+      "category": "Shime-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "kataha-jime",
+      "name": "Kataha-jime",
+      "group": "boden-shime",
+      "pool": "erweiterung",
+      "area": "boden",
+      "category": "Shime-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "hadaka-jime",
+      "name": "Hadaka-jime",
+      "group": "boden-shime",
+      "pool": "erweiterung",
+      "area": "boden",
+      "category": "Shime-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "sankaku-jime",
+      "name": "Sankaku-jime",
+      "group": "boden-shime",
+      "pool": "erweiterung",
+      "area": "boden",
+      "category": "Shime-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "sode-guruma-jime",
+      "name": "Sode-guruma-jime",
+      "group": "boden-shime",
+      "pool": "erweiterung",
+      "area": "boden",
+      "category": "Shime-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "tsukkomi-jime",
+      "name": "Tsukkomi-jime",
+      "group": "boden-shime",
+      "pool": "erweiterung",
+      "area": "boden",
+      "category": "Shime-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "ashi-gatame",
+      "name": "Ashi-gatame",
+      "group": "boden-kansetsu",
+      "pool": "master",
+      "area": "boden",
+      "category": "Kansetsu-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "hara-gatame",
+      "name": "Hara-gatame",
+      "group": "boden-kansetsu",
+      "pool": "master",
+      "area": "boden",
+      "category": "Kansetsu-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "te-gatame",
+      "name": "Te-gatame",
+      "group": "boden-kansetsu",
+      "pool": "master",
+      "area": "boden",
+      "category": "Kansetsu-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "nami-juji-jime",
+      "name": "Nami-juji-jime",
+      "group": "boden-shime",
+      "pool": "master",
+      "area": "boden",
+      "category": "Shime-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "kata-juji-jime",
+      "name": "Kata-juji-jime",
+      "group": "boden-shime",
+      "pool": "master",
+      "area": "boden",
+      "category": "Shime-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "ryote-jime",
+      "name": "Ryo-te-jime",
+      "group": "boden-shime",
+      "pool": "master",
+      "area": "boden",
+      "category": "Shime-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": false
+    },
+    {
+      "id": "do-jime",
+      "name": "Do-jime",
+      "group": "boden-shime",
+      "pool": "historisch",
+      "area": "boden",
+      "category": "Shime-waza",
+      "turn": false,
+      "gokyo": null,
+      "counterOnly": false
+    }
+  ],
+  "comicSprites": {
+    "grundStand": {
+      "columns": 4,
+      "rows": 4
+    },
+    "erweiterungStand": {
+      "columns": 3,
+      "rows": 4
+    },
+    "grundBoden": {
+      "columns": 4,
+      "rows": 4
+    },
+    "erweiterungBoden": {
+      "columns": 3,
+      "rows": 4
+    }
+  },
+  "comicFrames": {
+    "morote-seoi-nage": [
+      "grundStand",
+      0,
+      0
+    ],
+    "tai-otoshi": [
+      "grundStand",
+      1,
+      0
+    ],
+    "tsurikomi-goshi": [
+      "grundStand",
+      2,
+      0
+    ],
+    "uchi-mata": [
+      "grundStand",
+      3,
+      0
+    ],
+    "o-goshi": [
+      "grundStand",
+      0,
+      1
+    ],
+    "ippon-seoi-nage": [
+      "grundStand",
+      1,
+      1
+    ],
+    "sode-tsurikomi-goshi": [
+      "grundStand",
+      2,
+      1
+    ],
+    "koshi-guruma": [
+      "grundStand",
+      3,
+      1
+    ],
+    "de-ashi-barai": [
+      "grundStand",
+      0,
+      2
+    ],
+    "o-uchi-gari": [
+      "grundStand",
+      1,
+      2
+    ],
+    "ko-uchi-gari": [
+      "grundStand",
+      2,
+      2
+    ],
+    "o-soto-gari": [
+      "grundStand",
+      3,
+      2
+    ],
+    "uki-goshi": [
+      "grundStand",
+      0,
+      3
+    ],
+    "ko-soto-gari": [
+      "grundStand",
+      1,
+      3
+    ],
+    "sasae-tsurikomi-ashi": [
+      "grundStand",
+      2,
+      3
+    ],
+    "harai-goshi": [
+      "grundStand",
+      3,
+      3
+    ],
+    "tomoe-nage": [
+      "erweiterungStand",
+      0,
+      0
+    ],
+    "sumi-gaeshi": [
+      "erweiterungStand",
+      1,
+      0
+    ],
+    "ura-nage": [
+      "erweiterungStand",
+      2,
+      0
+    ],
+    "tani-otoshi": [
+      "erweiterungStand",
+      0,
+      1
+    ],
+    "soto-makikomi": [
+      "erweiterungStand",
+      1,
+      1
+    ],
+    "ko-uchi-makikomi": [
+      "erweiterungStand",
+      2,
+      1
+    ],
+    "okuri-ashi-barai": [
+      "erweiterungStand",
+      0,
+      2
+    ],
+    "ashi-guruma": [
+      "erweiterungStand",
+      1,
+      2
+    ],
+    "uki-otoshi": [
+      "erweiterungStand",
+      2,
+      2
+    ],
+    "tsuri-goshi": [
+      "erweiterungStand",
+      0,
+      3
+    ],
+    "utsuri-goshi": [
+      "erweiterungStand",
+      1,
+      3
+    ],
+    "kata-guruma": [
+      "erweiterungStand",
+      2,
+      3
+    ],
+    "kesa-gatame": [
+      "grundBoden",
+      0,
+      1
+    ],
+    "yoko-shiho-gatame": [
+      "grundBoden",
+      0,
+      2
+    ],
+    "tate-shiho-gatame": [
+      "grundBoden",
+      0,
+      3
+    ],
+    "ushiro-kesa-gatame": [
+      "grundBoden",
+      1,
+      1
+    ],
+    "kuzure-kami-shiho-gatame": [
+      "grundBoden",
+      1,
+      2
+    ],
+    "uki-gatame": [
+      "grundBoden",
+      1,
+      3
+    ],
+    "juji-gatame": [
+      "grundBoden",
+      3,
+      1
+    ],
+    "ude-garami": [
+      "grundBoden",
+      3,
+      2
+    ],
+    "waki-gatame": [
+      "grundBoden",
+      3,
+      3
+    ],
+    "hiza-gatame": [
+      "erweiterungBoden",
+      0,
+      0
+    ],
+    "gyaku-juji-jime": [
+      "erweiterungBoden",
+      1,
+      0
+    ],
+    "okuri-eri-jime": [
+      "erweiterungBoden",
+      2,
+      0
+    ],
+    "sankaku-gatame": [
+      "erweiterungBoden",
+      0,
+      1
+    ],
+    "sode-guruma-jime": [
+      "erweiterungBoden",
+      2,
+      1
+    ],
+    "ashi-gatame": [
+      "erweiterungBoden",
+      0,
+      2
+    ],
+    "hadaka-jime": [
+      "erweiterungBoden",
+      1,
+      2
+    ],
+    "sankaku-jime": [
+      "erweiterungBoden",
+      2,
+      2
+    ],
+    "hara-gatame": [
+      "erweiterungBoden",
+      0,
+      3
+    ],
+    "kataha-jime": [
+      "erweiterungBoden",
+      1,
+      3
+    ],
+    "tsukkomi-jime": [
+      "erweiterungBoden",
+      2,
+      3
+    ]
+  },
+  "mandatoryByDegree": {
+    "1": [
+      "ura-nage",
+      "ko-uchi-makikomi",
+      "sode-guruma-jime",
+      "okuri-eri-jime"
+    ],
+    "2": [
+      "sumi-gaeshi",
+      "soto-makikomi",
+      "gyaku-juji-jime",
+      "okuri-eri-jime"
+    ],
+    "3": [
+      "tomoe-nage",
+      "tani-otoshi",
+      "hiza-gatame",
+      "sankaku-gatame"
+    ],
+    "4": [
+      "o-soto-gari",
+      "harai-goshi",
+      "uchi-mata",
+      "juji-gatame",
+      "ude-garami"
+    ],
+    "7": [
+      "kesa-gatame",
+      "tate-shiho-gatame",
+      "yoko-shiho-gatame",
+      "kami-shiho-gatame"
+    ],
+    "dan1": [
+      "morote-seoi-nage",
+      "ippon-seoi-nage",
+      "tai-otoshi",
+      "o-goshi",
+      "uki-goshi",
+      "koshi-guruma",
+      "tsurikomi-goshi",
+      "harai-goshi",
+      "de-ashi-barai",
+      "sasae-tsurikomi-ashi",
+      "o-soto-gari",
+      "o-uchi-gari",
+      "ko-soto-gari",
+      "ko-uchi-gari",
+      "uchi-mata",
+      "kata-guruma",
+      "uki-otoshi",
+      "tsuri-goshi",
+      "utsuri-goshi",
+      "okuri-ashi-barai",
+      "ashi-guruma",
+      "tomoe-nage",
+      "sumi-gaeshi",
+      "ura-nage",
+      "tani-otoshi",
+      "soto-makikomi",
+      "sukui-nage",
+      "uchi-mata-sukashi",
+      "hane-goshi",
+      "hiza-guruma",
+      "ko-soto-gake",
+      "harai-tsurikomi-ashi",
+      "o-guruma",
+      "o-soto-guruma",
+      "o-soto-otoshi",
+      "hane-makikomi",
+      "yoko-otoshi",
+      "uki-waza",
+      "yoko-guruma",
+      "yoko-gake",
+      "yoko-wakare",
+      "kuzure-kesa-gatame",
+      "kesa-gatame",
+      "yoko-shiho-gatame",
+      "kami-shiho-gatame",
+      "tate-shiho-gatame",
+      "juji-gatame",
+      "ude-garami",
+      "gyaku-juji-jime",
+      "okuri-eri-jime",
+      "ushiro-kesa-gatame",
+      "kata-gatame",
+      "kuzure-kami-shiho-gatame",
+      "ura-gatame",
+      "uki-gatame",
+      "waki-gatame",
+      "ude-gatame",
+      "hiza-gatame",
+      "sankaku-gatame",
+      "katate-jime",
+      "kataha-jime",
+      "hadaka-jime",
+      "sankaku-jime",
+      "sode-guruma-jime",
+      "tsukkomi-jime"
+    ],
+    "dan2": [
+      "morote-seoi-nage",
+      "ippon-seoi-nage",
+      "tai-otoshi",
+      "o-goshi",
+      "uki-goshi",
+      "koshi-guruma",
+      "tsurikomi-goshi",
+      "harai-goshi",
+      "de-ashi-barai",
+      "sasae-tsurikomi-ashi",
+      "o-soto-gari",
+      "o-uchi-gari",
+      "ko-soto-gari",
+      "ko-uchi-gari",
+      "uchi-mata",
+      "kata-guruma",
+      "uki-otoshi",
+      "tsuri-goshi",
+      "utsuri-goshi",
+      "okuri-ashi-barai",
+      "ashi-guruma",
+      "tomoe-nage",
+      "sumi-gaeshi",
+      "ura-nage",
+      "tani-otoshi",
+      "soto-makikomi",
+      "sukui-nage",
+      "uchi-mata-sukashi",
+      "hane-goshi",
+      "hiza-guruma",
+      "ko-soto-gake",
+      "harai-tsurikomi-ashi",
+      "o-guruma",
+      "o-soto-guruma",
+      "o-soto-otoshi",
+      "hane-makikomi",
+      "yoko-otoshi",
+      "uki-waza",
+      "yoko-guruma",
+      "yoko-gake",
+      "yoko-wakare",
+      "kuzure-kesa-gatame",
+      "kesa-gatame",
+      "yoko-shiho-gatame",
+      "kami-shiho-gatame",
+      "tate-shiho-gatame",
+      "juji-gatame",
+      "ude-garami",
+      "gyaku-juji-jime",
+      "okuri-eri-jime",
+      "ushiro-kesa-gatame",
+      "kata-gatame",
+      "kuzure-kami-shiho-gatame",
+      "ura-gatame",
+      "uki-gatame",
+      "waki-gatame",
+      "ude-gatame",
+      "hiza-gatame",
+      "sankaku-gatame",
+      "katate-jime",
+      "kataha-jime",
+      "hadaka-jime",
+      "sankaku-jime",
+      "sode-guruma-jime",
+      "tsukkomi-jime",
+      "ashi-gatame",
+      "hara-gatame",
+      "te-gatame",
+      "nami-juji-jime",
+      "kata-juji-jime",
+      "ryote-jime"
+    ],
+    "dan3": [
+      "morote-seoi-nage",
+      "ippon-seoi-nage",
+      "tai-otoshi",
+      "o-goshi",
+      "uki-goshi",
+      "koshi-guruma",
+      "tsurikomi-goshi",
+      "harai-goshi",
+      "de-ashi-barai",
+      "sasae-tsurikomi-ashi",
+      "o-soto-gari",
+      "o-uchi-gari",
+      "ko-soto-gari",
+      "ko-uchi-gari",
+      "uchi-mata",
+      "kata-guruma",
+      "uki-otoshi",
+      "tsuri-goshi",
+      "utsuri-goshi",
+      "okuri-ashi-barai",
+      "ashi-guruma",
+      "tomoe-nage",
+      "sumi-gaeshi",
+      "ura-nage",
+      "tani-otoshi",
+      "soto-makikomi",
+      "sukui-nage",
+      "uchi-mata-sukashi",
+      "hane-goshi",
+      "hiza-guruma",
+      "ko-soto-gake",
+      "harai-tsurikomi-ashi",
+      "o-guruma",
+      "o-soto-guruma",
+      "o-soto-otoshi",
+      "hane-makikomi",
+      "yoko-otoshi",
+      "uki-waza",
+      "yoko-guruma",
+      "yoko-gake",
+      "yoko-wakare",
+      "kuzure-kesa-gatame",
+      "kesa-gatame",
+      "yoko-shiho-gatame",
+      "kami-shiho-gatame",
+      "tate-shiho-gatame",
+      "juji-gatame",
+      "ude-garami",
+      "gyaku-juji-jime",
+      "okuri-eri-jime",
+      "ushiro-kesa-gatame",
+      "kata-gatame",
+      "kuzure-kami-shiho-gatame",
+      "ura-gatame",
+      "uki-gatame",
+      "waki-gatame",
+      "ude-gatame",
+      "hiza-gatame",
+      "sankaku-gatame",
+      "katate-jime",
+      "kataha-jime",
+      "hadaka-jime",
+      "sankaku-jime",
+      "sode-guruma-jime",
+      "tsukkomi-jime",
+      "ashi-gatame",
+      "hara-gatame",
+      "te-gatame",
+      "nami-juji-jime",
+      "kata-juji-jime",
+      "ryote-jime"
+    ],
+    "dan6": [
+      "morote-seoi-nage",
+      "ippon-seoi-nage",
+      "tai-otoshi",
+      "o-goshi",
+      "uki-goshi",
+      "koshi-guruma",
+      "tsurikomi-goshi",
+      "sode-tsurikomi-goshi",
+      "harai-goshi",
+      "de-ashi-barai",
+      "sasae-tsurikomi-ashi",
+      "o-soto-gari",
+      "o-uchi-gari",
+      "ko-soto-gari",
+      "ko-uchi-gari",
+      "uchi-mata",
+      "kata-guruma",
+      "uki-otoshi",
+      "tsuri-goshi",
+      "utsuri-goshi",
+      "okuri-ashi-barai",
+      "ashi-guruma",
+      "tomoe-nage",
+      "sumi-gaeshi",
+      "ura-nage",
+      "ko-uchi-makikomi",
+      "tani-otoshi",
+      "soto-makikomi",
+      "kuchiki-daoshi",
+      "morote-gari",
+      "sukui-nage",
+      "uchi-mata-sukashi",
+      "ko-uchi-gaeshi",
+      "seoi-otoshi",
+      "sumi-otoshi",
+      "obi-tori-gaeshi",
+      "kibisu-gaeshi",
+      "obi-otoshi",
+      "yama-arashi",
+      "hane-goshi",
+      "ushiro-goshi",
+      "hiza-guruma",
+      "ko-soto-gake",
+      "harai-tsurikomi-ashi",
+      "o-guruma",
+      "o-soto-guruma",
+      "o-soto-otoshi",
+      "o-soto-gaeshi",
+      "tsubame-gaeshi",
+      "hane-goshi-gaeshi",
+      "harai-goshi-gaeshi",
+      "uchi-mata-gaeshi",
+      "o-uchi-gaeshi",
+      "hikikomi-gaeshi",
+      "harai-makikomi",
+      "uchi-mata-makikomi",
+      "hane-makikomi",
+      "o-soto-makikomi",
+      "yoko-otoshi",
+      "uki-waza",
+      "yoko-guruma",
+      "yoko-gake",
+      "yoko-wakare",
+      "daki-age",
+      "tawara-gaeshi",
+      "uchi-makikomi",
+      "daki-wakare",
+      "kuzure-kesa-gatame",
+      "kesa-gatame",
+      "yoko-shiho-gatame",
+      "kami-shiho-gatame",
+      "tate-shiho-gatame",
+      "juji-gatame",
+      "ude-garami",
+      "gyaku-juji-jime",
+      "okuri-eri-jime",
+      "ushiro-kesa-gatame",
+      "kata-gatame",
+      "kuzure-kami-shiho-gatame",
+      "ura-gatame",
+      "uki-gatame",
+      "waki-gatame",
+      "ude-gatame",
+      "hiza-gatame",
+      "sankaku-gatame",
+      "katate-jime",
+      "kataha-jime",
+      "hadaka-jime",
+      "sankaku-jime",
+      "sode-guruma-jime",
+      "tsukkomi-jime",
+      "ashi-gatame",
+      "hara-gatame",
+      "te-gatame",
+      "nami-juji-jime",
+      "kata-juji-jime",
+      "ryote-jime",
+      "do-jime"
+    ]
+  },
+  "sideRequirementsByDegree": {
+    "4": 3,
+    "5": 3,
+    "6": 2,
+    "7": 1
+  },
+  "danPrograms": {
+    "dan1": {
+      "intro": "Diese Nachweise gehören zusätzlich zu den ausgewählten Technik- und Situationskarten zum 1. Dan.",
+      "cards": [
+        {
+          "key": "kata",
+          "kind": "Obligatorische Kata",
+          "title": "Kata-Teil auswählen",
+          "label": "Vorgabe zum 1. Dan",
+          "requirement": [
+            "Kata",
+            "Nage-no-kata 1–3 oder Ju-no-kata 1–2"
+          ],
+          "options": [
+            [
+              "nage-1-3",
+              "Nage-no-kata · Gruppen 1–3"
+            ],
+            [
+              "ju-1-2",
+              "Ju-no-kata · Gruppen 1–2"
+            ]
+          ]
+        },
+        {
+          "key": "wahlbereich",
+          "kind": "Ein Wahlbereich",
+          "title": "Schwerpunkt auswählen",
+          "label": "Nachweis zum 1. Dan",
+          "requirement": [
+            "Wahlbereich",
+            "Lizenz · Wettkampf · Kata · Selbstverteidigung oder Taiso"
+          ],
+          "options": [
+            [
+              "lizenz",
+              "Lizenzen · gültige Trainer-C-Lizenz des DJB"
+            ],
+            [
+              "wettkampf",
+              "Wettkampf · 10 Kampfpunkte und individuelle Kampfkonzeption"
+            ],
+            [
+              "kata-uke",
+              "Kata · als Uke: Kodokan-Kata nach Wahl mit mindestens 15 Techniken"
+            ],
+            [
+              "kata-alternative",
+              "Kata · als Tori: nicht gewählte Alternative der Obligatorik"
+            ],
+            [
+              "kata-nage-4-5",
+              "Kata · als Tori: Nage-no-kata Gruppen 4–5"
+            ],
+            [
+              "kata-ju-3",
+              "Kata · als Tori: Ju-no-kata Gruppe 3"
+            ],
+            [
+              "kata-katame-osae",
+              "Kata · als Tori: Katame-no-kata · Osaekomi-waza"
+            ],
+            [
+              "kata-goshinjutsu-1-2",
+              "Kata · als Tori: Kodokan Goshinjutsu Gruppen 1–2 (ohne Waffen)"
+            ],
+            [
+              "selbstverteidigung",
+              "Selbstverteidigung · Nahdistanz sowie Schläge und Tritte"
+            ],
+            [
+              "taiso",
+              "Taiso · Sportabzeichen, Tandoku-renshu und Seiryoku-zenyo-kokumin-taiiku"
+            ]
+          ]
+        }
+      ]
+    },
+    "dan2": {
+      "intro": "Zum 2. Dan kommen zum Technikprogramm Nage-no-kata und ein Wahlbereich hinzu.",
+      "cards": [
+        {
+          "key": "kata",
+          "kind": "Obligatorische Kata",
+          "title": "Kata vormerken",
+          "label": "Vorgabe zum 2. Dan",
+          "requirement": [
+            "Kata",
+            "Nage-no-kata"
+          ],
+          "options": [
+            [
+              "nage",
+              "Nage-no-kata"
+            ]
+          ]
+        },
+        {
+          "key": "handlungsketten",
+          "kind": "Katame-waza",
+          "title": "Handlungsketten planen",
+          "label": "Vorgabe",
+          "requirement": [
+            "Handlungsketten",
+            "2 verzweigte Ketten aus Oberlage mit je 3 Abschlüssen"
+          ],
+          "options": [
+            [
+              "oberlage-2",
+              "2 verzweigte Handlungsketten aus Oberlage · je mindestens 3 Abschlüsse"
+            ]
+          ],
+          "plannerLink": true
+        },
+        {
+          "key": "wahlbereich",
+          "kind": "Ein Wahlbereich",
+          "title": "Schwerpunkt auswählen",
+          "label": "Nachweis zum 2. Dan",
+          "requirement": [
+            "Wahlbereich",
+            "Lizenz · Wettkampf · Kata · Selbstverteidigung oder Taiso"
+          ],
+          "options": [
+            [
+              "lizenz",
+              "Lizenzen · Trainer-C, Landes-Kampfrichter oder Landes-Kata-Wertungsrichter"
+            ],
+            [
+              "wettkampf",
+              "Wettkampf · 10 Kampfpunkte und Uchi-komi mit zwei Eindrehtechniken beidseitig"
+            ],
+            [
+              "kata",
+              "Kata · Uke oder Katame-no-kata / Goshinjutsu / Kime-no-kata Idori als Tori"
+            ],
+            [
+              "selbstverteidigung",
+              "Selbstverteidigung · Programm 1. Dan plus Schlagwaffen"
+            ],
+            [
+              "taiso",
+              "Taiso · Sportabzeichen Silber und Seiryoku-zenyo-kokumin-taiiku"
+            ]
+          ]
+        }
+      ]
+    },
+    "dan3": {
+      "intro": "Der 3. Dan ergänzt das Technikprogramm um Theorie, Katame-no-kata und einen Wahlbereich.",
+      "cards": [
+        {
+          "key": "kata",
+          "kind": "Obligatorische Kata",
+          "title": "Kata vormerken",
+          "label": "Vorgabe zum 3. Dan",
+          "requirement": [
+            "Kata",
+            "Katame-no-kata"
+          ],
+          "options": [
+            [
+              "katame",
+              "Katame-no-kata"
+            ]
+          ]
+        },
+        {
+          "key": "theorie",
+          "kind": "Theorie",
+          "title": "Thema auswählen",
+          "label": "Themenbereich",
+          "requirement": [
+            "Theorie",
+            "eine Wahlaufgabe"
+          ],
+          "options": [
+            [
+              "kuzushi-tsukuri",
+              "Kanos Konzept von Kuzushi und Tsukuri"
+            ],
+            [
+              "uke-lernen",
+              "Bedeutung des Uke-Verhaltens für den Lernprozess"
+            ],
+            [
+              "judo-werte",
+              "Judo-Werte im Kinder- und Jugendtraining"
+            ]
+          ]
+        },
+        {
+          "key": "handlungsketten",
+          "kind": "Katame-waza",
+          "title": "Zusatznachweise planen",
+          "label": "Vorgaben",
+          "requirement": [
+            "Katame-Nachweise",
+            "Ketten in Ober- und Unterlage sowie Umdrehprinzipien"
+          ],
+          "options": [
+            [
+              "vollstaendig",
+              "2 Ketten Oberlage · 2 Ketten Unterlage · Umdrehprinzipien geplant"
+            ]
+          ],
+          "plannerLink": true
+        },
+        {
+          "key": "nage-nachweise",
+          "kind": "Nage-waza",
+          "title": "Kombinationen und Konter",
+          "label": "Vorgaben",
+          "requirement": [
+            "Nage-Nachweise",
+            "6 Kombinationen/Finten und 6 Kontertechniken"
+          ],
+          "options": [
+            [
+              "vollstaendig",
+              "6 Kombinationen oder Finten und 6 Kontertechniken geplant"
+            ]
+          ]
+        },
+        {
+          "key": "wahlbereich",
+          "kind": "Ein Wahlbereich",
+          "title": "Schwerpunkt auswählen",
+          "label": "Nachweis zum 3. Dan",
+          "requirement": [
+            "Wahlbereich",
+            "Lizenz · Wettkampf · Kata · Selbstverteidigung oder Taiso"
+          ],
+          "options": [
+            [
+              "lizenz",
+              "Lizenzen · Trainer-B oder Landeslizenz mit Erfahrung"
+            ],
+            [
+              "wettkampf",
+              "Wettkampf · 10 Kampfpunkte, Uchi-komi und Griffkampfstrategien"
+            ],
+            [
+              "kata",
+              "Kata · Uke oder Ju-no-kata / Goshinjutsu / Kime-no-kata / Koshiki-no-kata"
+            ],
+            [
+              "selbstverteidigung",
+              "Selbstverteidigung · Programm 2. Dan plus Schnitt-/Stichwaffen"
+            ],
+            [
+              "taiso",
+              "Taiso · Sportabzeichen Gold und Taiso-Programm"
+            ]
+          ]
+        }
+      ]
+    },
+    "dan4": {
+      "intro": "Für den 4. Dan werden vom Prüfer gewählte Beispiele aus den unten freigeschalteten Bereichen demonstriert und erläutert.",
+      "cards": [
+        {
+          "key": "kata",
+          "kind": "Obligatorische Kata",
+          "title": "Kata auswählen",
+          "label": "Vorgabe zum 4. Dan",
+          "requirement": [
+            "Kata",
+            "Ju-no-kata oder Kodokan Goshinjutsu"
+          ],
+          "options": [
+            [
+              "ju",
+              "Ju-no-kata"
+            ],
+            [
+              "goshinjutsu",
+              "Kodokan Goshinjutsu"
+            ]
+          ]
+        },
+        {
+          "key": "theorie",
+          "kind": "Theorie",
+          "title": "Thema auswählen",
+          "label": "Themenbereich",
+          "requirement": [
+            "Theorie",
+            "eine Wahlaufgabe"
+          ],
+          "options": [
+            [
+              "hebel",
+              "Hebelwirkungen und Rotationen um Körperachsen"
+            ],
+            [
+              "uebungsreihen",
+              "Übungsreihen nach Funktionsphasen"
+            ],
+            [
+              "kano",
+              "Kanos Erziehungskonzept Ende des 19. Jahrhunderts"
+            ]
+          ]
+        },
+        {
+          "key": "wahlbereich",
+          "kind": "Ein Wahlbereich",
+          "title": "Schwerpunkt auswählen",
+          "label": "Nachweis zum 4. Dan",
+          "requirement": [
+            "Wahlbereich",
+            "Lizenz · Wettkampf oder Kata"
+          ],
+          "options": [
+            [
+              "lizenz",
+              "Lizenzen · Trainer-B oder Bundes-B-Lizenz"
+            ],
+            [
+              "wettkampf",
+              "Wettkampf · 10 Kampfpunkte und vier Trainingsformen"
+            ],
+            [
+              "kata",
+              "Kata · Uke oder Tori nach den zugelassenen Alternativen"
+            ]
+          ]
+        }
+      ]
+    },
+    "dan5": {
+      "intro": "Für den 5. Dan werden vom Prüfer gewählte Beispiele aus den unten freigeschalteten Bereichen demonstriert und erläutert.",
+      "cards": [
+        {
+          "key": "kata",
+          "kind": "Obligatorische Kata",
+          "title": "Kata-Kombination auswählen",
+          "label": "Vorgabe zum 5. Dan",
+          "requirement": [
+            "Kata",
+            "Kata als Uke plus Koshiki- oder Kime-no-kata"
+          ],
+          "options": [
+            [
+              "itsutsu-koshiki",
+              "Itsutsu-no-kata als Uke + Koshiki-no-kata"
+            ],
+            [
+              "itsutsu-kime",
+              "Itsutsu-no-kata als Uke + Kime-no-kata"
+            ],
+            [
+              "andere-koshiki",
+              "andere Dan-Kata als Uke + Koshiki-no-kata"
+            ],
+            [
+              "andere-kime",
+              "andere Dan-Kata als Uke + Kime-no-kata"
+            ]
+          ]
+        },
+        {
+          "key": "theorie",
+          "kind": "Theorie",
+          "title": "Thema auswählen",
+          "label": "Themenbereich",
+          "requirement": [
+            "Theorie",
+            "eine Wahlaufgabe"
+          ],
+          "options": [
+            [
+              "rumpf",
+              "Rumpfstabilität, Gelenkwinkel und Kraftübertragung"
+            ],
+            [
+              "offene-aufgaben",
+              "Technikvermittlung durch offene Aufgabenstellungen"
+            ],
+            [
+              "seiryoku",
+              "Seiryoku-zenyo und Jita-kyoei ab ca. 1920"
+            ]
+          ]
+        },
+        {
+          "key": "wahlbereich",
+          "kind": "Ein Wahlbereich",
+          "title": "Schwerpunkt auswählen",
+          "label": "Nachweis zum 5. Dan",
+          "requirement": [
+            "Wahlbereich",
+            "Lizenz · Wettkampf oder Kata"
+          ],
+          "options": [
+            [
+              "lizenz",
+              "Lizenzen · Trainer-A oder Bundes-A-Lizenz"
+            ],
+            [
+              "wettkampf",
+              "Wettkampf · 10 Kampfpunkte, Handlungsketten und Periodisierung"
+            ],
+            [
+              "kata",
+              "Kata · Uke oder Tori nach den zugelassenen Alternativen"
+            ]
+          ],
+          "plannerLinkWhen": [
+            "wettkampf"
+          ]
+        }
+      ]
+    },
+    "dan6": {
+      "intro": "Der 6. Dan kann durch Prüfung erworben werden. Neben dem Technikprogramm sind zwei Kata-Demonstrationen, Theorie, Engagement und ein Wahlbereich nachzuweisen.",
+      "cards": [
+        {
+          "key": "kata",
+          "kind": "Bewertete Kata",
+          "title": "Prüfungs-Kata auswählen",
+          "label": "Als Tori · mindestens 75 %",
+          "requirement": [
+            "Bewertete Kata",
+            "eine Kata als Tori in Prüfungssituation"
+          ],
+          "options": [
+            [
+              "nage",
+              "Nage-no-kata"
+            ],
+            [
+              "katame",
+              "Katame-no-kata"
+            ],
+            [
+              "ju",
+              "Ju-no-kata"
+            ],
+            [
+              "kime",
+              "Kime-no-kata"
+            ],
+            [
+              "goshinjutsu",
+              "Kodokan Goshinjutsu"
+            ],
+            [
+              "koshiki",
+              "Koshiki-no-kata"
+            ]
+          ]
+        },
+        {
+          "key": "kata-oeffentlich",
+          "kind": "Öffentliche Kata",
+          "title": "Demonstration auswählen",
+          "label": "Als Tori bei einer DJB-Veranstaltung",
+          "requirement": [
+            "Öffentliche Kata",
+            "eine Kata als Tori bei DJB-Veranstaltung"
+          ],
+          "options": [
+            [
+              "nage",
+              "Nage-no-kata"
+            ],
+            [
+              "katame",
+              "Katame-no-kata"
+            ],
+            [
+              "ju",
+              "Ju-no-kata"
+            ],
+            [
+              "kime",
+              "Kime-no-kata"
+            ],
+            [
+              "goshinjutsu",
+              "Kodokan Goshinjutsu"
+            ],
+            [
+              "koshiki",
+              "Koshiki-no-kata"
+            ]
+          ]
+        },
+        {
+          "key": "theorie",
+          "kind": "Theorie",
+          "title": "Nachweis auswählen",
+          "label": "Vorab von der Kommission akzeptieren lassen",
+          "requirement": [
+            "Theorie",
+            "Veröffentlichung oder nachhaltiges Judo-Projekt"
+          ],
+          "options": [
+            [
+              "veroeffentlichung",
+              "Veröffentlichung zur Theoriebildung des Judo"
+            ],
+            [
+              "projekt",
+              "Projekt zur nachhaltigen Förderung des Judo"
+            ]
+          ]
+        },
+        {
+          "key": "engagement",
+          "kind": "Engagement",
+          "title": "Nachweis vormerken",
+          "label": "Vorgabe",
+          "requirement": [
+            "Engagement",
+            "besonderes Engagement nach DJB-Ehrenordnung"
+          ],
+          "options": [
+            [
+              "nachweis",
+              "Besonderes Engagement im Sinne der DJB-Ehrenordnung"
+            ]
+          ]
+        },
+        {
+          "key": "wahlbereich",
+          "kind": "Ein Wahlbereich",
+          "title": "Schwerpunkt auswählen",
+          "label": "Nachweis zum 6. Dan",
+          "requirement": [
+            "Wahlbereich",
+            "Lizenz · Wettkampf oder Kata"
+          ],
+          "options": [
+            [
+              "lizenz",
+              "Lizenzen · Diplomtrainer oder EJU/IJF-Lizenz"
+            ],
+            [
+              "wettkampf",
+              "Wettkampf · internationale Erfolge oder Kämpferprofil"
+            ],
+            [
+              "kata",
+              "Kata · internationale Medaille oder zwei Kata-Analysen"
+            ]
+          ]
+        }
+      ]
+    }
+  },
+  "notices": [
+    {
+      "type": "Widerspruch",
+      "title": "Zählweise der Nage-waza",
+      "text": "Die Pool-Übersicht zählt 16 + 12 + 32 + 9 = 69 Nage-waza, während ihr Anhang „Nage-waza, 68“ ausweist. Alle in der Übersicht namentlich aufgeführten Techniken bleiben hier sichtbar; Zählwerte werden nicht als Prüfungsanforderung verwendet."
+    },
+    {
+      "type": "Widerspruch",
+      "title": "Abweichende Technikbezeichnungen",
+      "text": "Die Pool-Übersicht nennt „Ko-soko-gari“ und „Okure-ashi-harai“. Das Grundprogramm-Poster bezeichnet die gezeigte Technik dagegen als „Ko-soto-gake“, das Erweiterungsprogramm-Poster als „Okuri-ashi-barai“. Die Anwendung führt Ko-soto-gari bzw. Okuri-ashi-barai; beim Ko-soto-Eintrag bleibt die Posterreferenz deshalb ausdrücklich als Quellenabweichung markiert."
+    },
+    {
+      "type": "Widerspruch",
+      "title": "Hara-gatame: Poster vs. Pool",
+      "text": "Das DJB-Poster zum Erweiterungsprogramm Boden zeigt Hara-gatame. In der offiziellen Pool-Tabelle ist Hara-gatame jedoch den Kansetsu-waza des Masterprogramms zugeordnet; das historische Programm enthält dort ausschließlich Do-jime. Hara-gatame wird deshalb in dieser Anwendung nicht als Kyu-Technik auswählbar gemacht."
+    }
+  ],
+  "fallTechniquesByDegree": {
+    "1": {
+      "intro": "Alle bisher erlernten Ukemi sind gefordert.",
+      "items": [
+        [
+          "Alle bisherigen Ukemi",
+          "Rückwärts, seitwärts, Rollen und freier Fall sicher beherrschen."
+        ]
+      ]
+    },
+    "2": {
+      "intro": "Alle bisher erlernten Ukemi sind gefordert.",
+      "items": [
+        [
+          "Alle bisherigen Ukemi",
+          "Rückwärts, seitwärts, Rollen und freier Fall sicher beherrschen."
+        ]
+      ]
+    },
+    "3": {
+      "intro": "Alle bisherigen Ukemi werden aus der zügigen Bewegung beidseitig verlangt; der freie Fall kommt hinzu.",
+      "items": [
+        [
+          "Rückwärts",
+          "Zügige Bewegung · beide Seiten"
+        ],
+        [
+          "Seitwärts",
+          "Zügige Bewegung · beide Seiten"
+        ],
+        [
+          "Rolle",
+          "Zügige Bewegung · beide Seiten"
+        ],
+        [
+          "Freier Fall",
+          "Zusätzliche Falltechnik"
+        ]
+      ]
+    },
+    "4": {
+      "intro": "Aus der zügigen Bewegung und jeweils zu beiden Seiten.",
+      "items": [
+        [
+          "Rückwärts",
+          "Zügige Bewegung · beide Seiten"
+        ],
+        [
+          "Seitwärts",
+          "Zügige Bewegung · beide Seiten"
+        ],
+        [
+          "Rolle",
+          "Zügige Bewegung · beide Seiten"
+        ]
+      ]
+    },
+    "5": {
+      "intro": "Aus dem Gehen und jeweils rechts wie links.",
+      "items": [
+        [
+          "Rückwärts",
+          "Aus dem Gehen · rechts und links"
+        ],
+        [
+          "Seitwärts",
+          "Aus dem Gehen · rechts und links"
+        ],
+        [
+          "Rolle",
+          "Aus dem Gehen · rechts und links"
+        ]
+      ]
+    },
+    "6": {
+      "intro": "Aus dem Stand und jeweils zu beiden Seiten.",
+      "items": [
+        [
+          "Rückwärts mit Rolle",
+          "Beide Seiten"
+        ],
+        [
+          "Seitwärts",
+          "Beide Seiten"
+        ],
+        [
+          "Rolle vorwärts",
+          "Beide Seiten"
+        ]
+      ]
+    },
+    "7": {
+      "intro": "Aus dem Stand; bei der Lernzielkontrolle ist jeweils eine Seite gefordert.",
+      "items": [
+        [
+          "Rückwärts",
+          "Eine Seite"
+        ],
+        [
+          "Seitwärts",
+          "Eine Seite"
+        ],
+        [
+          "Rolle",
+          "Eine Seite"
+        ]
+      ]
+    },
+    "8": {
+      "intro": "Für den Einstiegsgürtel ist kein festes Ukemi-Repertoire vorgegeben. Die sichere Grundidee bleibt: fallen lernen, ohne sich zu verletzen.",
+      "items": [
+        [
+          "Sicher fallen",
+          "Grundverständnis: verletzungsfrei fallen lernen."
+        ]
+      ]
+    },
+    "dan1": {
+      "intro": "Für den 1. Dan weist das Anforderungsprofil keine zusätzliche, eigenständige Ukemi-Anforderung aus.",
+      "items": [
+        [
+          "Keine zusätzliche Vorgabe",
+          "Die Ukemi-Anforderungen werden im 1.-Dan-Profil nicht gesondert aufgeführt."
+        ]
+      ]
+    },
+    "dan2": {
+      "intro": "Für den 2. Dan weist das Anforderungsprofil keine zusätzliche, eigenständige Ukemi-Anforderung aus.",
+      "items": [
+        [
+          "Keine zusätzliche Vorgabe",
+          "Die Ukemi-Anforderungen werden im 2.-Dan-Profil nicht gesondert aufgeführt."
+        ]
+      ]
+    },
+    "dan3": {
+      "intro": "Für den 3. Dan weist das Anforderungsprofil keine zusätzliche, eigenständige Ukemi-Anforderung aus.",
+      "items": [
+        [
+          "Keine zusätzliche Vorgabe",
+          "Die Ukemi-Anforderungen werden im 3.-Dan-Profil nicht gesondert aufgeführt."
+        ]
+      ]
+    },
+    "dan4": {
+      "intro": "Für den 4. Dan weist das Anforderungsprofil keine zusätzliche, eigenständige Ukemi-Anforderung aus.",
+      "items": [
+        [
+          "Keine zusätzliche Vorgabe",
+          "Die Ukemi-Anforderungen werden im 4.-Dan-Profil nicht gesondert aufgeführt."
+        ]
+      ]
+    },
+    "dan5": {
+      "intro": "Für den 5. Dan weist das Anforderungsprofil keine zusätzliche, eigenständige Ukemi-Anforderung aus.",
+      "items": [
+        [
+          "Keine zusätzliche Vorgabe",
+          "Die Ukemi-Anforderungen werden im 5.-Dan-Profil nicht gesondert aufgeführt."
+        ]
+      ]
+    },
+    "dan6": {
+      "intro": "Für den 6. Dan weist das Anforderungsprofil keine zusätzliche, eigenständige Ukemi-Anforderung aus.",
+      "items": [
+        [
+          "Keine zusätzliche Vorgabe",
+          "Die Ukemi-Anforderungen werden im 6.-Dan-Profil nicht gesondert aufgeführt."
+        ]
+      ]
+    }
+  },
+  "standardSituationsByDegree": {
+    "1": [
+      [
+        "stand-boden-ai",
+        "Übergang Stand → Boden · Ai-yotsu",
+        "Eine Situationslösung aus Gleichgriff planen."
+      ],
+      [
+        "stand-boden-kenka",
+        "Übergang Stand → Boden · Kenka-yotsu",
+        "Eine Situationslösung aus Gegengriff planen."
+      ],
+      [
+        "stand-boden",
+        "Übergang Stand → Boden",
+        "Wiederholung einer früheren Situationslösung."
+      ],
+      [
+        "bauchlage-osae",
+        "Bauchlage → Osaekomi",
+        "Uke aus der Bauchlage kontrollieren."
+      ],
+      [
+        "beinklammer-loesen",
+        "Beinklammer lösen",
+        "Die Beinklammer funktional auflösen."
+      ],
+      [
+        "bank-angriff",
+        "Angriff gegen die Bank",
+        "Eine Lösung gegen Ukes Bankposition erarbeiten."
+      ],
+      [
+        "eigene-rueckenlage",
+        "Angriff aus eigener Rückenlage",
+        "Aus der Unterlage eine günstige Angriffsposition schaffen."
+      ],
+      [
+        "gegner-rueckenlage",
+        "Angriff gegen gegnerische Rückenlage",
+        "Gegner in Rückenlage kontrollieren oder angreifen."
+      ],
+      [
+        "positionswechsel-1",
+        "Positionswechsel · 1",
+        "Von einer Verteidigungsposition in eine günstige Angriffsposition wechseln."
+      ],
+      [
+        "positionswechsel-2",
+        "Positionswechsel · 2",
+        "Einen zweiten Positionswechsel mit anderer Ausgangslage planen."
+      ],
+      [
+        "positionswechsel-3",
+        "Positionswechsel · 3",
+        "Einen dritten Positionswechsel mit anderer Ausgangslage planen."
+      ]
+    ],
+    "2": [
+      [
+        "stand-boden",
+        "Übergang Stand → Boden",
+        "Wiederholung der bisherigen Lösung."
+      ],
+      [
+        "bauchlage-osae",
+        "Bauchlage → Osaekomi",
+        "Uke aus der Bauchlage kontrollieren."
+      ],
+      [
+        "beinklammer-loesen",
+        "Beinklammer lösen",
+        "Die Beinklammer funktional auflösen."
+      ],
+      [
+        "bank-angriff",
+        "Angriff gegen die Bank",
+        "Eine Lösung gegen Ukes Bankposition erarbeiten."
+      ],
+      [
+        "eigene-rueckenlage",
+        "Angriff aus eigener Rückenlage",
+        "Aus der Unterlage eine günstige Angriffsposition schaffen."
+      ],
+      [
+        "gegner-rueckenlage",
+        "Angriff gegen gegnerische Rückenlage",
+        "Gegner in Rückenlage kontrollieren oder angreifen."
+      ],
+      [
+        "positionswechsel-1",
+        "Positionswechsel · 1",
+        "Von einer Verteidigungsposition in eine günstige Angriffsposition wechseln."
+      ],
+      [
+        "positionswechsel-2",
+        "Positionswechsel · 2",
+        "Einen zweiten Positionswechsel mit anderer Ausgangslage planen."
+      ]
+    ],
+    "3": [
+      [
+        "stand-boden",
+        "Übergang Stand → Boden",
+        "Wiederholung der bisherigen Lösung."
+      ],
+      [
+        "bauchlage-osae",
+        "Bauchlage → Osaekomi",
+        "Uke aus der Bauchlage kontrollieren."
+      ],
+      [
+        "beinklammer-loesen",
+        "Beinklammer lösen",
+        "Die Beinklammer funktional auflösen."
+      ],
+      [
+        "bank-angriff",
+        "Angriff gegen die Bank",
+        "Eine Lösung gegen Ukes Bankposition erarbeiten."
+      ],
+      [
+        "eigene-rueckenlage",
+        "Angriff aus eigener Rückenlage",
+        "Aus der Unterlage eine günstige Angriffsposition schaffen."
+      ],
+      [
+        "gegner-rueckenlage",
+        "Angriff gegen gegnerische Rückenlage",
+        "Gegner in Rückenlage kontrollieren oder angreifen."
+      ],
+      [
+        "positionswechsel",
+        "Positionswechsel",
+        "Von einer Verteidigungsposition in eine günstige Angriffsposition wechseln."
+      ]
+    ],
+    "4": [
+      [
+        "stand-boden",
+        "Übergang Stand → Boden",
+        "Wiederholung der bisherigen Lösung."
+      ],
+      [
+        "bauchlage-osae",
+        "Bauchlage → Osaekomi",
+        "Uke aus der Bauchlage kontrollieren."
+      ],
+      [
+        "beinklammer-loesen",
+        "Beinklammer lösen",
+        "Die Beinklammer funktional auflösen."
+      ],
+      [
+        "bank-angriff",
+        "Angriff gegen die Bank",
+        "Eine Lösung gegen Ukes Bankposition erarbeiten."
+      ],
+      [
+        "eigene-rueckenlage",
+        "Angriff aus eigener Rückenlage",
+        "Aus der Unterlage eine günstige Angriffsposition schaffen."
+      ],
+      [
+        "gegner-rueckenlage",
+        "Angriff gegen gegnerische Rückenlage",
+        "Gegner in Rückenlage kontrollieren oder angreifen."
+      ]
+    ],
+    "5": [
+      [
+        "stand-boden",
+        "Übergang Stand → Boden",
+        "Wiederholung der bisherigen Lösung."
+      ],
+      [
+        "bauchlage-osae",
+        "Bauchlage → Osaekomi",
+        "Uke aus der Bauchlage kontrollieren."
+      ],
+      [
+        "beinklammer-loesen",
+        "Beinklammer lösen",
+        "Die Beinklammer funktional auflösen."
+      ],
+      [
+        "bank-angriff",
+        "Angriff gegen die Bank",
+        "Eine Lösung gegen Ukes Bankposition erarbeiten."
+      ]
+    ],
+    "6": [
+      [
+        "stand-boden",
+        "Übergang Stand → Boden",
+        "Wiederholung der Lösung aus dem 7. Kyu."
+      ],
+      [
+        "bauchlage-osae",
+        "Bauchlage → Osaekomi",
+        "Uke aus der Bauchlage in eine Haltetechnik umdrehen."
+      ]
+    ],
+    "7": [
+      [
+        "stand-boden",
+        "Übergang Stand → Boden",
+        "Nach einem Wurfansatz kontrolliert zum Halten übergehen."
+      ]
+    ],
+    "dan1": [
+      [
+        "bank-bauch-ober",
+        "Bank-/Bauchlage · Oberlage",
+        "Mindestens eine Lösung aus der Oberlage demonstrieren."
+      ],
+      [
+        "bank-bauch-unter",
+        "Bank-/Bauchlage · Unterlage",
+        "Mindestens eine Lösung aus der Unterlage demonstrieren."
+      ],
+      [
+        "beinklammer-ober",
+        "Beinklammer · Oberlage",
+        "Mindestens eine Lösung aus der Oberlage demonstrieren."
+      ],
+      [
+        "beinklammer-unter",
+        "Beinklammer · Unterlage",
+        "Mindestens eine Lösung aus der Unterlage demonstrieren."
+      ],
+      [
+        "rueckenlage-ober",
+        "Rückenlage · Oberlage",
+        "Partner zwischen den Beinen: mindestens eine Lösung aus der Oberlage."
+      ],
+      [
+        "rueckenlage-unter",
+        "Rückenlage · Unterlage",
+        "Partner zwischen den Beinen: mindestens eine Lösung aus der Unterlage."
+      ],
+      [
+        "stand-boden",
+        "Übergang Stand → Boden",
+        "Eine Katame-waza als Abschluss eines Übergangs planen."
+      ]
+    ],
+    "dan2": [
+      [
+        "bank-bauch",
+        "Bank-/Bauchlage",
+        "Katame-waza als Lösung einer Standardsituation einplanen."
+      ],
+      [
+        "beinklammer",
+        "Beinklammer",
+        "Katame-waza als Lösung einer Standardsituation einplanen."
+      ],
+      [
+        "rueckenlage",
+        "Rückenlage",
+        "Katame-waza als Lösung einer Standardsituation einplanen."
+      ],
+      [
+        "stand-boden",
+        "Übergang Stand → Boden",
+        "Katame-waza als Lösung einer Standardsituation einplanen."
+      ]
+    ],
+    "dan3": [
+      [
+        "bank-bauch-ober",
+        "Bank-/Bauchlage · Oberlage",
+        "Zwei verzweigte Handlungsketten aus Oberlage ergänzen."
+      ],
+      [
+        "bank-bauch-unter",
+        "Bank-/Bauchlage · Unterlage",
+        "Zwei verzweigte Handlungsketten aus Unterlage ergänzen."
+      ],
+      [
+        "eigene-rueckenlage",
+        "Eigene Rückenlage",
+        "Prinzipien der Umdrehtechniken erläutern."
+      ]
+    ]
+  },
+  "situationSolutionOptions": {
+    "stand-boden": [
+      [
+        "katate-jime",
+        "Als Koshi-jime im Übergang Stand → Boden."
+      ],
+      [
+        "hadaka-jime",
+        "Gegen die Bank im Übergang Stand → Boden."
+      ]
+    ],
+    "bauchlage-osae": [
+      [
+        "kuzure-kesa-gatame",
+        "Gegen die Bauchlage."
+      ]
+    ],
+    "beinklammer-loesen": [
+      [
+        null,
+        "Befreiung durch Schulter fixieren und Hüftwechsel.",
+        "Handlungsprinzip"
+      ],
+      [
+        "sode-guruma-jime",
+        "Angriff gegen die Beinklammer."
+      ]
+    ],
+    "bank-angriff": [
+      [
+        "kuzure-kesa-gatame",
+        "Gegen die Bank."
+      ],
+      [
+        "yoko-shiho-gatame",
+        "Schräg von hinten, von der Seite oder aus der Bank."
+      ],
+      [
+        "kami-shiho-gatame",
+        "Gegen die Bank von vorne oder hinten."
+      ],
+      [
+        "tate-shiho-gatame",
+        "Gegen die Bank."
+      ],
+      [
+        "juji-gatame",
+        "Gegen die Bank."
+      ],
+      [
+        "waki-gatame",
+        "Aus der Bank."
+      ],
+      [
+        "kuzure-kami-shiho-gatame",
+        "Gegen die Bank."
+      ],
+      [
+        "ushiro-kesa-gatame",
+        "Aus der Bank."
+      ],
+      [
+        "ura-gatame",
+        "Gegen die Bank."
+      ],
+      [
+        "sankaku-gatame",
+        "Gegen die Bank."
+      ],
+      [
+        "kataha-jime",
+        "Gegen die Bank."
+      ],
+      [
+        "hadaka-jime",
+        "Gegen die Bank im Übergang."
+      ]
+    ],
+    "rueckenlage": [
+      [
+        "kesa-gatame",
+        "Aus der Rückenlage."
+      ],
+      [
+        "tate-shiho-gatame",
+        "Aus der Rückenlage durch diagonales Einklemmen und Drehen."
+      ],
+      [
+        "juji-gatame",
+        "Aus der Rückenlage."
+      ],
+      [
+        "ushiro-kesa-gatame",
+        "Aus der Rückenlage."
+      ],
+      [
+        "hiza-gatame",
+        "Aus der eigenen Rückenlage."
+      ],
+      [
+        "sankaku-jime",
+        "Aus der Rückenlage."
+      ]
+    ],
+    "positionswechsel": [
+      [
+        null,
+        "Kesa-gatame → Yoko-shiho-gatame",
+        "Haltegriffwechsel"
+      ],
+      [
+        null,
+        "Kesa-gatame → Tate-shiho-gatame",
+        "Haltegriffwechsel"
+      ],
+      [
+        null,
+        "Yoko-shiho-gatame → Kami-shiho-gatame",
+        "Haltegriffwechsel"
+      ]
+    ]
+  },
+  "situationSolutionAliases": {
+    "stand-boden-ai": "stand-boden",
+    "stand-boden-kenka": "stand-boden",
+    "beinklammer": "beinklammer-loesen",
+    "beinklammer-ober": "beinklammer-loesen",
+    "beinklammer-unter": "beinklammer-loesen",
+    "bank-bauch": "bank-angriff",
+    "bank-bauch-ober": "bank-angriff",
+    "bank-bauch-unter": "bank-angriff",
+    "eigene-rueckenlage": "rueckenlage",
+    "gegner-rueckenlage": "rueckenlage",
+    "rueckenlage-ober": "rueckenlage",
+    "rueckenlage-unter": "rueckenlage",
+    "positionswechsel-1": "positionswechsel",
+    "positionswechsel-2": "positionswechsel",
+    "positionswechsel-3": "positionswechsel"
+  },
+  "requirementsByDegree": {
+    "8": [
+      { "title": "Einstieg", "metric": "zero", "needed": 0, "detail": "kein Technikpool-Umfang festgelegt" }
+    ],
+    "7": [
+      { "title": "Würfe", "metric": "stand", "needed": 3, "detail": "aus dem Grundprogramm" },
+      { "title": "Hauptseite", "metric": "turns", "side": "main", "needed": 1, "detail": "Eindrehtechnik" },
+      { "title": "Gegenseite", "metric": "turns", "side": "opposite", "needed": 1, "detail": "Eindrehtechnik" },
+      { "title": "Fußtechnik", "metric": "foot", "needed": 1, "detail": "Ashi-waza" },
+      { "title": "Halten", "metric": "required", "ids": "degree-mandatory", "needed": 4, "detail": "4 konkret benannte Osaekomi-waza" }
+    ],
+    "6": [
+      { "title": "Würfe", "metric": "stand", "needed": 6, "detail": "aus dem Grundprogramm" },
+      { "title": "Hauptseite", "metric": "turns", "side": "main", "needed": 2, "detail": "Eindrehtechniken" },
+      { "title": "Gegenseite", "metric": "turns", "side": "opposite", "needed": 2, "detail": "Eindrehtechniken" },
+      { "title": "Fußtechniken", "metric": "foot", "needed": 2, "detail": "Ashi-waza" },
+      { "title": "Halten", "metric": "holds", "needed": 4, "detail": "weitere Haltegriffe / Varianten" }
+    ],
+    "5": [
+      { "title": "Würfe", "metric": "stand", "needed": 9, "detail": "aus dem Grundprogramm" },
+      { "title": "Hauptseite", "metric": "turns", "side": "main", "needed": 3, "detail": "Eindrehtechniken" },
+      { "title": "Gegenseite", "metric": "turns", "side": "opposite", "needed": 3, "detail": "Eindrehtechniken" },
+      { "title": "Fußtechniken", "metric": "foot", "needed": 3, "detail": "Ashi-waza" }
+    ],
+    "4": [
+      { "title": "Würfe", "metric": "stand", "needed": 12, "detail": "aus dem Grundprogramm" },
+      { "title": "Hauptseite", "metric": "turns", "side": "main", "needed": 3, "detail": "Eindrehtechniken" },
+      { "title": "Gegenseite", "metric": "turns", "side": "opposite", "needed": 3, "detail": "Eindrehtechniken" },
+      { "title": "Pflichtwürfe", "metric": "required", "ids": ["o-soto-gari", "harai-goshi", "uchi-mata"], "needed": 3, "detail": "O-soto-gari · Harai-goshi · Uchi-mata" },
+      { "title": "Hebel", "metric": "levers", "needed": 3, "detail": "inkl. Juji- & Ude-garami" }
+    ],
+    "3": [
+      { "title": "Würfe", "metric": "stand", "needed": 15, "detail": "gesamt" },
+      { "title": "Erweiterung", "metric": "extension-throws", "needed": 3, "detail": "Würfe aus dem Erweiterungsprogramm" },
+      { "title": "Pflichtwürfe", "metric": "required", "ids": ["tomoe-nage", "tani-otoshi"], "needed": 2, "detail": "Tomoe-nage · Tani-otoshi" },
+      { "title": "Erweiterungshebel", "metric": "extension-levers", "needed": 4, "detail": "inkl. Hiza- & Sankaku-gatame" },
+      { "title": "Pflichthebel", "metric": "required", "ids": ["hiza-gatame", "sankaku-gatame"], "needed": 2, "detail": "Hiza- & Sankaku-gatame" }
+    ],
+    "2": [
+      { "title": "Würfe", "metric": "stand", "needed": 18, "detail": "gesamt" },
+      { "title": "Erweiterung", "metric": "extension-throws", "needed": 6, "detail": "Würfe aus dem Erweiterungsprogramm" },
+      { "title": "Pflichtwürfe", "metric": "required", "ids": ["sumi-gaeshi", "soto-makikomi"], "needed": 2, "detail": "Sumi-gaeshi · Soto-makikomi" },
+      { "title": "Würgetechniken", "metric": "chokes", "needed": 3, "detail": "aus Grund- & Erweiterungsprogramm" },
+      { "title": "Pflichtwürgen", "metric": "required", "ids": ["gyaku-juji-jime", "okuri-eri-jime"], "needed": 2, "detail": "Gyaku-juji- & Okuri-eri-jime" }
+    ],
+    "1": [
+      { "title": "Würfe", "metric": "stand", "needed": 20, "detail": "gesamt" },
+      { "title": "Erweiterung", "metric": "extension-throws", "needed": 9, "detail": "Würfe aus dem Erweiterungsprogramm" },
+      { "title": "Pflichtwürfe", "metric": "required", "ids": ["ura-nage", "ko-uchi-makikomi"], "needed": 2, "detail": "Ura-nage · Ko-uchi-makikomi" },
+      { "title": "Würgetechniken", "metric": "chokes", "needed": 4, "detail": "aus Grund- & Erweiterungsprogramm" },
+      { "title": "Pflichtwürgen", "metric": "required", "ids": ["sode-guruma-jime", "okuri-eri-jime"], "needed": 2, "detail": "Sode-guruma- & Okuri-eri-jime" }
+    ],
+    "dan1": [
+      { "title": "Gokyo-no-waza", "metric": "gokyo", "needed": "gokyo-count", "detail": "jede Gokyo-Familie aus freier Interaktion" },
+      { "title": "Katame-waza", "metric": "required", "ids": "dan-ground", "needed": "dan-ground-count", "detail": "je eine Variante aus Grund- & Erweiterungsprogramm" }
+    ],
+    "dan2": [
+      { "title": "Gokyo-no-waza", "metric": "gokyo", "needed": "gokyo-count", "detail": "jede Gokyo-Technik aus freien Interaktionen" },
+      { "title": "Weitere Würfe", "metric": "outside-gokyo-throws", "needed": 12, "detail": "12 Shinmeisho-/Habukareta-waza" },
+      { "title": "Katame-waza", "metric": "required", "ids": "katame-without-do", "needed": "katame-without-do-count", "detail": "alle außer Do-jime; Ashi-garami ist nicht im Pool" }
+    ],
+    "dan3": [
+      { "title": "Gokyo-no-waza", "metric": "gokyo", "needed": "gokyo-count", "detail": "jede Gokyo-Technik aus freien Interaktionen" },
+      { "title": "Weitere Würfe", "metric": "outside-gokyo-throws", "needed": 12, "detail": "12 Shinmeisho-/Habukareta-waza" },
+      { "title": "Katame-waza", "metric": "required", "ids": "katame-without-do", "needed": "katame-without-do-count", "detail": "alle außer Do-jime; Ashi-garami ist nicht im Pool" }
+    ],
+    "dan4": [
+      { "title": "Te-waza", "metric": "group", "group": "stand-te", "needed": 1, "detail": "mindestens ein Beispiel für die individuelle Vorbereitung" },
+      { "title": "Koshi-waza", "metric": "group", "group": "stand-koshi", "needed": 1, "detail": "mindestens ein Beispiel für die individuelle Vorbereitung" },
+      { "title": "Ashi-waza", "metric": "group", "group": "stand-ashi", "needed": 1, "detail": "mindestens ein Beispiel für die individuelle Vorbereitung" },
+      { "title": "Osaekomi-waza", "metric": "group", "group": "boden-osae", "needed": 1, "detail": "mindestens ein Beispiel einschließlich Befreiung" }
+    ],
+    "dan5": [
+      { "title": "Ma-sutemi-waza", "metric": "group", "group": "stand-ma", "needed": 1, "detail": "mindestens ein Beispiel für die individuelle Vorbereitung" },
+      { "title": "Yoko-sutemi-waza", "metric": "group", "group": "stand-yoko", "needed": 1, "detail": "mindestens ein Beispiel; Kawazu-gake und Kani-basami ausgeschlossen" },
+      { "title": "Kansetsu-waza", "metric": "group", "group": "boden-kansetsu", "needed": 1, "detail": "mindestens ein Beispiel einschließlich Verteidigung" },
+      { "title": "Shime-waza", "metric": "group", "group": "boden-shime", "needed": 1, "detail": "mindestens ein Beispiel einschließlich Verteidigung" }
+    ],
+    "dan6": [
+      { "title": "Nage-waza", "metric": "required", "ids": "dan6-stand", "needed": "dan6-stand-count", "detail": "alle außer Kawazu-gake und Kani-basami" },
+      { "title": "Katame-waza", "metric": "required", "ids": "dan6-boden", "needed": "dan6-boden-count", "detail": "alle Katame-waza" }
+    ]
+  },
+  "conditionalRequirements": {
+    "dan2": [
+      { "when": { "option": "wahlbereich", "equals": "wettkampf" }, "title": "Hauptseite", "metric": "turns", "side": "main", "needed": 2, "detail": "zwei Eindrehtechniken im Wahlbereich Wettkampf" },
+      { "when": { "option": "wahlbereich", "equals": "wettkampf" }, "title": "Gegenseite", "metric": "turns", "side": "opposite", "needed": 2, "detail": "zwei Eindrehtechniken im Wahlbereich Wettkampf" }
+    ]
+  },
+  "gradeNotes": {
+    "1": "20 Würfe, davon neun aus dem Erweiterungsprogramm; Ura-nage und Ko-uchi-makikomi sowie Sode-guruma- und Okuri-eri-jime sind verbindlich. Zusätzlich ca. 10 Aktionen aus einem individuellen Schwerpunkt.",
+    "2": "18 Würfe, davon sechs aus dem Erweiterungsprogramm; Sumi-gaeshi und Soto-makikomi sowie Gyaku-juji- und Okuri-eri-jime sind verbindlich.",
+    "3": "15 Würfe, davon drei aus dem Erweiterungsprogramm; Tomoe-nage und Tani-otoshi sowie Hiza- und Sankaku-gatame sind verbindlich.",
+    "4": "Neben zwölf Würfen sind O-soto-gari, Harai-goshi und Uchi-mata verbindlich. Bei den Hebeln sind Juji-gatame und Ude-garami verbindlich plus eine Wahltechnik.",
+    "5": "Die vier Befreiungs- und vier Situationslösungen sind Aufgaben, keine fest vorgegebenen Einzeltechniken. Sie stehen nicht als auswählbare Karte im Raster.",
+    "6": "Vier weitere Haltetechniken können eigenständige Kodokan/IJF-Techniken oder Varianten sein. Die Karte zählt deshalb nur die Technik-Planung, nicht Variantenwechsel.",
+    "7": "Die drei Würfe sollen aus dem Grundprogramm kommen; Kesa-, Tate-shiho-, Yoko-shiho- und Kami-shiho-gatame sind konkret benannt.",
+    "8": "Der 8. Kyu ist ein Einstiegsgürtel; die aktuelle Kyu-Anforderung schreibt keinen Auswahlumfang aus dem Technikpool vor.",
+    "dan1": "Zum 1. Dan sind alle Gokyo-no-waza aus freien Interaktionen gefordert. Bei Katame-waza je eine Variante jeder Technik aus Grund- und Erweiterungsprogramm als Situationslösung; Kata und ein Wahlbereich bleiben zusätzlich erforderlich.",
+    "dan2": "Zum 2. Dan sind alle Gokyo-no-waza, zwölf Shinmeisho-/Habukareta-waza sowie alle Katame-waza außer Ashi-garami und Do-jime gefordert. Die zwölf zusätzlichen Würfe werden individuell zusammengestellt.",
+    "dan3": "Zum 3. Dan gelten Gokyo, zwölf Shinmeisho-/Habukareta-waza und alle Katame-waza außer Ashi-garami und Do-jime. Zusätzlich werden Kombinationen/Finten, Kontertechniken, Handlungsketten, Kata, Theorie und ein Wahlbereich nachgewiesen.",
+    "dan4": "Zum 4. Dan werden Te-, Koshi- und Ashi-waza sowie Osaekomi-waza aus dem Gesamtprogramm des Kodokan an vom Prüfer gewählten Beispielen demonstriert und erläutert. Die Auswahlkarten dienen der individuellen Vorbereitung, nicht einer fest vorgeschriebenen Technikanzahl.",
+    "dan5": "Zum 5. Dan werden Ma- und Yoko-sutemi-waza (außer Kawazu-gake und Kani-basami) sowie Kansetsu- und Shime-waza an vom Prüfer gewählten Beispielen demonstriert und erläutert.",
+    "dan6": "Beim 6. Dan durch Prüfung sind alle Nage-waza außer Kawazu-gake und Kani-basami sowie alle Katame-waza gefordert. Die Technik-Pflichtauswahl wird deshalb vollständig gesetzt."
+  }
+}

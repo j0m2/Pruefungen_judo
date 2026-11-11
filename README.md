@@ -2,6 +2,21 @@
 
 Eine statische, GitHub-Pages-fähige Anwendung zum Zusammenstellen individueller Judo-Graduierungsprogramme für 8.–1. Kyu sowie 1.–6. Dan.
 
+## Quellstruktur
+
+- `src/data.json`: fachliche Daten – Grade, Pools, Techniken, Pflichtvorgaben, Standardsituationen, Musterlösungen und Texte.
+- `src/rules.js`: reine Fachlogik – Poolfreigaben, Pflichtauswahl, Fortschrittsprüfung, Import-Normalisierung und Situationsfilter.
+- `src/app.js`: Anwendungsschicht – JSON laden, Browserzustand, Rendering, Import/Export und Bedienung.
+- `src/index.html` und `src/style.css`: Struktur und Gestaltung.
+
+Die Seite lädt `data.json` zur Laufzeit über den statischen Hosting-Pfad. Deshalb ist kein lokaler Webserver Teil des Builds nötig.
+
+## Build
+
+```sh
+make build
+make check
+```
 
 ## Datenbasis
 

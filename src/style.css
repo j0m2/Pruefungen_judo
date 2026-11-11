@@ -100,20 +100,21 @@ h2 { margin: 0; color: var(--ink); font-size: 1.2rem; line-height: 1.2; letter-s
 
 .situations-intro { margin: .55rem 0 .7rem; color: #5d728b; font-size: .7rem; }
 .situation-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 9px; }
-.situation-card { display: flex; min-height: 76px; align-items: flex-start; gap: .62rem; width: 100%; padding: .72rem; border: 1px solid var(--line); border-radius: 10px; background: white; color: #183147; text-align: left; transition: border-color .15s, background .15s, box-shadow .15s; }
-.situation-card:hover { border-color: #8cb7e1; background: #f9fbfe; }
+.situation-card { min-height: 76px; padding: .72rem; border: 1px solid var(--line); border-radius: 10px; background: white; color: #183147; text-align: left; transition: border-color .15s, background .15s, box-shadow .15s; }
 .situation-card.is-selected { border: 2px solid #3182ce; padding: calc(.72rem - 1px); background: #f4f9ff; box-shadow: 0 0 0 1px #3182ce; }
-.situation-check { display: grid; flex: none; width: 22px; height: 22px; place-items: center; border: 1px solid #b7c9dc; border-radius: 6px; color: transparent; font-size: .76rem; }
-.situation-card.is-selected .situation-check { border-color: #1865b5; background: #1865b5; color: white; }
 .situation-content { display: block; min-width: 0; }
 .situation-content strong { display: block; font-size: .72rem; line-height: 1.25; }
 .situation-content small { display: block; margin-top: .18rem; color: #687d95; font-size: .62rem; line-height: 1.35; }
 .situation-solutions { display: block; margin-top: .62rem; padding-top: .55rem; border-top: 1px solid #e5ebf3; }
 .situation-solutions-label { display: block; color: #087c6c; font-size: .57rem; font-weight: 800; letter-spacing: .045em; text-transform: uppercase; }
 .situation-solution-list { display: grid; gap: 5px; margin-top: .38rem; }
-.situation-solution { display: block; padding: .42rem .48rem; border-radius: 6px; background: #f3f8fc; }
+.situation-solution { display: block; width: 100%; padding: .42rem .48rem; border: 1px solid transparent; border-radius: 6px; background: #f3f8fc; color: inherit; text-align: left; }
+.situation-solution:hover { border-color: #8cb7e1; background: #f8fbfe; }
+.situation-solution.is-selected { border-color: #1865b5; background: #e8f3ff; box-shadow: inset 0 0 0 1px #1865b5; }
+.situation-solution:focus-visible { outline: 2px solid #1865b5; outline-offset: 2px; }
 .situation-content .situation-solution strong { color: #1d4569; font-size: .64rem; }
 .situation-content .situation-solution small { margin-top: .1rem; font-size: .58rem; }
+.situation-no-solutions { margin: .62rem 0 0; padding-top: .55rem; border-top: 1px solid #e5ebf3; color: #687d95; font-size: .6rem; line-height: 1.35; }
 
 .dan-options-intro { margin: .55rem 0 .7rem; color: #5d728b; font-size: .7rem; }
 .dan-option-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
@@ -147,7 +148,12 @@ h2 { margin: 0; color: var(--ink); font-size: 1.2rem; line-height: 1.2; letter-s
 .technique-card { position: relative; min-height: 178px; padding: .7rem; overflow: visible; border: 1px solid #d8e1ed; border-radius: 10px; background: #fff; transition: border-color .15s, box-shadow .15s, transform .15s; }
 .technique-card:hover { z-index: 1; border-color: #8cb7e1; box-shadow: 0 5px 16px rgba(33, 73, 112, .11); transform: translateY(-1px); }
 .technique-card.is-selected { padding: calc(.7rem - 1px); border: 2px solid #3182ce; background: #fcfdff; box-shadow: 0 0 0 1px #3182ce; }
-.technique-card.is-required::after { content: 'Pflicht'; position: absolute; top: .7rem; right: 2.7rem; padding: .18rem .33rem; border-radius: 4px; background: #fff0df; color: #9a5a07; font-size: .53rem; font-weight: 800; letter-spacing: .03em; text-transform: uppercase; }
+.technique-card.is-required { border-color: #cbd5e1; background: #f5f7f9; box-shadow: none; }
+.technique-card.is-required:hover { border-color: #cbd5e1; box-shadow: none; transform: none; }
+.technique-card.is-required .card-pool, .technique-card.is-required .technique-meta, .technique-card.is-required .category-chip { color: #7d8b99; }
+.technique-card.is-required h4 { color: #5c6975; }
+.technique-card.is-required .comic-illustration { filter: grayscale(.75); opacity: .7; }
+.technique-card.is-required .select-toggle, .technique-card.is-selected .select-toggle:disabled { cursor: not-allowed; border-color: #c5ced8; background: #e1e7ed; color: #718096; }
 .card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: .5rem; }
 .card-pool { color: var(--pool-color); font-size: .57rem; font-weight: 750; letter-spacing: .045em; text-transform: uppercase; }
 .select-toggle { display: grid; flex: 0 0 auto; width: 26px; min-width: 26px; height: 26px; padding: 0; border: 1px solid #b7c9dc; border-radius: 7px; background: white; color: transparent; font-size: .85rem; }
