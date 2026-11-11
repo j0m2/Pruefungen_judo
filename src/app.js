@@ -1,4 +1,4 @@
-const DATA_VERSION = 4;
+const DATA_VERSION = 6;
 const STORAGE_KEY = "judo-programmplaner-v1";
 
 const degrees = [
@@ -455,6 +455,69 @@ const standardSituationsByDegree = {
   ],
 };
 
+// Die Zuordnung richtet sich nach der Anwendungsaufgabe. Sichtbar bleiben aber
+// nur Techniken aus Pools, die für den gewählten Grad auch wählbar sind.
+// Techniknamen bleiben Vorschläge für die Situationskarte; sie erweitern den
+// für den Grad wählbaren Technikpool nicht.
+const situationSolutionOptions = {
+  "stand-boden": [
+    ["katate-jime", "Als Koshi-jime im Übergang Stand → Boden."],
+    ["hadaka-jime", "Gegen die Bank im Übergang Stand → Boden."],
+  ],
+  "bauchlage-osae": [
+    ["kuzure-kesa-gatame", "Gegen die Bauchlage."],
+  ],
+  "beinklammer-loesen": [
+    [null, "Befreiung durch Schulter fixieren und Hüftwechsel.", "Handlungsprinzip"],
+    ["sode-guruma-jime", "Angriff gegen die Beinklammer."],
+  ],
+  "bank-angriff": [
+    ["kuzure-kesa-gatame", "Gegen die Bank."],
+    ["yoko-shiho-gatame", "Schräg von hinten, von der Seite oder aus der Bank."],
+    ["kami-shiho-gatame", "Gegen die Bank von vorne oder hinten."],
+    ["tate-shiho-gatame", "Gegen die Bank."],
+    ["juji-gatame", "Gegen die Bank."],
+    ["waki-gatame", "Aus der Bank."],
+    ["kuzure-kami-shiho-gatame", "Gegen die Bank."],
+    ["ushiro-kesa-gatame", "Aus der Bank."],
+    ["ura-gatame", "Gegen die Bank."],
+    ["sankaku-gatame", "Gegen die Bank."],
+    ["kataha-jime", "Gegen die Bank."],
+    ["hadaka-jime", "Gegen die Bank im Übergang."],
+  ],
+  "rueckenlage": [
+    ["kesa-gatame", "Aus der Rückenlage."],
+    ["tate-shiho-gatame", "Aus der Rückenlage durch diagonales Einklemmen und Drehen."],
+    ["juji-gatame", "Aus der Rückenlage."],
+    ["ushiro-kesa-gatame", "Aus der Rückenlage."],
+    ["hiza-gatame", "Aus der eigenen Rückenlage."],
+    ["sankaku-jime", "Aus der Rückenlage."],
+  ],
+  "positionswechsel": [
+    [null, "Kesa-gatame → Yoko-shiho-gatame", "Haltegriffwechsel"],
+    [null, "Kesa-gatame → Tate-shiho-gatame", "Haltegriffwechsel"],
+    [null, "Yoko-shiho-gatame → Kami-shiho-gatame", "Haltegriffwechsel"],
+  ],
+};
+
+const situationSolutionAliases = {
+  "stand-boden-ai": "stand-boden",
+  "stand-boden-kenka": "stand-boden",
+  "beinklammer": "beinklammer-loesen",
+  "beinklammer-ober": "beinklammer-loesen",
+  "beinklammer-unter": "beinklammer-loesen",
+  "bank-bauch": "bank-angriff",
+  "bank-bauch-ober": "bank-angriff",
+  "bank-bauch-unter": "bank-angriff",
+  "eigene-rueckenlage": "rueckenlage",
+  "gegner-rueckenlage": "rueckenlage",
+  "rueckenlage-ober": "rueckenlage",
+  "rueckenlage-unter": "rueckenlage",
+  "positionswechsel-1": "positionswechsel",
+  "positionswechsel-2": "positionswechsel",
+  "positionswechsel-3": "positionswechsel",
+};
+
 const standardSituationIds = new Set(
   Object.entries(standardSituationsByDegree).flatMap(([degree, situations]) => situations.map(([id]) => `${degree}:${id}`)),
 );
@@ -624,9 +687,18 @@ function ensureMandatorySelections() {
 function situationsForCurrentDegree() {
   return (standardSituationsByDegree[state.degree] || []).map(([id, title, detail]) => ({
     id: `${state.degree}:${id}`,
+    key: id,
     title,
     detail,
   }));
+}
+
+function solutionOptionsForSituation(key) {
+  return (situationSolutionOptions[situationSolutionAliases[key] || key] || []).filter(([techniqueId]) => {
+    if (!techniqueId) return true;
+    const item = techniqueById.get(techniqueId);
+    return Boolean(item && isSelectableForCurrentDegree(item));
+  });
 }
 
 function isSituationSelected(id) { return Boolean(state.situations[id]); }
@@ -795,13 +867,20 @@ function renderSituations() {
   const selected = selectedSituationCount();
   elements.situationsSummary.textContent = `${selected} / ${situations.length} geplant`;
   elements.situationsIntro.textContent = state.degree === "dan1"
-    ? "Für jede Lage eine passende Katame-waza als Situationslösung planen; Ober- und Unterlage getrennt berücksichtigen."
-    : "Jede Karte steht für eine geforderte Situationslösung. Erst mit dem Häkchen ist sie Teil deines Programms.";
+    ? "Für jede Lage eine passende Katame-waza als Situationslösung planen; Ober- und Unterlage getrennt berücksichtigen. Die Vorschläge sind auf die für diesen Grad wählbaren Pools begrenzt."
+    : "Jede Karte steht für eine geforderte Situationslösung. Vorschläge erscheinen nur, wenn ihre Technik aus einem für diesen Grad wählbaren Pool stammt.";
   elements.situationsGrid.innerHTML = situations.map((situation) => {
     const isSelected = isSituationSelected(situation.id);
+    const solutions = solutionOptionsForSituation(situation.key);
+    const solutionsMarkup = solutions.length
+      ? `<span class="situation-solutions"><span class="situation-solutions-label">Mögliche Lösungen</span><span class="situation-solution-list">${solutions.map(([techniqueId, detail, label]) => {
+        const techniqueName = techniqueId ? techniqueById.get(techniqueId)?.name : label;
+        return `<span class="situation-solution"><strong>${techniqueName || "Musterlösung"}</strong><small>${detail}</small></span>`;
+      }).join("")}</span></span>`
+      : "";
     return `<button class="situation-card ${isSelected ? "is-selected" : ""}" type="button" data-situation-toggle="${situation.id}" aria-pressed="${isSelected}">
       <span class="situation-check" aria-hidden="true">✓</span>
-      <span class="situation-content"><strong>${situation.title}</strong><small>${situation.detail}</small></span>
+      <span class="situation-content"><strong>${situation.title}</strong><small>${situation.detail}</small>${solutionsMarkup}</span>
     </button>`;
   }).join("");
 }
