@@ -2,7 +2,7 @@
 
 .PHONY: build clean check
 
-VERSION ?= 0.1.6
+VERSION ?= 0.1.7
 
 build:
 	BUILD_VERSION=$(VERSION) node scripts/build.mjs
