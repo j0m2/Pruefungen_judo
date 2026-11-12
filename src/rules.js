@@ -11,6 +11,7 @@
       sideRequirementsByDegree,
       danPrograms,
       standardSituationsByDegree,
+      applicationTaskDescriptions,
       situationSolutionOptions,
       situationSolutionAliases,
       requirementsByDegree,
@@ -124,7 +125,16 @@
     }
 
     function situationsForDegree(degreeId) {
-      return (standardSituationsByDegree[degreeId] || []).map(([id, title, detail]) => ({ id: `${degreeId}:${id}`, key: id, title, detail }));
+      return (standardSituationsByDegree[degreeId] || []).map(([id, title, detail]) => {
+        const description = applicationTaskDescriptions[id] || {};
+        return {
+          id: `${degreeId}:${id}`,
+          key: id,
+          title: description.title || title,
+          detail: description.detail || detail,
+          context: description.context || "",
+        };
+      });
     }
 
     function solutionOptionsForSituation(key, degreeId) {

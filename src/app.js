@@ -157,6 +157,20 @@ function renderRequirements() {
   elements.note.textContent = gradeNotes[state.degree];
 }
 
+function solutionName(solution) {
+  return solution.techniqueId ? techniqueById.get(solution.techniqueId)?.name : solution.label;
+}
+
+function solutionOptionGroups(solutions, selectedSolution) {
+  const groups = new Map();
+  for (const solution of solutions) {
+    const group = solution.techniqueId ? techniqueById.get(solution.techniqueId)?.category || "Weitere Lösungen" : "Bewegungsprinzip";
+    if (!groups.has(group)) groups.set(group, []);
+    groups.get(group).push(solution);
+  }
+  return [...groups.entries()].map(([group, entries]) => `<optgroup label="${group}">${entries.map((solution) => `<option value="${solution.id}" ${selectedSolution === solution.id ? "selected" : ""}>${solutionName(solution) || "Musterlösung"}</option>`).join("")}</optgroup>`).join("");
+}
+
 function renderSituations() {
   const situations = situationsForCurrentDegree();
   elements.situationsSection.hidden = situations.length === 0;
@@ -169,15 +183,13 @@ function renderSituations() {
   elements.situationsGrid.innerHTML = situations.map((situation) => {
     const selectedSolution = state.situations[situation.id] || "";
     const solutions = solutionOptionsForSituation(situation.key);
+    const selectId = `situation-solution-${situation.id.replace(":", "-")}`;
+    const selected = solutions.find((solution) => solution.id === selectedSolution);
     const solutionsMarkup = solutions.length
-      ? `<div class="situation-solutions" role="radiogroup" aria-label="Lösung für ${situation.title}"><span class="situation-solutions-label">Lösung auswählen</span><div class="situation-solution-list">${solutions.map((solution) => {
-        const isSelected = selectedSolution === solution.id;
-        const techniqueName = solution.techniqueId ? techniqueById.get(solution.techniqueId)?.name : solution.label;
-        return `<button class="situation-solution ${isSelected ? "is-selected" : ""}" type="button" role="radio" aria-checked="${isSelected}" data-situation-solution="${situation.id}" data-solution-id="${solution.id}"><strong>${techniqueName || "Musterlösung"}</strong><small>${solution.detail}</small></button>`;
-      }).join("")}</div></div>`
+      ? `<div class="situation-solutions"><label class="situation-solutions-label" for="${selectId}">Lösung auswählen · ${solutions.length} Möglichkeit${solutions.length === 1 ? "" : "en"}</label><select class="situation-solution-select" id="${selectId}" data-situation-solution="${situation.id}"><option value="">Noch nicht festgelegt …</option>${solutionOptionGroups(solutions, selectedSolution)}</select>${selected ? `<p class="situation-solution-description"><strong>${solutionName(selected) || "Musterlösung"}:</strong> ${selected.detail}</p>` : ""}</div>`
       : `<p class="situation-no-solutions">Für diese Anwendungsaufgabe ist im für diesen Grad zulässigen Pool keine Musterlösung hinterlegt.</p>`;
     return `<article class="situation-card ${selectedSolution ? "is-selected" : ""}">
-      <div class="situation-content"><strong>${situation.title}</strong><small>${situation.detail}</small>${solutionsMarkup}</div>
+      <div class="situation-content"><strong>${situation.title}</strong><small>${situation.detail}</small>${situation.context ? `<p class="situation-context">${situation.context}</p>` : ""}${solutionsMarkup}</div>
     </article>`;
   }).join("");
 }
@@ -304,8 +316,10 @@ function resetSelection() {
 }
 
 function updateSituationSolution(id, solutionId) {
-  if (!standardSituationIds.has(id) || !isValidSituationSolution(id, solutionId)) return;
-  state.situations[id] = solutionId;
+  if (!standardSituationIds.has(id)) return;
+  if (!solutionId) delete state.situations[id];
+  else if (!isValidSituationSolution(id, solutionId)) return;
+  else state.situations[id] = solutionId;
   persist();
   renderRequirements();
   renderSituations();
@@ -434,9 +448,9 @@ function bindEvents() {
     persist();
     renderRequirements();
   });
-  elements.situationsGrid.addEventListener("click", (event) => {
-    const button = event.target.closest("[data-situation-solution]");
-    if (button) updateSituationSolution(button.dataset.situationSolution, button.dataset.solutionId);
+  elements.situationsGrid.addEventListener("change", (event) => {
+    const select = event.target.closest("[data-situation-solution]");
+    if (select) updateSituationSolution(select.dataset.situationSolution, select.value);
   });
   elements.danOptionGrid.addEventListener("change", (event) => {
     const select = event.target.closest("[data-dan-option]");

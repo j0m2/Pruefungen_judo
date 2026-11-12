@@ -1,6 +1,6 @@
 {
   "schema": "judo-programmplaner-data",
-  "version": 8,
+  "version": 9,
   "degrees": [
     {
       "id": "8",
@@ -2907,229 +2907,747 @@
   "situationSolutionOptions": {
     "stand-boden": [
       [
-        "katate-jime",
-        "Als Koshi-jime im Übergang Stand → Boden."
+        "kuzure-kesa-gatame",
+        "Nach der Landung seitlich am Oberkörper bleiben und Kopf sowie nahen Arm sichern.",
+        null
       ],
       [
-        "hadaka-jime",
-        "Gegen die Bank im Übergang Stand → Boden."
+        "kesa-gatame",
+        "Nach einer seitlichen Landung Hüfte neben Uke absetzen und Kopf sowie Arm kontrollieren.",
+        null
+      ],
+      [
+        "yoko-shiho-gatame",
+        "Seitlich über Ukes Oberkörper bleiben und die Brust-Schulter-Kontrolle ausbauen.",
+        null
+      ],
+      [
+        "kami-shiho-gatame",
+        "Nach dem Wurf an Ukes Kopfseite weiterarbeiten und die obere Vierpunktehalte sichern.",
+        null
+      ],
+      [
+        "okuri-eri-jime",
+        "Dreht Uke in Bauch- oder Banklage, den Kragen aus passender seitlicher oder rückwärtiger Position übernehmen.",
+        null
       ]
     ],
     "bauchlage-osae": [
       [
         "kuzure-kesa-gatame",
-        "Gegen die Bauchlage."
-      ]
-    ],
-    "beinklammer-loesen": [
-      [
-        null,
-        "Befreiung durch Schulter fixieren und Hüftwechsel.",
-        "Handlungsprinzip"
+        "Uke aus der Bauchlage kontrolliert wenden und seitlich mit Kopf-Arm-Kontrolle sichern.",
+        null
       ],
       [
-        "sode-guruma-jime",
-        "Angriff gegen die Beinklammer."
+        "kesa-gatame",
+        "Halbnelson-Umdreher: Schulter und Nacken kontrollieren, Uke drehen und Kesa-gatame ansetzen.",
+        null
+      ],
+      [
+        "yoko-shiho-gatame",
+        "Uke in Rückenlage drehen und die seitliche Vierpunktehalte aufbauen.",
+        null
+      ],
+      [
+        "kami-shiho-gatame",
+        "Uke aus der Bauchlage wenden und an der Kopfseite in Kami-shiho-gatame fixieren.",
+        null
+      ],
+      [
+        "tate-shiho-gatame",
+        "Schlüsseldreher: Uke kontrolliert wenden und die Reitposition zu Tate-shiho-gatame stabilisieren.",
+        null
       ]
     ],
     "bank-angriff": [
       [
         "kuzure-kesa-gatame",
-        "Gegen die Bank."
+        "Uke über Schulter- und Armkontrolle aus der Bank drehen und seitlich sichern.",
+        null
+      ],
+      [
+        "kesa-gatame",
+        "Halbnelson-Umdreher: Schulter und Nacken kontrollieren, Uke drehen und Kesa-gatame ansetzen.",
+        null
       ],
       [
         "yoko-shiho-gatame",
-        "Schräg von hinten, von der Seite oder aus der Bank."
+        "Stützeklauen- oder Dampfwalzen-Umdreher: Uke von der Seite drehen und Yoko-shiho-gatame sichern.",
+        null
       ],
       [
         "kami-shiho-gatame",
-        "Gegen die Bank von vorne oder hinten."
+        "Sattelsturz oder rollende Bankumkehr: über Reverskontrolle zur Kopf-Vierpunktehalte wechseln.",
+        null
       ],
       [
         "tate-shiho-gatame",
-        "Gegen die Bank."
+        "Bei der Gegenrichtung des Sattelsturzes Uke wenden und Tate-shiho-gatame stabilisieren.",
+        null
       ],
       [
         "juji-gatame",
-        "Gegen die Bank."
+        "Rollbankhebel: aus der Armkontrolle gegen die Bank den Kreuzarmhebel entwickeln.",
+        null
       ],
       [
         "waki-gatame",
-        "Aus der Bank."
-      ],
-      [
-        "kuzure-kami-shiho-gatame",
-        "Gegen die Bank."
-      ],
-      [
-        "ushiro-kesa-gatame",
-        "Aus der Bank."
+        "Den abgestützten Arm abklemmen und zum Achselstreckhebel weiterführen.",
+        null
       ],
       [
         "ura-gatame",
-        "Gegen die Bank."
+        "Den Arm abklemmen, die Lage wechseln und Ura-gatame als Kontrolle sichern.",
+        null
       ],
       [
-        "sankaku-gatame",
-        "Gegen die Bank."
+        "okuri-eri-jime",
+        "Rollbankwürger: Kragen fixieren und über eine Rolle oder ein Umgehen zur Kragenwürge weiterarbeiten.",
+        null
       ],
       [
         "kataha-jime",
-        "Gegen die Bank."
+        "Rollender Einflügelwürger aus einer sicheren Kopf-Arm- und Kragenkontrolle.",
+        null
       ],
       [
-        "hadaka-jime",
-        "Gegen die Bank im Übergang."
+        "sode-guruma-jime",
+        "Ärmelradwürge aus der oberen Bankkontrolle bei eindeutig gesicherter Kragen- und Ärmelkontrolle.",
+        null
       ]
     ],
-    "rueckenlage": [
+    "beinklammer-oben": [
       [
-        "kesa-gatame",
-        "Aus der Rückenlage."
+        null,
+        "Schulter kontrollieren, Hüfte wechseln und die Beinklammer lösen.",
+        "Beinklammer lösen"
+      ],
+      [
+        "yoko-shiho-gatame",
+        "Das geklammerte Bein befreien, seitlich passieren und Yoko-shiho-gatame sichern.",
+        null
       ],
       [
         "tate-shiho-gatame",
-        "Aus der Rückenlage durch diagonales Einklemmen und Drehen."
+        "Beinklammer lösen, Ukes Hüfte kontrollieren und zur Reitposition in Tate-shiho-gatame aufsteigen.",
+        null
+      ],
+      [
+        "kami-shiho-gatame",
+        "Das Bein befreien und um Ukes Kopfseite zur oberen Vierpunktehalte passieren.",
+        null
+      ],
+      [
+        "okuri-eri-jime",
+        "Gibt Uke nach dem Lösen der Klammer den Rücken frei, den Kragen übernehmen und Okuri-eri-jime ansetzen.",
+        null
+      ]
+    ],
+    "beinklammer-unten": [
+      [
+        "ude-garami",
+        "Über Armkontrolle aus der Unterlage einen Ude-garami-Ansatz entwickeln.",
+        null
+      ],
+      [
+        "gyaku-juji-jime",
+        "Kragenkontrolle nutzen und die Kreuzwürge mit passender Griffstellung aufbauen.",
+        null
       ],
       [
         "juji-gatame",
-        "Aus der Rückenlage."
-      ],
-      [
-        "ushiro-kesa-gatame",
-        "Aus der Rückenlage."
-      ],
-      [
-        "hiza-gatame",
-        "Aus der eigenen Rückenlage."
+        "Den Arm kontrollieren, einen Winkel zum Oberkörper schaffen und Juji-gatame ansetzen.",
+        null
       ],
       [
         "sankaku-jime",
-        "Aus der Rückenlage."
+        "Arm und Kopf kontrollieren, die Dreieckskontrolle schließen und Sankaku-jime nur bei gesicherter Würgewirkung ansetzen.",
+        null
+      ]
+    ],
+    "beinklammer-gesamt": [
+      [
+        null,
+        "Schulter kontrollieren, Hüfte wechseln und die Beinklammer lösen.",
+        "Beinklammer lösen"
+      ],
+      [
+        "yoko-shiho-gatame",
+        "Das geklammerte Bein befreien, seitlich passieren und Yoko-shiho-gatame sichern.",
+        null
+      ],
+      [
+        "tate-shiho-gatame",
+        "Beinklammer lösen, Ukes Hüfte kontrollieren und zur Reitposition in Tate-shiho-gatame aufsteigen.",
+        null
+      ],
+      [
+        "kami-shiho-gatame",
+        "Das Bein befreien und um Ukes Kopfseite zur oberen Vierpunktehalte passieren.",
+        null
+      ],
+      [
+        "okuri-eri-jime",
+        "Gibt Uke nach dem Lösen der Klammer den Rücken frei, den Kragen übernehmen und Okuri-eri-jime ansetzen.",
+        null
+      ],
+      [
+        "ude-garami",
+        "Über Armkontrolle aus der Unterlage einen Ude-garami-Ansatz entwickeln.",
+        null
+      ],
+      [
+        "gyaku-juji-jime",
+        "Kragenkontrolle nutzen und die Kreuzwürge mit passender Griffstellung aufbauen.",
+        null
+      ],
+      [
+        "juji-gatame",
+        "Den Arm kontrollieren, einen Winkel zum Oberkörper schaffen und Juji-gatame ansetzen.",
+        null
+      ],
+      [
+        "sankaku-jime",
+        "Arm und Kopf kontrollieren, die Dreieckskontrolle schließen und Sankaku-jime nur bei gesicherter Würgewirkung ansetzen.",
+        null
+      ]
+    ],
+    "rueckenlage-ober": [
+      [
+        "yoko-shiho-gatame",
+        "Die Kontrolle an Ukes Beinen öffnen, seitlich passieren und Yoko-shiho-gatame stabilisieren.",
+        null
+      ],
+      [
+        "kami-shiho-gatame",
+        "Die Kontrolle an Ukes Beinen öffnen, zur Kopfseite passieren und Kami-shiho-gatame festigen.",
+        null
+      ],
+      [
+        "kesa-gatame",
+        "Nach dem Öffnen und Passieren in die seitliche Kopf-Arm-Kontrolle für Kesa-gatame wechseln.",
+        null
+      ]
+    ],
+    "rueckenlage-unter": [
+      [
+        "gyaku-juji-jime",
+        "Aus der Rückenlage die Kragenkontrolle nutzen und Gyaku-juji-jime mit passender Griffstellung aufbauen.",
+        null
+      ],
+      [
+        "ude-garami",
+        "Ukes Arm isolieren und Ude-garami aus der eigenen Rückenlage ansetzen.",
+        null
+      ],
+      [
+        "juji-gatame",
+        "Ukes Arm kontrollieren, einen Winkel schaffen und Juji-gatame ansetzen.",
+        null
+      ],
+      [
+        "sankaku-jime",
+        "Arm und Kopf kontrollieren und Sankaku-jime nur bei sicherer Würgewirkung schließen.",
+        null
+      ]
+    ],
+    "rueckenlage-gesamt": [
+      [
+        "yoko-shiho-gatame",
+        "Die Kontrolle an Ukes Beinen öffnen, seitlich passieren und Yoko-shiho-gatame stabilisieren.",
+        null
+      ],
+      [
+        "kami-shiho-gatame",
+        "Die Kontrolle an Ukes Beinen öffnen, zur Kopfseite passieren und Kami-shiho-gatame festigen.",
+        null
+      ],
+      [
+        "kesa-gatame",
+        "Nach dem Öffnen und Passieren in die seitliche Kopf-Arm-Kontrolle für Kesa-gatame wechseln.",
+        null
+      ],
+      [
+        "gyaku-juji-jime",
+        "Aus der Rückenlage die Kragenkontrolle nutzen und Gyaku-juji-jime mit passender Griffstellung aufbauen.",
+        null
+      ],
+      [
+        "ude-garami",
+        "Ukes Arm isolieren und Ude-garami aus der eigenen Rückenlage ansetzen.",
+        null
+      ],
+      [
+        "juji-gatame",
+        "Ukes Arm kontrollieren, einen Winkel schaffen und Juji-gatame ansetzen.",
+        null
+      ],
+      [
+        "sankaku-jime",
+        "Arm und Kopf kontrollieren und Sankaku-jime nur bei sicherer Würgewirkung schließen.",
+        null
       ]
     ],
     "positionswechsel": [
       [
         null,
-        "Kesa-gatame → Yoko-shiho-gatame",
-        "Haltegriffwechsel"
+        "Von Kesa-gatame in die seitliche Vierpunktehalte wechseln.",
+        "Kesa-gatame → Yoko-shiho-gatame"
       ],
       [
         null,
-        "Kesa-gatame → Tate-shiho-gatame",
-        "Haltegriffwechsel"
+        "Von Kesa-gatame in die Reitposition wechseln.",
+        "Kesa-gatame → Tate-shiho-gatame"
       ],
       [
         null,
-        "Yoko-shiho-gatame → Kami-shiho-gatame",
-        "Haltegriffwechsel"
+        "Von Yoko-shiho-gatame an die Kopfseite in Kami-shiho-gatame wechseln.",
+        "Yoko-shiho-gatame → Kami-shiho-gatame"
       ]
     ]
   },
   "situationSolutionAliases": {
     "stand-boden-ai": "stand-boden",
     "stand-boden-kenka": "stand-boden",
-    "beinklammer": "beinklammer-loesen",
-    "beinklammer-ober": "beinklammer-loesen",
-    "beinklammer-unter": "beinklammer-loesen",
+    "beinklammer-loesen": "beinklammer-oben",
+    "beinklammer": "beinklammer-gesamt",
+    "beinklammer-ober": "beinklammer-oben",
+    "beinklammer-unter": "beinklammer-unten",
     "bank-bauch": "bank-angriff",
     "bank-bauch-ober": "bank-angriff",
     "bank-bauch-unter": "bank-angriff",
-    "eigene-rueckenlage": "rueckenlage",
-    "gegner-rueckenlage": "rueckenlage",
-    "rueckenlage-ober": "rueckenlage",
-    "rueckenlage-unter": "rueckenlage",
+    "eigene-rueckenlage": "rueckenlage-unter",
+    "gegner-rueckenlage": "rueckenlage-ober",
+    "rueckenlage-ober": "rueckenlage-ober",
+    "rueckenlage-unter": "rueckenlage-unter",
+    "rueckenlage": "rueckenlage-gesamt",
     "positionswechsel-1": "positionswechsel",
     "positionswechsel-2": "positionswechsel",
     "positionswechsel-3": "positionswechsel"
   },
   "requirementsByDegree": {
-    "8": [
-      { "title": "Einstieg", "metric": "zero", "needed": 0, "detail": "kein Technikpool-Umfang festgelegt" }
-    ],
-    "7": [
-      { "title": "Würfe", "metric": "stand", "needed": 3, "detail": "aus dem Grundprogramm" },
-      { "title": "Hauptseite", "metric": "turns", "side": "main", "needed": 1, "detail": "Eindrehtechnik" },
-      { "title": "Gegenseite", "metric": "turns", "side": "opposite", "needed": 1, "detail": "Eindrehtechnik" },
-      { "title": "Fußtechnik", "metric": "foot", "needed": 1, "detail": "Ashi-waza" },
-      { "title": "Halten", "metric": "required", "ids": "degree-mandatory", "needed": 4, "detail": "4 konkret benannte Osaekomi-waza" }
-    ],
-    "6": [
-      { "title": "Würfe", "metric": "stand", "needed": 6, "detail": "aus dem Grundprogramm" },
-      { "title": "Hauptseite", "metric": "turns", "side": "main", "needed": 2, "detail": "Eindrehtechniken" },
-      { "title": "Gegenseite", "metric": "turns", "side": "opposite", "needed": 2, "detail": "Eindrehtechniken" },
-      { "title": "Fußtechniken", "metric": "foot", "needed": 2, "detail": "Ashi-waza" },
-      { "title": "Halten", "metric": "holds", "needed": 4, "detail": "weitere Haltegriffe / Varianten" }
-    ],
-    "5": [
-      { "title": "Würfe", "metric": "stand", "needed": 9, "detail": "aus dem Grundprogramm" },
-      { "title": "Hauptseite", "metric": "turns", "side": "main", "needed": 3, "detail": "Eindrehtechniken" },
-      { "title": "Gegenseite", "metric": "turns", "side": "opposite", "needed": 3, "detail": "Eindrehtechniken" },
-      { "title": "Fußtechniken", "metric": "foot", "needed": 3, "detail": "Ashi-waza" }
-    ],
-    "4": [
-      { "title": "Würfe", "metric": "stand", "needed": 12, "detail": "aus dem Grundprogramm" },
-      { "title": "Hauptseite", "metric": "turns", "side": "main", "needed": 3, "detail": "Eindrehtechniken" },
-      { "title": "Gegenseite", "metric": "turns", "side": "opposite", "needed": 3, "detail": "Eindrehtechniken" },
-      { "title": "Pflichtwürfe", "metric": "required", "ids": ["o-soto-gari", "harai-goshi", "uchi-mata"], "needed": 3, "detail": "O-soto-gari · Harai-goshi · Uchi-mata" },
-      { "title": "Hebel", "metric": "levers", "needed": 3, "detail": "inkl. Juji- & Ude-garami" }
-    ],
-    "3": [
-      { "title": "Würfe", "metric": "stand", "needed": 15, "detail": "gesamt" },
-      { "title": "Erweiterung", "metric": "extension-throws", "needed": 3, "detail": "Würfe aus dem Erweiterungsprogramm" },
-      { "title": "Pflichtwürfe", "metric": "required", "ids": ["tomoe-nage", "tani-otoshi"], "needed": 2, "detail": "Tomoe-nage · Tani-otoshi" },
-      { "title": "Erweiterungshebel", "metric": "extension-levers", "needed": 4, "detail": "inkl. Hiza- & Sankaku-gatame" },
-      { "title": "Pflichthebel", "metric": "required", "ids": ["hiza-gatame", "sankaku-gatame"], "needed": 2, "detail": "Hiza- & Sankaku-gatame" }
+    "1": [
+      {
+        "title": "Würfe",
+        "metric": "stand",
+        "needed": 20,
+        "detail": "gesamt"
+      },
+      {
+        "title": "Erweiterung",
+        "metric": "extension-throws",
+        "needed": 9,
+        "detail": "Würfe aus dem Erweiterungsprogramm"
+      },
+      {
+        "title": "Pflichtwürfe",
+        "metric": "required",
+        "ids": [
+          "ura-nage",
+          "ko-uchi-makikomi"
+        ],
+        "needed": 2,
+        "detail": "Ura-nage · Ko-uchi-makikomi"
+      },
+      {
+        "title": "Würgetechniken",
+        "metric": "chokes",
+        "needed": 4,
+        "detail": "aus Grund- & Erweiterungsprogramm"
+      },
+      {
+        "title": "Pflichtwürgen",
+        "metric": "required",
+        "ids": [
+          "sode-guruma-jime",
+          "okuri-eri-jime"
+        ],
+        "needed": 2,
+        "detail": "Sode-guruma- & Okuri-eri-jime"
+      }
     ],
     "2": [
-      { "title": "Würfe", "metric": "stand", "needed": 18, "detail": "gesamt" },
-      { "title": "Erweiterung", "metric": "extension-throws", "needed": 6, "detail": "Würfe aus dem Erweiterungsprogramm" },
-      { "title": "Pflichtwürfe", "metric": "required", "ids": ["sumi-gaeshi", "soto-makikomi"], "needed": 2, "detail": "Sumi-gaeshi · Soto-makikomi" },
-      { "title": "Würgetechniken", "metric": "chokes", "needed": 3, "detail": "aus Grund- & Erweiterungsprogramm" },
-      { "title": "Pflichtwürgen", "metric": "required", "ids": ["gyaku-juji-jime", "okuri-eri-jime"], "needed": 2, "detail": "Gyaku-juji- & Okuri-eri-jime" }
+      {
+        "title": "Würfe",
+        "metric": "stand",
+        "needed": 18,
+        "detail": "gesamt"
+      },
+      {
+        "title": "Erweiterung",
+        "metric": "extension-throws",
+        "needed": 6,
+        "detail": "Würfe aus dem Erweiterungsprogramm"
+      },
+      {
+        "title": "Pflichtwürfe",
+        "metric": "required",
+        "ids": [
+          "sumi-gaeshi",
+          "soto-makikomi"
+        ],
+        "needed": 2,
+        "detail": "Sumi-gaeshi · Soto-makikomi"
+      },
+      {
+        "title": "Würgetechniken",
+        "metric": "chokes",
+        "needed": 3,
+        "detail": "aus Grund- & Erweiterungsprogramm"
+      },
+      {
+        "title": "Pflichtwürgen",
+        "metric": "required",
+        "ids": [
+          "gyaku-juji-jime",
+          "okuri-eri-jime"
+        ],
+        "needed": 2,
+        "detail": "Gyaku-juji- & Okuri-eri-jime"
+      }
     ],
-    "1": [
-      { "title": "Würfe", "metric": "stand", "needed": 20, "detail": "gesamt" },
-      { "title": "Erweiterung", "metric": "extension-throws", "needed": 9, "detail": "Würfe aus dem Erweiterungsprogramm" },
-      { "title": "Pflichtwürfe", "metric": "required", "ids": ["ura-nage", "ko-uchi-makikomi"], "needed": 2, "detail": "Ura-nage · Ko-uchi-makikomi" },
-      { "title": "Würgetechniken", "metric": "chokes", "needed": 4, "detail": "aus Grund- & Erweiterungsprogramm" },
-      { "title": "Pflichtwürgen", "metric": "required", "ids": ["sode-guruma-jime", "okuri-eri-jime"], "needed": 2, "detail": "Sode-guruma- & Okuri-eri-jime" }
+    "3": [
+      {
+        "title": "Würfe",
+        "metric": "stand",
+        "needed": 15,
+        "detail": "gesamt"
+      },
+      {
+        "title": "Erweiterung",
+        "metric": "extension-throws",
+        "needed": 3,
+        "detail": "Würfe aus dem Erweiterungsprogramm"
+      },
+      {
+        "title": "Pflichtwürfe",
+        "metric": "required",
+        "ids": [
+          "tomoe-nage",
+          "tani-otoshi"
+        ],
+        "needed": 2,
+        "detail": "Tomoe-nage · Tani-otoshi"
+      },
+      {
+        "title": "Erweiterungshebel",
+        "metric": "extension-levers",
+        "needed": 4,
+        "detail": "inkl. Hiza- & Sankaku-gatame"
+      },
+      {
+        "title": "Pflichthebel",
+        "metric": "required",
+        "ids": [
+          "hiza-gatame",
+          "sankaku-gatame"
+        ],
+        "needed": 2,
+        "detail": "Hiza- & Sankaku-gatame"
+      }
+    ],
+    "4": [
+      {
+        "title": "Würfe",
+        "metric": "stand",
+        "needed": 12,
+        "detail": "aus dem Grundprogramm"
+      },
+      {
+        "title": "Hauptseite",
+        "metric": "turns",
+        "side": "main",
+        "needed": 3,
+        "detail": "Eindrehtechniken"
+      },
+      {
+        "title": "Gegenseite",
+        "metric": "turns",
+        "side": "opposite",
+        "needed": 3,
+        "detail": "Eindrehtechniken"
+      },
+      {
+        "title": "Pflichtwürfe",
+        "metric": "required",
+        "ids": [
+          "o-soto-gari",
+          "harai-goshi",
+          "uchi-mata"
+        ],
+        "needed": 3,
+        "detail": "O-soto-gari · Harai-goshi · Uchi-mata"
+      },
+      {
+        "title": "Hebel",
+        "metric": "levers",
+        "needed": 3,
+        "detail": "inkl. Juji- & Ude-garami"
+      }
+    ],
+    "5": [
+      {
+        "title": "Würfe",
+        "metric": "stand",
+        "needed": 9,
+        "detail": "aus dem Grundprogramm"
+      },
+      {
+        "title": "Hauptseite",
+        "metric": "turns",
+        "side": "main",
+        "needed": 3,
+        "detail": "Eindrehtechniken"
+      },
+      {
+        "title": "Gegenseite",
+        "metric": "turns",
+        "side": "opposite",
+        "needed": 3,
+        "detail": "Eindrehtechniken"
+      },
+      {
+        "title": "Fußtechniken",
+        "metric": "foot",
+        "needed": 3,
+        "detail": "Ashi-waza"
+      }
+    ],
+    "6": [
+      {
+        "title": "Würfe",
+        "metric": "stand",
+        "needed": 6,
+        "detail": "aus dem Grundprogramm"
+      },
+      {
+        "title": "Hauptseite",
+        "metric": "turns",
+        "side": "main",
+        "needed": 2,
+        "detail": "Eindrehtechniken"
+      },
+      {
+        "title": "Gegenseite",
+        "metric": "turns",
+        "side": "opposite",
+        "needed": 2,
+        "detail": "Eindrehtechniken"
+      },
+      {
+        "title": "Fußtechniken",
+        "metric": "foot",
+        "needed": 2,
+        "detail": "Ashi-waza"
+      },
+      {
+        "title": "Halten",
+        "metric": "holds",
+        "needed": 4,
+        "detail": "weitere Haltegriffe / Varianten"
+      }
+    ],
+    "7": [
+      {
+        "title": "Würfe",
+        "metric": "stand",
+        "needed": 3,
+        "detail": "aus dem Grundprogramm"
+      },
+      {
+        "title": "Hauptseite",
+        "metric": "turns",
+        "side": "main",
+        "needed": 1,
+        "detail": "Eindrehtechnik"
+      },
+      {
+        "title": "Gegenseite",
+        "metric": "turns",
+        "side": "opposite",
+        "needed": 1,
+        "detail": "Eindrehtechnik"
+      },
+      {
+        "title": "Fußtechnik",
+        "metric": "foot",
+        "needed": 1,
+        "detail": "Ashi-waza"
+      },
+      {
+        "title": "Halten",
+        "metric": "required",
+        "ids": "degree-mandatory",
+        "needed": 4,
+        "detail": "4 konkret benannte Osaekomi-waza"
+      }
+    ],
+    "8": [
+      {
+        "title": "Einstieg",
+        "metric": "zero",
+        "needed": 0,
+        "detail": "kein Technikpool-Umfang festgelegt"
+      }
     ],
     "dan1": [
-      { "title": "Gokyo-no-waza", "metric": "gokyo", "needed": "gokyo-count", "detail": "jede Gokyo-Familie aus freier Interaktion" },
-      { "title": "Katame-waza", "metric": "required", "ids": "dan-ground", "needed": "dan-ground-count", "detail": "je eine Variante aus Grund- & Erweiterungsprogramm" }
+      {
+        "title": "Gokyo-no-waza",
+        "metric": "gokyo",
+        "needed": "gokyo-count",
+        "detail": "jede Gokyo-Familie aus freier Interaktion"
+      },
+      {
+        "title": "Katame-waza",
+        "metric": "required",
+        "ids": "dan-ground",
+        "needed": "dan-ground-count",
+        "detail": "je eine Variante aus Grund- & Erweiterungsprogramm"
+      }
     ],
     "dan2": [
-      { "title": "Gokyo-no-waza", "metric": "gokyo", "needed": "gokyo-count", "detail": "jede Gokyo-Technik aus freien Interaktionen" },
-      { "title": "Weitere Würfe", "metric": "outside-gokyo-throws", "needed": 12, "detail": "12 Shinmeisho-/Habukareta-waza" },
-      { "title": "Katame-waza", "metric": "required", "ids": "katame-without-do", "needed": "katame-without-do-count", "detail": "alle außer Do-jime; Ashi-garami ist nicht im Pool" }
+      {
+        "title": "Gokyo-no-waza",
+        "metric": "gokyo",
+        "needed": "gokyo-count",
+        "detail": "jede Gokyo-Technik aus freien Interaktionen"
+      },
+      {
+        "title": "Weitere Würfe",
+        "metric": "outside-gokyo-throws",
+        "needed": 12,
+        "detail": "12 Shinmeisho-/Habukareta-waza"
+      },
+      {
+        "title": "Katame-waza",
+        "metric": "required",
+        "ids": "katame-without-do",
+        "needed": "katame-without-do-count",
+        "detail": "alle außer Do-jime; Ashi-garami ist nicht im Pool"
+      }
     ],
     "dan3": [
-      { "title": "Gokyo-no-waza", "metric": "gokyo", "needed": "gokyo-count", "detail": "jede Gokyo-Technik aus freien Interaktionen" },
-      { "title": "Weitere Würfe", "metric": "outside-gokyo-throws", "needed": 12, "detail": "12 Shinmeisho-/Habukareta-waza" },
-      { "title": "Katame-waza", "metric": "required", "ids": "katame-without-do", "needed": "katame-without-do-count", "detail": "alle außer Do-jime; Ashi-garami ist nicht im Pool" }
+      {
+        "title": "Gokyo-no-waza",
+        "metric": "gokyo",
+        "needed": "gokyo-count",
+        "detail": "jede Gokyo-Technik aus freien Interaktionen"
+      },
+      {
+        "title": "Weitere Würfe",
+        "metric": "outside-gokyo-throws",
+        "needed": 12,
+        "detail": "12 Shinmeisho-/Habukareta-waza"
+      },
+      {
+        "title": "Katame-waza",
+        "metric": "required",
+        "ids": "katame-without-do",
+        "needed": "katame-without-do-count",
+        "detail": "alle außer Do-jime; Ashi-garami ist nicht im Pool"
+      }
     ],
     "dan4": [
-      { "title": "Te-waza", "metric": "group", "group": "stand-te", "needed": 1, "detail": "mindestens ein Beispiel für die individuelle Vorbereitung" },
-      { "title": "Koshi-waza", "metric": "group", "group": "stand-koshi", "needed": 1, "detail": "mindestens ein Beispiel für die individuelle Vorbereitung" },
-      { "title": "Ashi-waza", "metric": "group", "group": "stand-ashi", "needed": 1, "detail": "mindestens ein Beispiel für die individuelle Vorbereitung" },
-      { "title": "Osaekomi-waza", "metric": "group", "group": "boden-osae", "needed": 1, "detail": "mindestens ein Beispiel einschließlich Befreiung" }
+      {
+        "title": "Te-waza",
+        "metric": "group",
+        "group": "stand-te",
+        "needed": 1,
+        "detail": "mindestens ein Beispiel für die individuelle Vorbereitung"
+      },
+      {
+        "title": "Koshi-waza",
+        "metric": "group",
+        "group": "stand-koshi",
+        "needed": 1,
+        "detail": "mindestens ein Beispiel für die individuelle Vorbereitung"
+      },
+      {
+        "title": "Ashi-waza",
+        "metric": "group",
+        "group": "stand-ashi",
+        "needed": 1,
+        "detail": "mindestens ein Beispiel für die individuelle Vorbereitung"
+      },
+      {
+        "title": "Osaekomi-waza",
+        "metric": "group",
+        "group": "boden-osae",
+        "needed": 1,
+        "detail": "mindestens ein Beispiel einschließlich Befreiung"
+      }
     ],
     "dan5": [
-      { "title": "Ma-sutemi-waza", "metric": "group", "group": "stand-ma", "needed": 1, "detail": "mindestens ein Beispiel für die individuelle Vorbereitung" },
-      { "title": "Yoko-sutemi-waza", "metric": "group", "group": "stand-yoko", "needed": 1, "detail": "mindestens ein Beispiel; Kawazu-gake und Kani-basami ausgeschlossen" },
-      { "title": "Kansetsu-waza", "metric": "group", "group": "boden-kansetsu", "needed": 1, "detail": "mindestens ein Beispiel einschließlich Verteidigung" },
-      { "title": "Shime-waza", "metric": "group", "group": "boden-shime", "needed": 1, "detail": "mindestens ein Beispiel einschließlich Verteidigung" }
+      {
+        "title": "Ma-sutemi-waza",
+        "metric": "group",
+        "group": "stand-ma",
+        "needed": 1,
+        "detail": "mindestens ein Beispiel für die individuelle Vorbereitung"
+      },
+      {
+        "title": "Yoko-sutemi-waza",
+        "metric": "group",
+        "group": "stand-yoko",
+        "needed": 1,
+        "detail": "mindestens ein Beispiel; Kawazu-gake und Kani-basami ausgeschlossen"
+      },
+      {
+        "title": "Kansetsu-waza",
+        "metric": "group",
+        "group": "boden-kansetsu",
+        "needed": 1,
+        "detail": "mindestens ein Beispiel einschließlich Verteidigung"
+      },
+      {
+        "title": "Shime-waza",
+        "metric": "group",
+        "group": "boden-shime",
+        "needed": 1,
+        "detail": "mindestens ein Beispiel einschließlich Verteidigung"
+      }
     ],
     "dan6": [
-      { "title": "Nage-waza", "metric": "required", "ids": "dan6-stand", "needed": "dan6-stand-count", "detail": "alle außer Kawazu-gake und Kani-basami" },
-      { "title": "Katame-waza", "metric": "required", "ids": "dan6-boden", "needed": "dan6-boden-count", "detail": "alle Katame-waza" }
+      {
+        "title": "Nage-waza",
+        "metric": "required",
+        "ids": "dan6-stand",
+        "needed": "dan6-stand-count",
+        "detail": "alle außer Kawazu-gake und Kani-basami"
+      },
+      {
+        "title": "Katame-waza",
+        "metric": "required",
+        "ids": "dan6-boden",
+        "needed": "dan6-boden-count",
+        "detail": "alle Katame-waza"
+      }
     ]
   },
   "conditionalRequirements": {
     "dan2": [
-      { "when": { "option": "wahlbereich", "equals": "wettkampf" }, "title": "Hauptseite", "metric": "turns", "side": "main", "needed": 2, "detail": "zwei Eindrehtechniken im Wahlbereich Wettkampf" },
-      { "when": { "option": "wahlbereich", "equals": "wettkampf" }, "title": "Gegenseite", "metric": "turns", "side": "opposite", "needed": 2, "detail": "zwei Eindrehtechniken im Wahlbereich Wettkampf" }
+      {
+        "when": {
+          "option": "wahlbereich",
+          "equals": "wettkampf"
+        },
+        "title": "Hauptseite",
+        "metric": "turns",
+        "side": "main",
+        "needed": 2,
+        "detail": "zwei Eindrehtechniken im Wahlbereich Wettkampf"
+      },
+      {
+        "when": {
+          "option": "wahlbereich",
+          "equals": "wettkampf"
+        },
+        "title": "Gegenseite",
+        "metric": "turns",
+        "side": "opposite",
+        "needed": 2,
+        "detail": "zwei Eindrehtechniken im Wahlbereich Wettkampf"
+      }
     ]
   },
   "gradeNotes": {
@@ -3147,5 +3665,76 @@
     "dan4": "Zum 4. Dan werden Te-, Koshi- und Ashi-waza sowie Osaekomi-waza aus dem Gesamtprogramm des Kodokan an vom Prüfer gewählten Beispielen demonstriert und erläutert. Die Auswahlkarten dienen der individuellen Vorbereitung, nicht einer fest vorgeschriebenen Technikanzahl.",
     "dan5": "Zum 5. Dan werden Ma- und Yoko-sutemi-waza (außer Kawazu-gake und Kani-basami) sowie Kansetsu- und Shime-waza an vom Prüfer gewählten Beispielen demonstriert und erläutert.",
     "dan6": "Beim 6. Dan durch Prüfung sind alle Nage-waza außer Kawazu-gake und Kani-basami sowie alle Katame-waza gefordert. Die Technik-Pflichtauswahl wird deshalb vollständig gesetzt."
+  },
+  "applicationTaskSources": {
+    "handlungsketten": {
+      "repository": "https://github.com/j0m2/Handlungsketten_judo",
+      "scope": "Judo-spezifische Ausgangssituationen und Beschreibungen; nichtjudo-spezifische Aliasse wurden nicht übernommen."
+    }
+  },
+  "applicationTaskDescriptions": {
+    "stand-boden": {
+      "context": "Nach einem nicht vollständig erfolgreichen Wurf bleibt Tori unmittelbar in Kontakt und nutzt die entstandene Bodenlage ohne Unterbrechung weiter."
+    },
+    "stand-boden-ai": {
+      "context": "Nach einem nicht vollständig erfolgreichen Wurf aus Gleichgriff bleibt Tori in Kontakt und führt den Übergang ohne Unterbrechung am Boden fort."
+    },
+    "stand-boden-kenka": {
+      "context": "Nach einem nicht vollständig erfolgreichen Wurf aus Gegengriff bleibt Tori in Kontakt und führt den Übergang ohne Unterbrechung am Boden fort."
+    },
+    "bauchlage-osae": {
+      "context": "Uke liegt flach in Bauchlage. Tori dreht Uke kontrolliert und schließt die Aktion mit einer Haltetechnik ab."
+    },
+    "bank-angriff": {
+      "context": "Uke befindet sich in Bankposition. Tori kontrolliert aus Oberlage oder seitlich, dreht Uke und schließt mit einer sicheren Bodentechnik ab."
+    },
+    "bank-bauch": {
+      "context": "Uke befindet sich in Bank- oder Bauchlage. Die Lösung wird aus der vorhandenen Kontrolle entwickelt und endet in einer technisch abgesicherten Position."
+    },
+    "bank-bauch-ober": {
+      "context": "Tori greift Uke aus der Oberlage gegen Bank- oder Bauchlage an, dreht oder kontrolliert und führt zu einer eindeutigen Abschlusstechnik."
+    },
+    "bank-bauch-unter": {
+      "context": "Aus der Unterlage gegen Bank- oder Bauchlage zunächst Raum und Kontrolle schaffen; anschließend eine technisch eindeutige Lösung entwickeln."
+    },
+    "beinklammer-loesen": {
+      "context": "Ein Bein von Tori ist durch Uke geklammert. Erst die Klammer kontrolliert lösen, dann eine stabile Abschlussposition sichern."
+    },
+    "beinklammer": {
+      "context": "Die Beinklammer wird als Ausgangslage verstanden. Lösung und Abschluss müssen zur jeweiligen Ober- oder Unterlage passen."
+    },
+    "beinklammer-ober": {
+      "context": "Tori ist in Oberlage, ein Bein ist von Uke geklammert. Nach dem Lösen der Klammer wird die Oberlage gesichert oder zum Würger weitergeführt."
+    },
+    "beinklammer-unter": {
+      "context": "Tori liegt unten in der Beinklammer. Über Arm- oder Kragenkontrolle wird eine eigene Angriffsmöglichkeit aufgebaut."
+    },
+    "eigene-rueckenlage": {
+      "context": "Tori liegt auf dem Rücken und hält Uke zwischen den eigenen Beinen. Aus Arm- oder Kragenkontrolle wird eine Angriffsmöglichkeit entwickelt."
+    },
+    "gegner-rueckenlage": {
+      "context": "Uke liegt auf dem Rücken und kontrolliert Tori mit den Beinen. Tori öffnet die Kontrolle, passiert oder stabilisiert eine Oberlage."
+    },
+    "rueckenlage": {
+      "context": "Die Rollen von Tori und Uke werden vor Beginn geklärt. Die Lösung muss aus der gewählten Rückenlage heraus nachvollziehbar zum Abschluss führen."
+    },
+    "rueckenlage-ober": {
+      "context": "Uke liegt auf dem Rücken und kontrolliert Tori mit den Beinen. Tori öffnet die Kontrolle, passiert oder stabilisiert eine Oberlage."
+    },
+    "rueckenlage-unter": {
+      "context": "Tori liegt auf dem Rücken und hält Uke zwischen den eigenen Beinen. Aus Arm- oder Kragenkontrolle wird eine Angriffsmöglichkeit entwickelt."
+    },
+    "positionswechsel": {
+      "context": "Aus einer stabilen Haltetechnik die Kontrolle ohne Unterbrechung in eine andere Haltetechnik überführen."
+    },
+    "positionswechsel-1": {
+      "context": "Erster eigenständiger Wechsel zwischen zwei Haltetechniken."
+    },
+    "positionswechsel-2": {
+      "context": "Zweiter Wechsel mit anderer Ausgangs- oder Zielposition."
+    },
+    "positionswechsel-3": {
+      "context": "Dritter Wechsel mit anderer Ausgangs- oder Zielposition."
+    }
   }
 }
