@@ -73,7 +73,9 @@ h2 { margin: 0; color: var(--ink); font-size: 1.2rem; line-height: 1.2; letter-s
 .completion { flex: none; padding: .55rem .65rem; border: 1px solid #cbd9e8; border-radius: 8px; background: #eef6fc; color: #185c9f; font-size: .9rem; font-weight: 750; }
 .completion small { color: #57718a; font-size: .65rem; font-weight: 600; }
 .requirements { display: grid; grid-template-columns: repeat(auto-fit, minmax(138px, 1fr)); gap: 8px; margin-top: 1rem; }
-.requirement { position: relative; min-height: 96px; padding: .72rem; overflow: hidden; border: 1px solid var(--line); border-radius: 9px; background: white; }
+.requirement { position: relative; width: 100%; min-height: 96px; padding: .72rem; overflow: hidden; border: 1px solid var(--line); border-radius: 9px; appearance: none; background: white; color: inherit; text-align: left; }
+.requirement:hover { border-color: #8cb7e1; box-shadow: 0 4px 12px rgba(33, 73, 112, .09); }
+.requirement:focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; }
 .requirement::before { content: ''; position: absolute; top: 0; right: 0; left: 0; height: 3px; background: #cbd5e1; }
 .requirement.is-complete::before { background: var(--teal); }
 .requirement.is-alert::before { background: #d97706; }

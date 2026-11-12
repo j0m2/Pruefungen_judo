@@ -202,6 +202,34 @@
       return targets[value] ?? 0;
     }
 
+    function requirementTarget(definition, state) {
+      const techniquesTarget = (filter) => ({ section: "techniken", filter });
+      switch (definition.metric) {
+        case "zero": return { section: "programm" };
+        case "stand": return techniquesTarget("stand");
+        case "turns": return techniquesTarget("turns");
+        case "foot": return techniquesTarget("group:stand-ashi");
+        case "extension-throws": return techniquesTarget("extension-throws");
+        case "holds": return techniquesTarget("group:boden-osae");
+        case "levers":
+        case "extension-levers": return techniquesTarget("group:boden-kansetsu");
+        case "chokes": return techniquesTarget("group:boden-shime");
+        case "gokyo": return techniquesTarget("gokyo");
+        case "outside-gokyo-throws": return techniquesTarget("outside-gokyo-throws");
+        case "group": return techniquesTarget(`group:${definition.group}`);
+        case "required": {
+          const ids = resolveTechniqueIds(definition.ids, state);
+          const items = ids.map((id) => techniqueById.get(id)).filter(Boolean);
+          const groups = new Set(items.map((item) => item.group));
+          const areas = new Set(items.map((item) => item.area));
+          if (groups.size === 1) return techniquesTarget(`group:${[...groups][0]}`);
+          if (areas.size === 1) return techniquesTarget([...areas][0]);
+          return techniquesTarget(`ids:${ids.join(",")}`);
+        }
+        default: return techniquesTarget("all");
+      }
+    }
+
     function requirementDefinitions(state) {
       const selected = selectedTechniques(state);
       const countSelected = (predicate) => selected.filter(predicate).length;
@@ -228,6 +256,7 @@
         () => metricValue(definition),
         resolveTarget(definition.needed, state),
         definition.detail,
+        requirementTarget(definition, state),
       ];
       const requirements = (requirementsByDegree[state.degree] || []).map(toRequirement);
       const danOptionRequirements = danCardsForDegree(state.degree).map((card) => [
@@ -235,6 +264,7 @@
         () => state.danOptions[card.key] ? 1 : 0,
         1,
         card.requirement[1],
+        { section: "dan-optionen" },
       ]);
       requirements.push(...danOptionRequirements);
 
@@ -244,6 +274,7 @@
         () => situationsForDegree(state.degree).filter((situation) => state.situations[situation.id]).length,
         situationCount,
         state.degree.startsWith("dan") ? "Situationslösungen für diesen Dan-Grad" : "Situationslösungen für diesen Grad",
+        { section: "situationen" },
       ]);
 
       for (const definition of conditionalRequirements[state.degree] || []) {

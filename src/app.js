@@ -145,14 +145,15 @@ function renderRequirements() {
   const countable = definitions.filter(([, , needed]) => needed > 0);
   const complete = countable.filter(([, getCurrent, needed]) => getCurrent() >= needed).length;
   elements.completion.innerHTML = `${complete}/${countable.length} <small>erfüllt</small>`;
-  elements.requirements.innerHTML = definitions.map(([title, getCurrent, needed, detail]) => {
+  elements.requirements.innerHTML = definitions.map(([title, getCurrent, needed, detail, target]) => {
     const current = getCurrent();
     const isComplete = needed === 0 || current >= needed;
-    return `<article class="requirement ${isComplete ? "is-complete" : "is-alert"}">
+    const filter = target?.filter ? ` data-requirement-filter="${target.filter}"` : "";
+    return `<button class="requirement ${isComplete ? "is-complete" : "is-alert"}" type="button" data-requirement-target="${target.section}"${filter} aria-label="${title}: ${needed === 0 ? "ohne Technikvorgabe" : `${current} von ${needed} erfüllt`}. Zur passenden Kategorie springen.">
       <span class="requirement-title">${title}</span>
       <span class="requirement-value">${needed === 0 ? "—" : `${current} / ${needed}`}</span>
       <span class="requirement-detail">${detail}</span>
-    </article>`;
+    </button>`;
   }).join("");
   elements.note.textContent = gradeNotes[state.degree];
 }
@@ -263,9 +264,20 @@ function techniqueCard(item) {
 
 function filterTechniques(items) {
   const needle = searchTerm.trim().toLocaleLowerCase("de");
+  const focusedIds = activeFilter.startsWith("ids:") ? new Set(activeFilter.slice(4).split(",")) : null;
   return items.filter((item) => {
     if (!isSelectableForCurrentDegree(item)) return false;
-    const filterMatches = activeFilter === "all" || (activeFilter === "stand" && item.area === "stand") || (activeFilter === "boden" && item.area === "boden") || (activeFilter === "required" && requiredForCurrentDegree(item)) || (activeFilter === "selected" && isSelected(item.id));
+    const filterMatches = activeFilter === "all"
+      || (activeFilter === "stand" && item.area === "stand")
+      || (activeFilter === "boden" && item.area === "boden")
+      || (activeFilter === "turns" && item.area === "stand" && item.turn)
+      || (activeFilter === "extension-throws" && item.area === "stand" && item.pool === "erweiterung")
+      || (activeFilter === "gokyo" && Boolean(item.gokyo))
+      || (activeFilter === "outside-gokyo-throws" && item.area === "stand" && !item.gokyo)
+      || (activeFilter.startsWith("group:") && item.group === activeFilter.slice(6))
+      || (focusedIds && focusedIds.has(item.id))
+      || (activeFilter === "required" && requiredForCurrentDegree(item))
+      || (activeFilter === "selected" && isSelected(item.id));
     const textMatches = !needle || `${item.name} ${item.category} ${pools[item.pool].label}`.toLocaleLowerCase("de").includes(needle);
     return filterMatches && textMatches;
   });
@@ -332,6 +344,17 @@ function setFeedback(message) {
 
 function syncFilterButtons() {
   document.querySelectorAll(".filter").forEach((button) => button.classList.toggle("active", button.dataset.filter === activeFilter));
+}
+
+function focusRequirement(target, filter) {
+  if (filter) {
+    activeFilter = filter;
+    searchTerm = "";
+    elements.search.value = "";
+    syncFilterButtons();
+    renderTechniqueGrid();
+  }
+  document.querySelector(`#${target}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
 function enterPrintView() {
@@ -431,6 +454,10 @@ function bindEvents() {
     persist();
   });
   elements.resetSelection.addEventListener("click", resetSelection);
+  elements.requirements.addEventListener("click", (event) => {
+    const card = event.target.closest("[data-requirement-target]");
+    if (card) focusRequirement(card.dataset.requirementTarget, card.dataset.requirementFilter);
+  });
   document.querySelectorAll(".filter").forEach((button) => button.addEventListener("click", () => {
     activeFilter = button.dataset.filter;
     syncFilterButtons();
